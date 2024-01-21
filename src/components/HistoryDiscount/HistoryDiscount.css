@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.back-btn{
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s;
+    color:#5DA25E !important
+}
+
+.back-btn:hover{
+    border: 1px solid #8CB78C;
+}
+

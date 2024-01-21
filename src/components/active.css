@@ -1,0 +1,9 @@
+ .activeTab{
+    border: 1px solid #5DA25E;
+ }
+ @media (max-width: 767px) {
+   .d-flex {
+       align-items: center; /* Center align items in column layout */
+      
+   }
+}

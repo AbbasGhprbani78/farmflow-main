@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style3.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <div class="d-flex">
+      <nav id="nav" class="mynav rounded-start-0 rounded-end-3 mt-0">
+        <div id="head">
+            <div id="logo"></div>
+            <i onclick="Open()" class="fa fa-bars" id="'bars"></i>
+            <!-- <div id="va">FarmFlow</div> -->
+            <i onclick="Close()" class="fa fa-times" id="times" style="margin-left: 70px;"></i>
+        </div>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-home"></i>HOME</a>
+
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-product"></i>PRODUCT</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-map"></i>MAP</a>
+       <!-- <a href="#"><i class="fa fa-calender-week"></i>Events</a> -->
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-machines"></i>MACHINES</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-my-task"></i>EMPLOYEES</a>
+        <!-- <a href="#" class="nav-link text-light"><i class="icon-employee"></i>EMPLOYEE</a> -->
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-leaderboard"></i>LEADERBOARD</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-game"></i>GAME</a>
+        <!-- <a href="#" class="nav-link text-light"><i class="icon-rewards"></i>REWARDS</a> -->
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-convert-points"></i>CONVERT POINTS</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-chat"></i>CHAT</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center"><i class="icon-employee"></i>REPORT</a>
+        <a href="#" class="nav-link text-light d-flex align-items-center ms-0 "><i class="bi bi-bell text-secondary fa-xl me-1 "></i>NOTIFICATION</a>
+
+        <!-- <a href="#" class="nav-link text-light"><i class="bi bi-clipboard-data fs-3"></i>REPORT</a> -->
+        <a href="#" class="nav-link text-light d-flex align-items-center" id="sign"><i class="icon-logout"></i>LOGOUT</a>
+    </nav>
+
+      <div class="w-100 mt-4 mainbackground">
+        <nav class="navbar float-end me-3 d-sm-block d-md-none">
+          <button class="navbar-toggler fs-3 fixed-button" data-bs-toggle="offcanvas" data-bs-target="#mycol">
+              <span class="bi bi-list"></span>
+          </button>
+  
+  
+          <div class="offcanvas offcanvas-end w-50 listHide overflow-auto vh-100" id="mycol" data-bs-scroll="true">
+              <button class="btn btn-success rounded-circle ms-2 mt-2 col-3"><i class="bi bi-arrow-left fs-2 pe-5" data-bs-dismiss="offcanvas"></i></button>
+              <ul class="navbar-nav text-start mt-3">
+  
+  
+                  
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-home"></i>HOME</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-product"></i>PRODUCT</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-map"></i>MAP</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-machines"></i>MACHINES</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-my-task"></i>MY TASK</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-employee"></i>EMPLOYEE</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-leaderboard"></i>LEADERBOARD</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-game"></i>GAME</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-rewards"></i>REWARDS</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-convert-points"></i>CONVERT POINTS</a></li>
+                  <li class="nav-item mb-3 ms-3"><a href="#" class="nav-link d-flex text-align-center text-dark"><i class="icon-chat"></i>CHAT</a></li>
+  
+          
+           
+              </ul>
+          </div>
+  
+      </nav>
+        <img
+          src="./img/logo-removebg-preview 4.png"
+          class="img1"
+          alt=""
+          style="width: 200px; height: 50px"
+        />
+
+        <div class="d-flex border rounded-pill float-end me-3 me-sm-5">
+          <i class="bi bi-bell fs-5"></i>
+          <img src="./img/Group 1133.png" class="img2" alt="" />
+        </div>
+
+        <hr class="text-secondary mb-0" />
+
+        <div class="d-flex">
+          <div
+            class="ms-3 mt-2 text-center text-light h6 rounded-top-3 task"
+            style="margin-bottom: 0px"
+          >
+            Plan1
+          </div>
+          <div
+            class="ms-3 mt-2 text-center h6 rounded-top-3 plan2"
+            style="margin-bottom: 0px"
+          >
+            Plan2
+          </div>
+          <div
+            class="ms-3 mt-2 text-center h6 rounded-top-3 plan3"
+            style="margin-bottom: 0px"
+          >
+            Plan3
+          </div>
+        </div>
+
+        <hr class="text-secondary mt-0" />
+
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-5 mb-4">
+              <div
+                class="overflow-y-scroll scrollnone00"
+                style="max-height: 30vh"
+              >
+                <div class="d-md-flex">
+                  <div class="col-12 col-md-5 one mb-3 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-thermometer-half fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-5 two mb-3 ms-md-5 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-fire fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-md-flex mt-3">
+                  <div class="col-12 col-md-5 three mb-3 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-wind fs-4 text-success"></i>
+                      <div class="h6 text-success">Soil Moisture</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-5 four mb-3 ms-md-5 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-cloud-drizzle fs-4 text-success"></i>
+                      <div class="h6 text-success">Precipitation</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-md-flex">
+                  <div class="col-12 col-md-5 one mb-3 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-thermometer-half fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-5 two mb-3 ms-md-5 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-fire fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-md-flex mt-3">
+                  <div class="col-12 col-md-5 three mb-3 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-wind fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-5 four mb-3 ms-md-5 rounded-3">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <i class="bi bi-cloud-drizzle fs-4 text-success"></i>
+                      <div class="h6 text-success">Air Temp</div>
+                    </div>
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div class="fw-bold fs-4 text-success">+24</div>
+                      <div
+                        class="text-success rounded-5 border border-success ps-2 pe-2"
+                      >
+                        GOOD
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-7">
+              <div class="rounded-3 notifborder">
+                <div class="fw-bolder fs-5 notif mt-2 ms-3">Notifications</div>
+
+                <div>
+                  <ul
+                    class="list-unstyled overflow-y-scroll scrollnone00"
+                    style="max-height: 23vh"
+                  >
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+
+                    <li
+                      class="d-flex ps-3 align-items-center justify-content-between mt-4"
+                    >
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="dot pt-2"
+                          style="width: 18px; height: 18px; border-radius: 50px"
+                        ></div>
+                        <div class="fw-bold ps-2 mytext">
+                          Lorem ipsum dolor sit amet.
+                        </div>
+                      </div>
+
+                      <div class="me-3">01/02/23</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row productcard pt-2">
+            <div class="col-lg-1 mt-2 fs-4 text-success d-flex flex-column align-items-center">
+              <i class="bi bi-map"></i>
+                <i class="bi bi-arrow-left-short fa-2x" style="margin-left: -25px;"></i>
+            
+            </div>
+
+            <div class="col-lg-1 me-5">
+              <img src="./img/2006.i003 1.png" class="img-fluid" alt="" />
+            </div>
+
+            <div class="col-12 col-lg-4 onecard ms-5">
+              <div
+                class="d-flex align-items-center justify-content-around"
+                style="margin-top: 35px"
+              >
+                <div
+                  class="rounded-circle bg-success ms-3"
+                  style="width: 130px; height: 130px"
+                ></div>
+
+                <div>
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Crop :</div>
+                    <div class="fw-bolder fs-6 ms-1">Wheat</div>
+                  </div>
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Size :</div>
+                    <div class="fw-bolder fs-6 ms-1">46 Ha</div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Phase :</div>
+                    <div class="fw-bolder fs-6 ms-1">Filling</div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Sow Date :</div>
+                    <div class="fw-bolder fs-6 ms-1">Sepn18</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-4 ms-5 onecard">
+              <div class="fw-bold fs-6 pt-1">Planned Activities</div>
+              <ul
+                class="list-unstyled overflow-y-scroll scrollnone00"
+                style="max-height: 23vh"
+              >
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6">Spraying Corn Field</span>
+                  </div>
+
+                  <div class="rounded-5 px-3 py-1 text-light nowbdg">NOW!</div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6">Spraying Corn Field</span>
+                  </div>
+
+                  <div class="rounded-5 px-3 py-1 text-secondary nowbdg1">
+                    Wait!
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+
+            
+
+
+          </div>
+
+          <div class="d-block d-lg-none">
+            <div class="col-12 onecard mt-4">
+              <div class="d-flex align-items-center justify-content-around">
+                <div
+                  class="rounded-circle bg-success ms-3"
+                  style="width: 130px; height: 130px; margin-top: 30px"
+                ></div>
+
+                <div style="margin-top: 30px">
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Crop :</div>
+                    <div class="fw-bolder fs-6 ms-1">Wheat</div>
+                  </div>
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Size :</div>
+                    <div class="fw-bolder fs-6 ms-1">46 Ha</div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Phase :</div>
+                    <div class="fw-bolder fs-6 ms-1">Filling</div>
+                  </div>
+
+                  <div class="d-flex">
+                    <div class="fw-bold fs-6 text-success">Sow Date :</div>
+                    <div class="fw-bolder fs-6 ms-1">Sepn18</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 onecard mt-4">
+              <div class="fw-bold fs-6 pt-2 ps-3">Planned Activities</div>
+              <ul
+                class="list-unstyled overflow-y-scroll scrollnone00 ms-2 me-3"
+                style="max-height: 23vh"
+              >
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6">Spraying Corn Field</span>
+                  </div>
+
+                  <div class="rounded-5 px-3 py-1 text-light nowbdg">NOW!</div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6">Spraying Corn Field</span>
+                  </div>
+
+                  <div class="rounded-5 px-3 py-1 text-secondary nowbdg1">
+                    Wait!
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+
+                <li class="d-flex justify-content-between ms-2 mb-1 mt-2">
+                  <div>
+                    <input
+                      type="checkbox"
+                      checked
+                      class="form-check form-check-input form-check-inline"
+                    /><span class="fw-medium fs-6 text-decoration-line-through"
+                      >Spraying Corn Field</span
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline">
+
+            <div class="d-flex mt-0 ms-4 ">
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1">
+                <div class="text-muted">Mon</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">24</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Tue</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">25</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Wed</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">26</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Thu</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">27</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Fri</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">28</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Sat</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">29</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Sun</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">30</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Mon</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">31</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Tue</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">01</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Wed</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">02</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Thu</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">03</div>
+    
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-column align-items-center flex-md-grow-1 calendar">
+                <div class="text-muted">Fri</div>
+                <div class="ch maincal">
+
+                  <div class="px-2 py-3 cal">04</div>
+    
+                </div>
+
+              </div>
+
+
+
+
+            <!-- <div class="d-flex align-items-start mt-2 ms-3 w-50">
+              <div class="h6 text-muted flex-md-grow-1 ">Mon</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Tue</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Wed</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Thu</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Fri</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Sat</div>
+            </div>
+
+            <div class="d-flex align-items-start mt-2 ms-3 w-50">
+              <div class="h6 text-muted flex-md-grow-1 ">Mon</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Tue</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Wed</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Thu</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Fri</div>
+              <div class="h6 text-muted flex-md-grow-1 ">Sat</div>
+            </div> -->
+
+           
+
+         
+
+          </div>
+
+          <div class="d-flex ms-4 ">
+
+            <div class="d-flex align-items-center mt-1">
+              <div class="bg-success rounded-circle" style="width: 10px; height: 10px;"></div>
+              <div class="fs-6 fw-bold ms-1">Plowing</div>
+            </div>
+
+            <div class="d-flex align-items-center mt-1 ms-4">
+              <div class="rounded-circle tdot1" style="width: 10px; height: 10px;"></div>
+              <div class="fs-6 fw-bold ms-1">Shipment</div>
+            </div>
+
+            <div class="d-flex align-items-center mt-1 ms-4">
+              <div class="rounded-circle tdot2" style="width: 10px; height: 10px;"></div>
+              <div class="fs-6 fw-bold ms-1">Shipment</div>
+            </div>
+
+
+            <div class="d-flex"></div>
+            <div class="d-flex"></div>
+
+
+
+
+          </div>
+
+            
+        </div>
+
+        
+      </div>
+      <img src="./img/Frame 39943.png" class="d-sm-none img-fluid" alt="" />
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+      var nav = document.getElementById("nav");
+      var bars = document.getElementById("bars");
+      var logo = document.getElementById("logo");
+      function Open() {
+        nav.style.width = "200px";
+        bars.style.display = "none";
+        logo.style.display = "inline-block";
+      }
+
+      function Close() {
+        nav.style.width = "42px";
+        bars.style.display = "inline-block";
+        logo.style.display = "none";
+      }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

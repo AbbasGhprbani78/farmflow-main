@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+
+.modal-edit-container {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px 30px;
+    border-radius: 8px;
+    animation: diaplayModal 0.8s ease-in-out;
+    transition: all 0.8s;
+    width: 400px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background-color: #fff;
+    z-index: 9999;
+
+}
+
+.modal-edit-form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.product-input-wrapper {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.label-edit {
+    margin: 15px 0;
+}
+
+.product-drop {}
+
+.land-drop,
+.product-drop,
+.product-date-input,
+.product-description {
+    padding: 7px 10px;
+    border-radius: 8px;
+}
+
+.product-date-input {
+    border: 1px solid;
+}
+
+.product-description {
+
+    height: 130px;
+}
+
+.product-btn {
+    border: none;
+    outline: none;
+    width: 100px;
+    padding: 9px 3px;
+    border-radius: 8px;
+    margin: 18px 0 5px 0;
+    cursor: pointer;
+}
+
+.edit-product-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+.edit-btn-product {}
+
+.cancel-btn-product {
+    border: 1px solid #198754;
+    background-color: transparent;
+    color: #000;
+}
+
+.selectproduct {}
+
+.activeModal {
+    display: block;
+}
+
+.optionEdit{
+    background-color: #fff;
+    color:#5da25e;
+}
+
+
+@keyframes diaplayModal {
+    form {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@media (max-width:400px) {
+
+    .modal-edit-container {
+
+        width: 95%;
+
+    }
+
+    .modal-edit-form {
+        width: 97%;
+    }
+}

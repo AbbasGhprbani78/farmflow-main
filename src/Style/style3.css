@@ -1,0 +1,1140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bgbk: #fafafa;
+  --Primary: #77ab56;
+  --color1: #5da25e;
+  --color2: #ffc700;
+  --color3: #035467;
+  --color4: #ffda84;
+  --color5: #99b760;
+  --color6: #d4ca6c;
+  --color7: #828282;
+  --color8: #779a75;
+  --color9: #cbe0cb;
+  --color10: #fbf0d7;
+  --color11: #efeccf;
+  --color12: #dde6cc;
+  --color13: #646af4;
+  --color14: #80829d;
+  --color15: #b6c6e4;
+  --color16: #fafafa;
+  --color17: #edf2ea;
+  --color18: #bbd4ab;
+  --color19: #7aa85e;
+  --color20: #d1e9d1;
+  --color21: #6e8ecb;
+  --color22: #e8e8e8;
+}
+
+@media only screen and (max-width: 768px) {
+  .main11 {
+    background: linear-gradient(180deg, #fafafa, #edf2ea, #bbd4ab, #7aa85e);
+  }
+
+  #nav {
+    display: none;
+  }
+}
+
+.i11 {
+  color: #ffc700 !important;
+}
+
+@media (max-width: 992px) {
+  .chatbox {
+    overflow-y: scroll;
+    height: 72.6vh;
+  }
+
+  .chatbox::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../Images/homeMain/main.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
+  }
+  .mynot {
+    width: 150px !important;
+  }
+
+  .game {
+    width: 100px;
+  }
+
+  .club {
+    width: 150px;
+    background-color: #77ab56;
+    font-size: 18px;
+  }
+
+  .myrow {
+    height: 130px;
+    width: 97%;
+  }
+
+  .imgticket {
+    margin-right: 30px;
+  }
+
+  .good {
+    text-align: center;
+  }
+
+  .mybtn {
+    margin-top: 50px;
+  }
+
+  .img1 {
+    margin-right: 25px;
+  }
+
+  .colhide {
+    display: none;
+  }
+
+  .up {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .task {
+    width: 80px;
+  }
+
+  .task1 {
+    width: 80px;
+  }
+
+  .task2 {
+    width: 80px;
+  }
+
+  .task3 {
+    width: 80px;
+  }
+
+  .myarea {
+    width: 300px;
+    margin-left: 16px;
+  }
+
+  .myinputs {
+    width: 100%;
+    margin-right: 23px;
+    margin-left: 23px;
+  }
+
+  .mylab {
+    display: none !important;
+  }
+
+  .sb {
+    width: 80% !important;
+    margin-left: 35px;
+  }
+
+  .rating {
+    margin-left: 35px;
+  }
+
+  .myarea1 {
+    width: 300px;
+    margin-left: 38px;
+  }
+
+  .pointimg {
+    margin-left: 5px;
+  }
+
+  .remaining1 {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #5da25e;
+    padding: 10px 15px;
+    margin-top: 15px;
+  }
+
+  .listcroll {
+    overflow-y: scroll;
+    max-height: 20vh;
+  }
+
+  .backbtn {
+    border: none !important;
+    margin-top: 3px;
+  }
+
+  .twobtn {
+    margin-bottom: 5px;
+  }
+
+  .farmimg {
+    display: none;
+  }
+
+  .chat {
+    display: none;
+  }
+
+  .fielddrop {
+    width: 95%;
+  }
+
+  .productcard {
+    display: none !important;
+  }
+
+  .onecard {
+    height: 28vh;
+    background-color: #d1e9d1;
+    border-radius: 8px;
+  }
+
+  .timeline {
+    overflow-x: scroll;
+    margin-top: 20px;
+  }
+
+  .calendar {
+    margin-left: 50px;
+  }
+
+  .timeline::-webkit-scrollbar {
+    display: none;
+  }
+
+  .boxgreen {
+    background-color: #5da25e;
+    color: white;
+  }
+
+  .mainbackground {
+    width: 100%;
+  }
+
+  .dropb {
+    margin-left: 80px;
+  }
+
+  .myr {
+    background-color: #77ab56 !important;
+    font-size: 18px;
+  }
+
+  .map {
+    height: 50vh;
+    margin-bottom: 20px;
+  }
+
+  .map1 {
+    height: 50vh;
+  }
+
+  .uploadimg {
+    border: 2px dashed lightgray;
+    border-radius: 8px;
+    margin: 30px 30px;
+  }
+
+  .upi {
+    font-size: 80px;
+    color: lightgrey;
+  }
+
+  .mapscroll {
+    overflow-y: scroll;
+    height: 40vh;
+  }
+
+  .mapscroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .weatherimg {
+    width: 100%;
+  }
+
+  .mapimg {
+    width: 100%;
+  }
+
+  .wiscroll {
+    overflow-y: scroll;
+    height: 18vh;
+  }
+
+  .wiscroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .roll {
+    overflow-y: scroll;
+    max-height: 50vh;
+  }
+
+  .roll::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../Images/homeMain/main.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  .game {
+    width: 150px;
+  }
+
+  .club {
+    width: 200px;
+    background-color: #77ab56;
+    font-size: 24px;
+  }
+
+  .task {
+    width: 100px;
+  }
+
+  .task1 {
+    width: 100px;
+  }
+
+  .task2 {
+    width: 100px;
+  }
+
+  .task3 {
+    width: 100px;
+  }
+
+  .myrow {
+    height: 150px;
+    width: 100%;
+  }
+
+  .mybtn {
+    margin-top: 30px;
+  }
+
+  .minibg {
+    display: none;
+  }
+
+  .up {
+    display: flex;
+  }
+
+  .myinputs {
+    width: 50%;
+  }
+
+  .sb {
+    width: 25% !important;
+    margin-left: 16px;
+  }
+
+  .pointimg {
+    margin-left: 30px;
+  }
+
+  .remaining1 {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #5da25e;
+    padding: 10px 15px;
+    margin-left: 48px;
+  }
+
+  .listcroll {
+    overflow-y: scroll;
+    max-height: 72vh;
+  }
+
+  .backbtn {
+    border: 1px solid #5da25e;
+  }
+
+  .twobtn {
+    margin-bottom: 20px;
+  }
+
+  .fielddrop {
+    width: 50%;
+  }
+
+  .onecard {
+    height: 28vh;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  .timeline {
+    margin-top: 10px;
+  }
+
+  .mainbackground {
+    width: 96%;
+  }
+
+  .dropb {
+    margin-left: 100px;
+  }
+
+  .myr {
+    background-color: #77ab56 !important;
+    font-size: 18px !important;
+  }
+
+  .chat1 {
+    display: none;
+  }
+
+  .map {
+    height: 78vh;
+  }
+
+  .map1 {
+    height: 78vh;
+  }
+
+  .uploadimg {
+    height: 50vh;
+    border: 2px dashed lightgray;
+    border-radius: 8px;
+    margin: 100px 50px;
+  }
+
+  .upi {
+    font-size: 100px;
+    color: lightgrey;
+  }
+
+  .weatherimg {
+    width: 106%;
+  }
+
+  .mapimg {
+    width: 106%;
+  }
+}
+
+.wiscroll {
+  overflow-y: scroll;
+  height: 18vh;
+}
+
+.wiscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.listscroller {
+  overflow-y: scroll;
+  height: 30vh;
+}
+
+.listscroller::-webkit-scrollbar {
+  display: none;
+}
+
+.inputt {
+  width: min-content;
+  transform: translateY(-19px);
+  background-color: white;
+}
+
+.memberscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.roll {
+  height: 50vh;
+}
+
+.nonescroll01::-webkit-scrollbar {
+  display: none;
+}
+
+.upbox {
+  box-shadow: 5px 0px 7px lightgray;
+}
+
+.tdot1 {
+  background-color: #ffda84;
+}
+
+.tdot2 {
+  background-color: #99b760;
+}
+
+.ch {
+  background: linear-gradient(90deg, #5da25e, #99b760, #d4ca6c, #ffda84);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.cal {
+  border-radius: 20px;
+  background: #e8e8e8;
+  margin: 2px;
+  color: #5da25e;
+}
+
+.timeline {
+  height: 17vh;
+  background-color: #e8e8e8;
+  border-radius: 8px;
+}
+
+.nowbdg {
+  background-color: #6e8ecb;
+}
+
+.nowbdg1 {
+  background-color: #e8e8e8;
+}
+
+.productcard {
+  background-color: #d1e9d1;
+  border-radius: 8px;
+  height: 30vh;
+}
+
+.notif {
+  color: #035467;
+}
+
+.notifborder {
+  border: 1px solid #035467;
+}
+
+.plan2 {
+  background-color: white;
+  border: 1px solid #5da25e;
+  width: 100px;
+  color: #5da25e !important;
+}
+
+.plan3 {
+  background-color: white;
+  border: 1px solid #5da25e;
+  width: 100px;
+  color: #5da25e !important;
+}
+
+.planbdg {
+  border: 1px solid #5da25e !important;
+  color: #5da25e !important;
+  background-color: white !important;
+}
+
+.chatdown {
+  position: relative;
+}
+
+.sendbtn {
+  background-color: #5da25e;
+}
+
+.optbtn {
+  background-color: #fafafa;
+}
+
+.chatbdg {
+  background-color: #5da25e;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 18px;
+}
+
+.chat {
+  height: 600px;
+  background: linear-gradient(180deg, #fafafa, #edf2ea, #bbd4ab, #7aa85e);
+}
+
+.chat1 {
+  background: linear-gradient(180deg, #fafafa, #edf2ea, #bbd4ab, #7aa85e);
+}
+
+.colhide {
+  overflow-y: scroll;
+}
+
+.colhide::-webkit-scrollbar {
+  display: none;
+}
+
+.chatcolhide {
+  overflow-y: scroll;
+  box-shadow: 5px 5px 15px lightgray;
+  background-color: white;
+}
+
+.chatcolhide::-webkit-scrollbar {
+  display: none;
+}
+
+.qbox1 {
+  z-index: 1;
+}
+
+
+.ic1 {
+  color: #80829d;
+}
+
+.ic2 {
+  color: #b6c6e4;
+}
+
+.ic3 {
+  color: #646af4;
+}
+
+.qbox {
+  box-shadow: 1px 3px 10px lightgray;
+  background-color: white;
+}
+
+.listcroll::-webkit-scrollbar {
+  display: none;
+}
+
+.notif {
+  color: #035467;
+}
+
+.iim {
+  width: 0px;
+}
+
+.weatherimg {
+  background-image: url(./img/20230627111751_[fpdl.in]_rain-effect-nature-background_23-2148099031_full.jpg);
+  background-size: cover;
+  border-radius: 8px;
+  height: 150px;
+}
+
+.remaining {
+  background-color: #5da25e;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.remaining1 {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #5da25e;
+  padding: 10px 15px;
+}
+
+.scrollnone00::-webkit-scrollbar {
+  display: none;
+}
+
+.one {
+  background-color: #cbe0cb;
+}
+
+.two {
+  background-color: #fbf0d7;
+}
+
+.three {
+  background-color: #efeccf;
+}
+
+.four {
+  background-color: #dde6cc;
+}
+
+.s1 {
+  height: 120px;
+  background-color: #cbe0cb;
+  border-radius: 8px;
+}
+
+.s2 {
+  height: 120px;
+  background-color: #fbf0d7;
+  border-radius: 8px;
+}
+
+.s3 {
+  height: 120px;
+  background-color: #efeccf;
+  border-radius: 8px;
+}
+
+.s4 {
+  height: 120px;
+  background-color: #dde6cc;
+  border-radius: 8px;
+}
+
+.op {
+  opacity: 1;
+}
+
+.morebtn {
+  background-color: #5da25e !important;
+  width: 50%;
+}
+
+.ii {
+  width: 25px;
+}
+
+.tb {
+  overflow-y: scroll;
+  max-height: 430px;
+}
+
+.tb1 {
+  overflow-y: scroll;
+  max-height: 250px;
+  background-color: white;
+  box-shadow: 5px 5px 15px lightgrey;
+  border-radius: 8px;
+}
+
+.tb1::-webkit-scrollbar {
+  display: none;
+}
+
+.tb::-webkit-scrollbar {
+  display: none;
+}
+
+.task1 {
+  background-color: #ffda84;
+}
+
+.task2 {
+  background-color: #779a75;
+}
+
+.task3 {
+  background-color: #99b760;
+}
+
+.dropb {
+  border: none;
+  box-shadow: 5px 5px 15px lightgrey;
+}
+
+input {
+  border-radius: 8px;
+  padding-left: 10px;
+}
+
+select {
+  border-radius: 8px;
+  padding-left: 10px;
+}
+
+/* .table-container {
+  overflow-x: auto;
+} */
+.drop {
+  border-radius: 20px;
+  border-style: hidden;
+}
+
+#mydrop {
+  width: 100%;
+  height: 50px;
+  border-style: hidden;
+  box-shadow: 5px 5px 15px lightgray;
+  border-radius: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  margin-top: 15px;
+}
+
+.text {
+  color: var(--color7);
+  margin-left: 50px;
+}
+
+.machines1 {
+  background-color: #5da25e;
+  padding: 4px;
+  font-size: 16px;
+}
+
+.machines2 {
+  background-color: #ffda84;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.machines3 {
+  background-color: #99b760;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.machines4 {
+  background-color: #d4ca6c;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.myinputs {
+  box-shadow: 5px 5px 15px lightgray;
+}
+
+.imgprofile {
+  width: 55px;
+}
+
+.colhide {
+  box-shadow: 5px 5px 15px lightgray;
+  background-color: white;
+}
+
+.map1 {
+  box-shadow: 5px 5px 15px lightgray;
+  background-color: white;
+}
+
+.colhide1 {
+  height: 80vh;
+  box-shadow: 5px 5px 15px lightgray;
+  background-color: white;
+}
+
+.badgebg1 {
+  background-color: #5da25e !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.badgebg2 {
+  background-color: white !important;
+  color: #5da25e !important;
+  border: 1.7px solid #5da25e !important;
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.badges {
+  margin-left: 19%;
+  margin-top: 35px;
+}
+
+.myb {
+  width: 65%;
+  background-color: white;
+  box-shadow: 5px 5px 15px lightgray;
+  margin-left: 18%;
+  border-radius: 8px;
+  border: 1.5px solid #5da25e;
+}
+
+.myb1 {
+  overflow-y: scroll;
+  max-height: 50vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.myb1::-webkit-scrollbar {
+  display: none;
+}
+
+.tabscr {
+  overflow-y: scroll;
+  height: 80vh;
+  scrollbar-width: none;
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+.ph {
+  padding-right: 50px !important;
+}
+
+.myb::-webkit-scrollbar {
+  display: none;
+}
+
+.myn {
+  color: #035467 !important;
+}
+
+.dot {
+  background-color: #5da25e;
+}
+
+.mytext {
+  display: inline;
+}
+
+.img1 {
+  width: 70px;
+}
+
+.mybtn {
+  background-color: #5da25e !important;
+}
+
+.myrow {
+  box-shadow: 5px 5px 15px lightgray;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.game {
+  background-color: #77ab56;
+}
+
+.task {
+  background-color: #77ab56;
+}
+
+.img2 {
+  width: 40px;
+  height: 40px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.myr {
+  background-color: #77ab56 !important;
+}
+
+.mynav {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 43px;
+  display: block;
+  background: #000;
+  overflow: hidden;
+  transition-duration: 0.5s;
+}
+
+a {
+  text-decoration: none;
+  width: 188px;
+  color: #eee;
+  height: 40px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 13px;
+  margin: 6px;
+  transition-duration: 0.4s;
+  border-radius: 8px;
+}
+a:hover {
+  background: #e2e9f7;
+  color: #151525;
+}
+a:active {
+  transform: scale(0.7);
+}
+
+i {
+  width: 40px;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+#head {
+  height: 48px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #eee;
+  background: #04040f;
+}
+
+#logo {
+  width: 40px;
+  height: 40px;
+  background: url(logo.png);
+  background-size: cover;
+  margin-left: 12px;
+  display: none;
+}
+
+#bars {
+  display: inline-block;
+  margin: 0;
+  font-size: 22px;
+  padding: 14px;
+  height: 48px;
+}
+
+#times {
+  position: relative;
+  left: 24px;
+  height: 36px;
+}
+
+#va {
+  font-size: 22px;
+  font-family: sans-serif;
+}
+
+#sign {
+  position: relative;
+  top: 20px;
+  background: #353545;
+}
+
+#sign:hover {
+  color: #eee;
+}
+
+.sidebar-hidden {
+  display: none;
+}
+
+.icon-home {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/clarity_home-solid/48.png");
+}
+
+.icon-map {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/map/48.png");
+}
+.icon-product {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/box/36.png");
+}
+
+.icon-map {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/map/36.png");
+}
+
+.icon-machines {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/tractor (2) 1/36.png");
+}
+
+.icon-my-task {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/personalcard/36.png");
+}
+
+.icon-my-task {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/personalcard/36.png");
+}
+
+.icon-employee {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/to-do-list 1/36.png");
+}
+.icon-leaderboard {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/medal-star/36.png");
+}
+.icon-game {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/game/36.png");
+}
+.icon-rewards {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/crown-2/36.png");
+}
+.icon-convert-points {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: left;
+  background-size: cover;
+  background-image: url("icons/money-recive/36.png");
+}
+.icon-chat {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/messages/36.png");
+}
+.icon-report {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/medal-star/36.png");
+}
+.icon-logout {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+
+  background-size: cover;
+  background-image: url("icons/bx_log-out/36.png");
+}

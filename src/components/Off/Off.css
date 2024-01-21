@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper-off {
+    width: 90px;
+    height: 70px;
+    background-color:#FF7919;
+    position: relative;
+    border-radius: 8px;
+}
+.text-off{
+    text-align: center;
+    line-height: 70px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.cilp-path{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    clip-path: circle(50% at 50% 50%);
+    top:50%;
+    transform: translateY(-50%);
+    background-color: #FFF;
+}
+.clip1{
+    left: -10px;
+}
+.clip2{
+    right: -10px;
+}
+
+.orange{
+    background-color: #FF7919;
+}
+
+.blue{
+    background-color: #6BC8C2;
+}
+
+.yellow{
+    background-color: #FFC700;
+}
+.red{
+    background-color: red;
+}

@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bgbk: #fafafa;
+  --Primary: #77ab56;
+  --Primary2: #023e4c;
+  --color1: #5da25e;
+  --color2: #ffc700;
+  --color3: #035467;
+  --color4: #ffda84;
+  --color5: #99b760;
+  --color6: #d4ca6c;
+  --color7: #828282;
+  --color8: #779a75;
+  --color9: #cbe0cb;
+  --color10: #fbf0d7;
+  --color11: #efeccf;
+  --color12: #dde6cc;
+  --color13: #646af4;
+  --color14: #80829d;
+  --color15: #b6c6e4;
+  --color16: #fafafa;
+  --color17: #edf2ea;
+  --color18: #bbd4ab;
+  --color19: #7aa85e;
+  --color20: #d1e9d1;
+  --color21: #6e8ecb;
+  --color22: #e8e8e8;
+}
+
+@media (max-width: 992px) {
+  .fielddrop {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .fielddrop {
+    width: 50%;
+  }
+}
+
+.fielddrop :focus-visible {
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .cancel-button {
+    width: 25%;
+  }
+
+  .border-side {
+    border: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .cancel-button {
+    width: auto;
+  }
+
+  .border-side {
+    border-right: 1px solid var(--color1);
+  }
+}
+
+input :focus-visible {
+  outline: 0 !important;
+}
+
+textarea :focus-visible {
+  outline: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  background: none !important;
+}
+
+select:focus-visible {
+  outline: 0 !important;
+  border: none !important;
+}
+
+.table-task {
+  overflow-y: scroll;
+  margin-top: 1rem;
+  max-height: 250px;
+  background-color: white;
+  box-shadow: 5px 5px 15px lightgrey;
+  border-radius: 8rem;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.tabscr {
+  overflow-y: scroll;
+  height: 80vh;
+  scrollbar-width: none;
+  border-collapse: separate;
+  border-spacing: 50px 0;
+}
+
+.ph {
+  padding-right: 50px !important;
+}
+
+.table-parent .header-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--Primary2);
+  margin-bottom: 0 !important;
+  border-bottom: 2px solid var(--Primary2);
+}
+
+.table-parent {
+  padding: 0 10px;
+  margin-bottom: 1rem;
+}
+
+.border-prim2 {
+  border: 1px solid var(--Primary) !important;
+  border-radius: 8px !important;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table-container::-webkit-scrollbar {
+  display: none !important;
+}
+
+.table-responsiv-custome {
+  overflow-y: scroll;
+  max-height: 200px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.table-task thead tr th {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  color: var(--Primary2) !important;
+  padding: 12px 0 !important;
+  display: table-cell;
+  text-wrap: nowrap;
+  text-align: start;
+}
+
+.table-task tbody tr td {
+  padding: 12px 0 !important;
+  font-weight: 500 !important;
+  font-size: medium !important;
+  text-align: start !important;
+  display: table-cell;
+  text-wrap: nowrap;
+}
+
+/* tbody tr td.edit-remove {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-evenly !important;
+  cursor: pointer;
+} */
+
+.edit-remove i:first-child {
+  color: var(--Primary);
+}
+
+.edit-remove i:last-child {
+  color: red;
+}
+
+.newProductglass {
+  background:#fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(196, 187, 187, 0.76)
+}
+
+.form-land {
+  width: 100%;
+}
+
+.input-reduis {
+  border-radius: 8px;
+}
+
+.btns-tasks-wrapper {
+  display: flex;
+}
+
+.btn-prodduct-container {
+  display: flex;
+}
+
+@media (max-width:768px) {
+  .form-land {
+    width: 80% !important;
+    margin: 0 auto;
+  }
+
+  .product-date {
+    width: 100%;
+    text-align: left;
+  }
+
+  .area-product {
+    width: 100%;
+  }
+
+  .add-task-product {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+  .add-newProduct-container{
+    order: 3;
+  }
+}
+
+@media (max-width:576px) {
+  .btns-tasks-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-prodduct-container {
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  
+  #productglass{
+    margin-bottom: 25px;
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenLayers Click Longitude/Latitude</title>
+
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <script src="script.js"></script>
+
+</head>
+
+<body>
+
+  <h1>OpenLayers Click to Get Lon/Lat</h1>
+  
+  <div id="map" style="width:400px; height:250px;"></div>
+
+  <p>
+    Lon: <span id="x"></span><br>
+    Lat: <span id="y"></span>
+  </p>
+
+  <script>
+
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([37.41, 8.82]),
+        zoom: 4
+      })
+    });
+    
+    var xElement = document.getElementById('x');
+    var yElement = document.getElementById('y');
+
+    map.on('click', function(evt) {
+      var mapCoord = evt.coordinate;
+
+      var lonlat = ol.proj.toLonLat(mapCoord);
+
+      xElement.innerHTML = lonlat[0];
+      yElement.innerHTML = lonlat[1];
+    });
+
+  </script>
+
+</body>
+</html>

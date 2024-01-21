@@ -1,0 +1,41 @@
+*,::after,::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.backChat{
+    display: none;
+    background-color: transparent;
+    font-size:1.3rem;
+    
+}
+img{
+    vertical-align: middle;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.img-audiuance{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+@media (max-width:768px) {
+    .backChat{
+        display: block;
+    }
+}
+
+@media (max-width:576px) {
+.emloyeeName{
+    font-size: 14px;
+}
+.farm{
+    font-size: 12px;
+}
+
+}
+

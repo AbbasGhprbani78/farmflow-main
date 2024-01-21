@@ -1,0 +1,73 @@
+@media (max-width: 768px) {
+    .mymainbg {
+        display: none;
+    }
+
+}
+
+:root {
+    --Primary:#77ab56;
+    --color1:#5DA25E;
+}
+
+.title1 {
+    color: #77ab56;
+}
+
+.topinput {
+    height: 40px;
+    border-radius: 8px;
+    border: 0.7px solid #77ab56;
+}
+
+.topinput:hover {
+    border: 2px solid #5DA25E;
+}
+
+.mybtn {
+    background-color: #77ab56;
+    height: 40px;
+    /* width: 325px; */
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.mybtn:hover {
+    background-color: #5DA25E;
+}
+
+.mybg {
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.myimg {
+    width: 50px;
+    height: 50px;
+}
+
+.myinput1 {
+    margin-top: 50px;
+}
+
+.myinput2 {
+    margin-top: 50px;
+}
+
+.logo {
+    margin-top:40px;
+    margin-left: 116px;
+    width: 45%;
+    height: 55%;
+}
+
+.mymainbg {
+    height: 100vh;
+    width: 100%;
+}
+
+.bg1 {
+   vertical-align: bottom;
+   margin-top: 30px;
+}
+

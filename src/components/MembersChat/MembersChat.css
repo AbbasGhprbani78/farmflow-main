@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.employeContent {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 20px 20px 20px 0;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+    transition: all .3s;
+    color: #000;
+}
+
+.employeeImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.employeeImage>img {
+    width: 100%;
+    height: 100%;
+}
+
+.employeText {
+    margin-left: 20px;
+}
+
+.employesContainer.active {
+    box-shadow: 5px 5px 10px #c0c0c0, -5px -5px 10px #ffffff;
+    transform: scale(1.1);
+    padding-left: 10px;
+}

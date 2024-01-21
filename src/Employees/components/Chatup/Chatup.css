@@ -1,0 +1,26 @@
+*,::after,::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+img{
+    vertical-align: middle;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+
+
+@media (max-width:576px) {
+.emloyeeName{
+    font-size: 14px;
+}
+.farm{
+    font-size: 12px;
+}
+
+}
+

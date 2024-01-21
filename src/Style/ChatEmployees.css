@@ -1,0 +1,178 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.chatcolhide {
+    overflow-y: scroll;
+    box-shadow: 5px 5px 15px lightgray;
+    background-color: white;
+    }
+    
+    
+    .chatcolhide::-webkit-scrollbar {
+    display: none;
+    }
+    
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+.chatwrapper{
+    max-height: 380px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.chatDown{
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.chat {
+    background: linear-gradient(180deg, #fafafa, #EDF2EA, #BBD4AB, #7AA85E);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+i {
+    width: 40px;
+    margin-right: 10px;
+    padding: 10px;
+}
+.bi-emoji-smile::before {
+    content: "\f327";
+}
+bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input{
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+#file{
+    display: none;
+}
+
+
+.btn-sendfile{
+    outline:  none;
+    border: none;
+    border-radius: 50%;
+    background-color:  transparent;
+    margin-left: 7px;
+}
+.recording{
+    width: auto !important;
+}
+.audio-recorder-timer{
+    margin-left: 0 !important;
+}
+.audio-recorder-status,.audio-recorder-options{
+display: none !important;
+}
+
+.audio-btn{
+    outline: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    font-size: 22px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.emoji-icon{
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 4px;
+}
+.hideIcon{
+    display: none;
+}
+.show-sendIcon{
+    display: block;
+    transition:  all .3s;
+}
+.emoji-wrapper{
+    position: absolute;
+    right:-80px;
+    bottom:140%;
+}
+.Voice-wave{
+    display: none;
+}
+
+@media (max-width:992px) {
+    .chat{
+        margin: 50px auto 0 auto !important;
+        
+    }
+    .chatcolhide{
+        margin:0 auto
+    }
+    .chatwrapper{
+        min-height: 300px;
+    }
+    }
+   
+
+@media (max-width:767px) {
+    .chat{
+        min-height: 450px !important;
+        
+    }
+    .chatPage{
+        display: flex;
+        flex-direction: column !important;
+        padding: 0 10px;
+    }
+    .emoji-icon{
+        display: none;
+    }
+    
+}
+
+@media (max-width:576px) {
+    .chatwrapper{
+        font-size: 8px;
+    }
+    .inputChat::placeholder{
+        font-size: 10px;
+    }
+    .messge-input{
+        width: 90% !important;
+    }
+}
+@media (max-width:438px) {
+        .btn-sendfile{
+            margin-left: 5px !important;
+            margin-right: -9px !important;
+        }
+}
+::-webkit-scrollbar{
+    display: none;
+
+}
+

@@ -1,0 +1,23 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.score{
+    box-shadow: 5px 5px 15px lightgray;
+    border: 1px solid lightgray;
+    width: 70px;
+    border-radius: 8px;
+    font-weight: bold;
+    align-self: center !important;
+    padding:5px 0;
+}
+.score-number{
+    color: #252525;
+}
+.star{
+    color: rgb(255, 204, 0);
+}
+/* #023e4c */

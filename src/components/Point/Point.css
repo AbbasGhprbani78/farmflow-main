@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Rajdhani:wght@300&display=swap');
+
+
+
+.wrapper {
+    width: 70px;
+    height: 100px;
+    background-color: #5DA25E;
+    position: relative;
+    text-align: center;
+}
+
+
+h3 {
+    text-align: center;
+    padding-top: 5px;
+
+}
+
+.point {
+
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.clip-path {
+    clip-path: polygon(51% 42%, 0% 100%, 100% 100%);
+    width: 100%;
+    height: 50px;
+    background-color: #FFF;
+    position: absolute;
+    bottom: -2px;
+}
+
+@media (max-width:576px) {
+    .wrapper {
+        width: 60px;
+        height: 90px;
+        margin-left: 10px;
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "data": [
+        {
+            "title": "Maturity Levels in the People CMM",
+            "paragraphs": [
+                {
+                    "context": "A capability maturity model (CMM®) is constructed from the essential practices of one or more domains of organizational process. The People CMM concerns the domain of workforce management and development. A CMM describes an evolutionary improvement path from an ad hoc, immature process to a disciplined, mature process with improved quality and effectiveness.",
+                    "qas": [
+                        {
+                            "question": "What does a capability maturity model (CMM®) describe?",
+                            "id": "cmm_1",
+                            "answers": [
+                                {
+                                    "text": "an evolutionary improvement path from an ad hoc, immature process to a disciplined, mature process with improved quality and effectiveness",
+                                    "answer_start": 121
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "What domain does the People CMM address?",
+                            "id": "cmm_2",
+                            "answers": [
+                                {
+                                    "text": "workforce management and development",
+                                    "answer_start": 79
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "How many levels of maturity are there in all CMMs?",
+                            "id": "cmm_3",
+                            "answers": [
+                                {
+                                    "text": "five",
+                                    "answer_start": 33
+                                }
+                            ],
+                            "is_impossible": false
+                        }
+                    ]
+                },
+                {
+                    "context": "All CMMs are constructed with five levels of maturity. A maturity level is an evolutionary plateau at which one or more domains of the organization’s processes have been transformed to achieve a new level of organizational capability. Thus, an organization achieves a new level of maturity when a system of practices has been established or transformed to provide capabilities and results the organization did not have at the previous level. The method of transformation is different at each level, and requires capabilities established at earlier levels. Consequently, each maturity level provides a foundation of practices on which practices at subsequent maturity levels can be built. In order to be a true CMM, the maturity framework underlying a model must use the principles established in Humphrey’s maturity framework for transforming the organization at each level.",
+                    "qas": [
+                        {
+                            "question": "What is the significance of achieving a new level of maturity in a CMM?",
+                            "id": "cmm_4",
+                            "answers": [
+                                {
+                                    "text": "an organization achieves a new level of maturity when a system of practices has been established or transformed to provide capabilities and results the organization did not have at the previous level",
+                                    "answer_start": 213
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "What is required for practices at subsequent maturity levels to be built?",
+                            "id": "cmm_5",
+                            "answers": [
+                                {
+                                    "text": "a foundation of practices established at earlier levels",
+                                    "answer_start": 411
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "What framework must be used for a model to be considered a true CMM?",
+                            "id": "cmm_6",
+                            "answers": [
+                                {
+                                    "text": "Humphrey’s maturity framework for transforming the organization at each level",
+                                    "answer_start": 543
+                                }
+                            ],
+                            "is_impossible": false
+                        }
+                    ]
+                },
+                {
+                    "context": "The People CMM applies the principles underlying Humphrey’s maturity framework to the domain of workforce practices. Each of the People CMM’s five maturity levels represents a different level of organizational capability for managing and developing the workforce. Each maturity level provides a layer in the foundation for continuous improvement and equips the organization with increasingly powerful tools for developing the capability of its workforce. The nature of the transformation imposed on the organization’s workforce practices to achieve each level of maturity",
+                    "qas": [
+                        {
+                            "question": "What do each of the People CMM’s five maturity levels represent?",
+                            "id": "cmm_7",
+                            "answers": [
+                                {
+                                    "text": "a different level of organizational capability for managing and developing the workforce",
+                                    "answer_start": 144
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "What does each maturity level provide for the organization?",
+                            "id": "cmm_8",
+                            "answers": [
+                                {
+                                    "text": "a layer in the foundation for continuous improvement and increasingly powerful tools for developing the capability of its workforce",
+                                    "answer_start": 338
+                                }
+                            ],
+                            "is_impossible": false
+                        },
+                        {
+                            "question": "What is the nature of the transformation imposed on the organization’s workforce practices?",
+                            "id": "cmm_9",
+                            "answers": [
+                                {
+                                    "text": "The nature of the transformation imposed on the organization’s workforce practices to achieve each level of maturity is not provided in the text.",
+                                    "answer_start": -1
+                                }
+                            ],
+                            "is_impossible": true,
+                            "plausible_answers": [{"text": "The transformation involves adopting and implementing new practices and processes.", "answer_start": -1}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

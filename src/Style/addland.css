@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bgbk: #fafafa;
+  --Primary: #77ab56;
+  --Primary2: #023e4c;
+  --color1: #5da25e;
+  --color2: #ffc700;
+  --color3: #035467;
+  --color4: #ffda84;
+  --color5: #99b760;
+  --color6: #d4ca6c;
+  --color7: #828282;
+  --color8: #779a75;
+  --color9: #cbe0cb;
+  --color10: #fbf0d7;
+  --color11: #efeccf;
+  --color12: #dde6cc;
+  --color13: #646af4;
+  --color14: #80829d;
+  --color15: #b6c6e4;
+  --color16: #fafafa;
+  --color17: #edf2ea;
+  --color18: #bbd4ab;
+  --color19: #7aa85e;
+  --color20: #d1e9d1;
+  --color21: #6e8ecb;
+  --color22: #e8e8e8;
+}
+@media (max-width: 992px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../Images/homeMain/main.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
+  }
+  .headerLeader {
+    text-align: center;
+    /* font-family: Gilroy; */
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../Images/homeMain/main.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: Keeps the background fixed while scrolling */
+  }
+  .headerLeader {
+    text-align: start;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+}
+.leaderShadow {
+  height: auto;
+  box-shadow: 5px 5px 15px lightgray;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
+  --bs-table-bg: none;
+}
+
+.focus:focus-visible {
+  outline: 0 !important;
+}
+.textarea {
+  resize: none;
+  overflow: scroll;
+}
+.textarea::-webkit-scrollbar {
+  display: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.leaflet-control-attribution.leaflet-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.leaflet-control-attribution.leaflet-control a {
+  width: auto;
+  margin: 0 5px;
+}
+.leaflet-control-attribution.leaflet-control a:first-child svg {
+  width: 0;
+  height: 0;
+}

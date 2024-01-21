@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.active {
+  background-color: #fff !important;
+}
+
+.reportMachines {
+  background-color: rgb(52, 122, 214) !important;
+  padding: 6px 13px !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  text-decoration: none;
+}
+
+#fill-tab-example {
+  background-color: #5DA25E;
+  border: none;
+}
+
+
+.showDisplay {
+  display: block;
+}
+
+.hideDisplay {
+  display: none;
+}
+
+.nav-tabs .nav-link {
+  color: #198754;
+
+}
+
+.custom-active-tab {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+@media (max-width:576px) {
+  .dropMachine {
+    margin-left: 15px;
+  }
+}

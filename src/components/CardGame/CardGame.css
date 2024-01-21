@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cardgame-wrapper{
+    box-shadow: 5px 5px 15px lightgray;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.game-send-btn{
+background-color:#77ab56;
+border-radius: 8px;
+color:#fff;
+outline: none;
+border: none;
+padding: 8px 15px;
+width: 100px;
+}
+.card-game-text{
+    width: 70%;
+}
+
+@media (max-width:992px) {
+    .card-game-text{
+        width: 95%;
+    }
+}
+@media (max-width:768px) {
+       .part{
+        margin-left: 10px;
+       }
+       .middle{
+        margin: 10px 0 !important;
+       }
+}
+

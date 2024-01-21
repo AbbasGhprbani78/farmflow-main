@@ -1,0 +1,386 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.rounded2{
+  border-radius: 8px;
+  /* overflow: hidden; */
+  text-align: center;
+}
+
+:root {
+  --bgbk:#fafafa;
+  --Primary:#77ab56;
+  --color1:#5DA25E;
+  --color2:#ffc700;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  #nav {
+    display: none;
+  }
+}
+
+i11 {
+  color: #ffc700!important;
+}
+
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+      font-size: 16px;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      --bs-table-bg:none;
+
+  }
+
+  .table th {
+    z-index: 1;
+  }
+
+  .table td {
+    z-index: 2;
+  }
+
+  body {
+    background-image: url(./img/mobile-bg.png);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position:bottom;
+  }
+} 
+
+@media (min-width: 768px) {
+  .table th,
+  .table td {
+      font-size: 20px;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      --bs-table-bg:none;
+    }
+    body{
+ 
+      object-fit: cover; 
+         background-color:#fafafa!important;
+        user-select: none;
+        background-image: url(./img/bg.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .table th {
+      z-index: 1;
+    }
+
+    .table td {
+      z-index: 2;
+    }
+
+ 
+}
+
+@media (max-width: 768px) {
+  .table i {
+      font-size:16px;
+      
+     }
+  }
+
+
+
+@media (min-width: 768px) {
+ .table i {
+  font-size:20px ;
+ }
+}
+
+thead tr {
+  z-index: 1;
+}
+
+
+.table-responsive tbody {
+  overflow-y: scroll;
+}
+
+.table-responsive {
+  overflow-y: scroll;
+  max-height: 70vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.table-responsive::-webkit-scrollbar {
+  display: none;
+}
+
+.table-responsive thead th {
+  position: sticky;
+  top: 0px;
+}
+
+
+
+/* .mbackg {
+  background-image: url(./img/bg.png);
+  background-size:cover;
+  background-repeat: no-repeat;
+  
+} */
+
+.mytable {
+  backdrop-filter: blur(10px);
+} 
+
+/* .table12 {
+  width: 100px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 8px;
+} */
+
+.myicon {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 150px;
+  gap: 5px;
+}
+
+.i11 {
+  color: #ffc700;
+  font-size: 25px;
+}
+
+.img2 {
+  width: 40px;
+  height: 40px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+.tback {
+  background-color: rgba(255, 255, 255, 0.7)!important;
+ 
+}
+
+.myr {
+  background-color: #77ab56!important;
+}
+
+
+.mynav{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 43px;
+    display: block;
+    background: #000;
+    overflow: hidden;
+    transition-duration: 0.5s;
+}
+
+a{
+    text-decoration: none;
+    width: 188px;
+    color:#eee;
+    height: 40px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 13px;
+    margin: 6px;
+    transition-duration: 0.4s;
+    border-radius: 8px;
+
+}
+a:hover{
+    background:#e2e9f7;
+    color:#151525;
+}
+a:active{
+    transform: scale(0.7);
+}
+
+i{
+    width: 40px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+#head{
+    height: 48px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #eee;
+    background: #04040f;
+
+}
+
+#logo{
+    width: 40px;
+    height: 40px;
+    background:url(logo.png);
+    background-size:cover;
+    margin-left:12px;
+    display: none;
+}
+
+#bars{
+    display: inline-block;
+    margin: 0;
+    font-size: 22px;
+    padding: 14px;
+    height: 48px;
+}
+
+#times{
+    position: relative;
+    left: 24px;
+    height: 36px;
+}
+
+#va{
+    font-size: 22px;
+    font-family: sans-serif;
+}
+
+#sign{
+    position: relative;
+    top: 20px;
+    background: #353545;
+}
+
+#sign:hover{
+   color: #eee; 
+}
+
+.sidebar-hidden {
+    display: none;
+  }
+
+  .icon-home {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/clarity_home-solid/48.png');
+  }
+
+  .icon-map {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/map/48.png');
+  }
+  .icon-product {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/box/36.png');
+  }
+
+  .icon-map {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/map/36.png');
+  }
+
+  .icon-machines {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/tractor (2) 1/36.png');
+  }
+
+  .icon-my-task {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/personalcard/36.png');
+  }
+
+  .icon-my-task {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/personalcard/36.png');
+  }
+
+  .icon-employee {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/to-do-list 1/36.png');
+  }
+  .icon-leaderboard {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/medal-star/36.png');
+  }
+  .icon-game{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/game/36.png');
+  }
+  .icon-rewards {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/crown-2/36.png');
+  }
+  .icon-convert-points {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: left;
+    background-size: cover;background-image: url('icons/money-recive/36.png');
+  }
+  .icon-chat {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/messages/36.png');
+  }
+  .icon-report {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/medal-star/36.png');
+  }
+  .icon-logout {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    
+    background-size: cover;background-image: url('icons/bx_log-out/36.png');
+  }
+
+  
+

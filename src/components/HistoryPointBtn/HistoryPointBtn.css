@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.history-btn-wrapper{
+    direction: rtl;
+
+}
+
+.history-btn{
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s;
+    color:#5DA25E !important
+}
+
+.history-btn:hover{
+    border: 1px solid #8CB78C;
+}
+
+
+
+   

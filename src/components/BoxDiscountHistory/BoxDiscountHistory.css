@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.myrow {
+    box-shadow: 5px 5px 15px lightgray;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.point-box{
+    box-shadow: 5px 5px 15px lightgray;
+    border-radius: 8px;
+    background-color: white;
+    padding: 12px 0;
+    height: 130px !important;
+} 
+
+
+ h3{
+    text-align: center;
+    padding-top: 5px;
+}
+.point{
+    text-align: center;
+    border:none !important;
+}
+
+.point-off{
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:768px) {
+   
+  .point-off{
+    justify-content: start;
+    margin-right: 10px;
+  }
+   
+}
+
+@media(max-width:576px) {
+    
+    .dic-his{
+        flex-wrap: wrap;
+    }
+}

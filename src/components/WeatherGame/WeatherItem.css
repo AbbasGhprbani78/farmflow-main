@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.situation{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px;
+    min-width: 125.5px;
+    box-shadow: rgba(0,0 ,0 ,0.19 ) 0px 10px 20px,
+    rgba(0, 0, 0,.23 )0 6px 6px;
+    border-radius: 8px;
+    
+}
+.titleSituation{
+   margin-bottom: 30px !important;
+   font-weight: bold;
+}
+
+
+@media (max-width:872px) {
+.situation{
+    font-size: 14px;
+}
+}

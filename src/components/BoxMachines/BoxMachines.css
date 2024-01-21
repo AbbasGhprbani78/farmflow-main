@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.machinInput {
+    width: auto;
+    padding: 7px 10px;
+}
+
+input[type="file"] {
+    display: block;
+}
+
+.boxMachines-wrapper {
+    background-color: #f9f9f9;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 98%;
+    margin: 20px auto;
+    border-radius: 8px;
+
+}
+
+.machine-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 10px 50px 10px;
+    font-size: 14px;
+
+}
+
+.machines-img {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.machines-img>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+}
+
+.machines-img>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.upload-machines,
+.upload-pdf {
+    display: none !important;
+}
+
+.lable-pdf {
+    color: #000 !important;
+    background-color: #fff;
+    padding: 8px 7px;
+}
+
+.select {
+    flex: 1 1 100%;
+    min-width: 130px;
+    padding: 7px 10px;
+}
+
+label {
+    cursor: pointer;
+}
+
+.edit-btn-machine {
+    background-color: #5da25e;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.machine-content2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px 50px 10px;
+    font-size: 13px;
+}
+
+.input-machine-container {
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+}
+
+.machine-top {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+
+}
+
+.machine-bottom {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    margin-top: 10px;
+}
+
+.pdfDown {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.input-machine {
+    height: 35.6px;
+    background-color: #fff;
+}
+
+.lable-pdf {
+    display: flex;
+    align-items: center;
+}
+
+
+.input-machin-box{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+ @media (max-width:1300px) {
+    .machine-content{
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width:1200px) {
+
+    input-machine,
+    .select {
+        width: 150px;
+    }
+
+    .machine-content {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 968px) and (min-width: 653px) {
+
+    .machine-top,
+    .machine-bottom {
+        width: 100%;
+    }
+
+    .select,
+    input-machine {
+        width: 150px !important;
+        margin: 0 10px !important;
+    }
+
+    .lable-pdf {
+        margin-left: 7px;
+    }
+}
+
+
+
+@media (max-width:653px) {
+    .machine-content {
+        flex-direction: column;
+    }
+    .select{
+        padding: 10px;
+    }
+    .vehicle{
+        padding:11px;
+    }
+
+    .machines-img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .dropdown-machine,
+    .inputWrapper {
+        width: 70%;
+
+    }
+
+    .select {
+        border: none !important;
+    }
+
+    .select,
+    .vehicle {
+        width: 100%;
+    }
+
+    .inputTime {
+        width: 50%;
+    }
+
+    .machinInput {
+        margin-top: 30px;
+        
+    }
+
+    .machinInput:not(:nth-child(1)) {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .select {
+        border: none !important;
+    }
+
+    .closeMachine {
+        font-size: 18px;
+    }
+
+    .boxMachines-wrapper {
+       
+        width: 90%;
+        position: relative;
+    }
+
+    .inputTime {
+        border: 1px solid;
+    }
+
+    .edit-btn-machine {
+        position: absolute;
+        left: 0;
+        top: 0
+    }
+
+    .delete-box {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+} 
