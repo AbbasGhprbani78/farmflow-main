@@ -781,8 +781,8 @@ function Report() {
                         </select>
                       </div>
                       <div>
-                        <div className="d-flex justify-content-between align-items-center"> <p style={{ fontWeight: "bold" }}>Sensor :</p>
-                          <p onClick={addSensorHandler} style={{ cursor: "pointer", borderBottom: "1px solid #5da25e", color: "#5da25e", fontWeight: "bold" }} className="d-flex align-items-center">Add Sensor  +</p></div>
+                        <div style={{ width: "100%" }} className="d-flex justify-content-between align-items-center"> <p style={{ fontWeight: "bold" }}>Sensor :</p>
+                          <p onClick={addSensorHandler} style={{ width: "100%", cursor: "pointer", borderBottom: "1px solid #5da25e", color: "#5da25e", fontWeight: "bold" }} className="d-flex align-items-center">Add Sensor  +</p></div>
                         <select
                           style={{ width: "100%" }}
                           onChange={(e) => {
@@ -824,6 +824,7 @@ function Report() {
                             <Table className="table table-responsive-custome">
                               <thead style={{ textAlign: "center" }}>
                                 <tr className="noborder-shadow">
+                                  {/* <th className="thead-report">Priority</th> */}
                                   <th className="thead-report">Name</th>
                                   <th className="thead-report">Land</th>
                                   <th className="thead-report">Product</th>
@@ -835,6 +836,7 @@ function Report() {
                               <tbody style={{ textAlign: "center" }}>
                                 {tableinfo && tableinfo.map((info, i) => (
                                   <tr key={i} className="noborder-shadow">
+                                    {/* <td>{info.priority}</td> */}
                                     <td className="td-report">{info.title}</td>
                                     <td className="td-report">{info.land.title}</td>
                                     <td className="td-report">{info.product.name}</td>

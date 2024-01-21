@@ -142,7 +142,7 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
         handleFilterItem={handleFilterItem}
         handleFilterItemL={handleFilterItemL}>
 
-        {filterPriority.map((task, i) => (
+        {filterPriority && filterPriority.map((task, i) => (
           <tr>
             {
               main !== "false" &&
@@ -215,7 +215,7 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
 
         ))}
 
-        {filterLands.map((task, i) => (
+        {filterLands && filterLands.map((task, i) => (
           <tr>
             {
               main !== "false" &&
