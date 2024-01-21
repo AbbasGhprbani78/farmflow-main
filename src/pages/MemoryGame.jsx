@@ -292,11 +292,11 @@ export default function MemoryGame() {
                         <p className='memory-text'>{infoGame[0].descriptions}</p>
                       </Col>
                       <Col md={4} lg={4} className="memoryLevel-wrapper">
-                        <p className='memoryLevel'>
+                        {/* <p className='memoryLevel'>
                           <GoTriangleLeft className='level-icon' />
                           level-1
                           <GoTriangleRight className='level-icon' />
-                        </p>
+                        </p> */}
                       </Col>
                       <Col md={12} lg={4} className="memory-time">
                         {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}

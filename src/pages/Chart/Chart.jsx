@@ -166,15 +166,15 @@ export default function Chart() {
                                         <tr>
                                             <th>Lable</th>
                                             <th>Value</th>
-                                            <th style={{textAlign:"center"}}>%</th>
+                                            <th style={{ textAlign: "center" }}>%</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {data2.map((data, i) => (
                                             <tr className='tr-chart' key={i}>
-                                                <td>{data.status == "IU" ? "under maintenance" : data.status == "A" ? "available" : "In Use"}</td>
+                                                <td>{data.status == "IU" ? "In Use" : data.status == "A" ? "available" : "Under Maintenance"}</td>
                                                 <td >{data.count}</td>
-                                                <td style={{textAlign:"center"}} >{(data.percentage).toFixed(2).replace(/\.?0*$/, '')}%</td>
+                                                <td style={{ textAlign: "center" }} >{(data.percentage).toFixed(2).replace(/\.?0*$/, '')}%</td>
                                             </tr>
                                         ))}
                                     </tbody>

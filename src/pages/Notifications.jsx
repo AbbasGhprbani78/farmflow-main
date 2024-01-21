@@ -26,8 +26,13 @@ function Notifications() {
       });
       if (response.status === 200) {
         console.log(response.data);
-        setNotif(response.data);
         setLoading(false)
+        const sortedNotifData = response.data.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA;
+        });
+        setNotif(sortedNotifData);
       }
 
     } catch (error) {
@@ -65,7 +70,7 @@ function Notifications() {
       }
     }
   };
-  
+
   useEffect(() => {
     fetchNotifData();
     fetchTaskData();

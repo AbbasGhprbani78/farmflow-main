@@ -5,7 +5,6 @@ import '../Style/homeStyle.css'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Weather from "../components/Weather";
 import { useEffect, useState } from "react";
@@ -16,6 +15,7 @@ import ShowModal from "../components/ShowModal";
 import { PlanInfo } from "../components/Product Component/PlanInfo";
 import { IP } from '../App'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default function EmployeesHome() {
@@ -29,18 +29,20 @@ export default function EmployeesHome() {
     const [activeJob, setActiveJob] = useState()
     const [landCount, setLandCount] = useState()
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+    const [unNotif, setAllNotif] = useState()
     function handleClose() {
         setShow(false);
     }
+
     async function handleShow(id) {
         setNotifData((notifs) =>
             notifs.map((notif) =>
                 notif.id === id ? { ...notif, read: true } : notif
             )
-        );
+        )
         setActiveId(id);
         setShow(true);
+
         const access = localStorage.getItem("access")
         const headers = {
             Authorization: `Bearer ${access}`
@@ -73,9 +75,11 @@ export default function EmployeesHome() {
         for (const i in notifData) {
             if (!notifData[i].read) n++;
         }
+        setAllNotif(n)
 
     }, [notifData]);
-    
+
+
     const getUnread = async () => {
 
         const access = localStorage.getItem('access')
@@ -110,9 +114,7 @@ export default function EmployeesHome() {
     }, [])
 
 
-
     localStorage.setItem("unread", unreadMessage)
-
     const getWeather = async (uuid) => {
 
         const access = localStorage.getItem('access')
@@ -296,70 +298,52 @@ export default function EmployeesHome() {
                             <Header unreadMessage={unreadMessage}></Header>
                             <Container fluid>
                                 <Row>
-                                    <Col
-                                        className=" mt-3 mb-3 mt-lg-0"
-                                        xs={{ span: 12, offset: 0 }}
-                                        lg={{ span: 3, offset: 0 }}
-                                    >
-                                        <PlansForm getWeather={getWeather} />
-                                    </Col>
-                                    <Col className="" xs={12} lg={9}>
-                                        <Row>
-                                            <PlanInfo
-                                                pClassName=""
-                                                className="s1"
-                                                quality="good"
-                                                amount={landCount}
-                                                title="Lands"
-                                            >
-                                                <i className="bi bi-clipboard2 fs-3"></i>
-                                            </PlanInfo>
-                                            <PlanInfo
-                                                pClassName="mt-3 mt-sm-0"
-                                                className="s2"
-                                                quality="high"
-                                                amount={activeJob}
-                                                title="Active Tasks"
-                                            >
-                                                <i className="bi bi-fire fs-3"></i>
-                                            </PlanInfo>
-                                            <PlanInfo
-                                                pClassName="mt-3 mt-xl-0"
-                                                className="s3"
-                                                quality="good"
-                                                amount={jobDue}
-                                                title="Completed Tasks"
-                                            >
-                                                <i className="bi bi-clock fs-3"></i>
-                                            </PlanInfo>
-                                        </Row>
-                                        <ValidDate />
-                                        <Weather weather={weather} />
-                                    </Col>
-                                    <Col
-                                        className=" mt-3 mb-3 mt-lg-0"
-                                        xs={{ span: 12, offset: 0 }}
-                                        lg={{ span: 3, offset: 0 }}
-                                    >
-                                        <AllNotifs number={unreadMessage}>
-                                            {notifData ? (
-                                                <>
-                                                    {notifData && notifData.map((notif, i) => (
-                                                        <Notif
-                                                            text={notif.content}
-                                                            date={notif.date}
-                                                            time={notif.time}
-                                                            read={notif.read}
-                                                            onShow={() => handleShow(notif.id)}
-                                                            key={notif.id}
-                                                        />
-                                                    ))}
-                                                </>) :
-                                                (<>
-                                                    <span>there are no notification to dispaly</span>
-                                                </>)}
-                                        </AllNotifs>
-                                    </Col>
+                                    <Col xs={12} sm={4} >
+                                        <Link style={{ all: "unset" }} to={"/employeefarmdetails"}>
+                                            <div className={`w-100 mt s1 land`}>
+                                                <Row className="flex-row">
+                                                    <Col xs={4} className="firstInfo">
+                                                        <i className="bi bi-clipboard2 fs-3"></i>
+                                                        <span className="fs-3 ">{landCount}</span>
+                                                    </Col>
+                                                    <Col xs={8} className="secInfo">
+                                                        <h5>Lands</h5>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </Link>
+
+                                    </Col >
+                                    <Col xs={12} sm={4} className='my-2' >
+                                        <Link style={{ all: "unset" }} to={"/employeeNotifications"}>
+                                            <div className={`w-100 mt s2 land`}>
+                                                <Row className="flex-row">
+                                                    <Col xs={4} className="firstInfo">
+                                                        <i className="bi bi-fire fs-3"></i>
+                                                        <span className="fs-3 ">{activeJob}</span>
+                                                    </Col>
+                                                    <Col xs={8} className="secInfo">
+                                                        <h5>Active Tasks</h5>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </Link>
+                                    </Col >
+                                    <Col xs={12} sm={4} >
+                                        <Link style={{ all: "unset" }} to={"/employeess"}>
+                                            <div className={`w-100 mt s3 land`}>
+                                                <Row className="flex-row">
+                                                    <Col xs={4} className="firstInfo">
+                                                        <i className="bi bi-clock fs-3"></i>
+                                                        <span className="fs-3 ">{jobDue}</span>
+                                                    </Col>
+                                                    <Col xs={8} className="secInfo">
+                                                        <h5>Completed Tasks</h5>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </Link>
+                                    </Col >
                                 </Row>
                             </Container>
                         </div>
@@ -382,34 +366,53 @@ export default function EmployeesHome() {
                             <Container fluid>
                                 <Row>
                                     <Col className="" xs={12} lg={9}>
-                                        <Row>
-                                            <PlanInfo
-                                                pClassName=""
-                                                className="s1"
-                                                quality="good"
-                                                amount={landCount}
-                                                title="Fields"
-                                            >
-                                                <i className="bi bi-clipboard2 fs-3"></i>
-                                            </PlanInfo>
-                                            <PlanInfo
-                                                pClassName="mt-3 mt-sm-0"
-                                                className="s2"
-                                                quality="high"
-                                                amount={activeJob}
-                                                title="Active Tasks"
-                                            >
-                                                <i className="bi bi-fire fs-3"></i>
-                                            </PlanInfo>
-                                            <PlanInfo
-                                                pClassName="mt-3 mt-xl-0"
-                                                className="s3"
-                                                quality="good"
-                                                amount={jobDue}
-                                                title="Completed Tasks"
-                                            >
-                                                <i className="bi bi-clock fs-3"></i>
-                                            </PlanInfo>
+                                        <Row className="align-items-end">
+                                            <Col xs={12} sm={4}>
+                                                <Link to={"/femployeefarmdetails"} style={{ all: "unset" }}>
+                                                    <div className={`w-100 mt s1 land`}>
+                                                        <Row className="flex-row">
+                                                            <Col xs={4} className="firstInfo">
+                                                                <i className="bi bi-clipboard2 fs-3"></i>
+                                                                <span className="fs-3 ">{landCount}</span>
+                                                            </Col>
+                                                            <Col xs={8} className="secInfo">
+                                                                <h5>Lands</h5>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                </Link>
+                                            </Col >
+
+                                            <Col xs={12} sm={4} >
+                                                <Link style={{ all: "unset" }} to={"/employeeNotifications"}>
+                                                    <div className={`w-100 mt s2 land`}>
+                                                        <Row className="flex-row">
+                                                            <Col xs={4} className="firstInfo">
+                                                                <i className="bi bi-fire fs-3"></i>
+                                                                <span className="fs-3 ">{activeJob}</span>
+                                                            </Col>
+                                                            <Col xs={8} className="secInfo">
+                                                                <h5>Active Tasks</h5>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                </Link>
+                                            </Col >
+                                            <Col xs={12} sm={4} >
+                                                <Link style={{ all: "unset" }} to={"/employeess"}>
+                                                    <div className={`w-100 mt s3 land`}>
+                                                        <Row className="flex-row">
+                                                            <Col xs={4} className="firstInfo">
+                                                                <i className="bi bi-clock fs-3"></i>
+                                                                <span className="fs-3 ">{jobDue}</span>
+                                                            </Col>
+                                                            <Col xs={8} className="secInfo">
+                                                                <h5>Completed Tasks</h5>
+                                                            </Col>
+                                                        </Row>
+                                                    </div>
+                                                </Link>
+                                            </Col >
                                         </Row>
                                         <ValidDate />
                                         <Weather weather={weather} />
@@ -420,7 +423,7 @@ export default function EmployeesHome() {
                                         lg={{ span: 3, offset: 0 }}
                                     >
                                         <PlansForm getWeather={getWeather} />
-                                        <AllNotifs number={unreadMessage}>
+                                        <AllNotifs number={unNotif}>
                                             {notifData ? (
                                                 <>
                                                     {notifData && notifData.map((notif, i) => (

@@ -16,9 +16,9 @@ const navItems = [
   },
   {
     className: "nav-link text-dark",
-    direction: "/employeeProduct",
+    direction: "/employeefarmdetails",
     iconClass: "bi bi-box-seam  fa-xl icon",
-    text: "PRODUCTS",
+    text: "FARM DETAILS",
     liClass: "nav-item mb-3 ms-3",
   },
   {
@@ -56,13 +56,7 @@ const navItems = [
     text: "CHAT",
     liClass: "nav-item mb-3 ms-3",
   },
-  // {
-  //   className: "nav-link text-dark",
-  //   direction: "/employeereport",
-  //   iconClass: "bi bi-clipboard2-check  fa-xl icon",
-  //   text: "REPORTS",
-  //   liClass: "nav-item mb-3 ms-3",
-  // },
+
   {
     className: "nav-link ",
     direction: "/employeeNotifications",

@@ -131,13 +131,15 @@ label {
 }
 
 
-.input-machin-box{
+.input-machin-box {
     padding-top: 3px;
     padding-bottom: 3px;
 }
 
- @media (max-width:1300px) {
-    .machine-content{
+
+
+@media (max-width:1300px) {
+    .machine-content {
         flex-wrap: wrap;
     }
 }
@@ -178,11 +180,13 @@ label {
     .machine-content {
         flex-direction: column;
     }
-    .select{
+
+    .select {
         padding: 10px;
     }
-    .vehicle{
-        padding:11px;
+
+    .vehicle {
+        padding: 11px;
     }
 
     .machines-img {
@@ -211,7 +215,7 @@ label {
 
     .machinInput {
         margin-top: 30px;
-        
+
     }
 
     .machinInput:not(:nth-child(1)) {
@@ -229,7 +233,7 @@ label {
     }
 
     .boxMachines-wrapper {
-       
+
         width: 90%;
         position: relative;
     }
@@ -250,4 +254,4 @@ label {
         right: 5px;
     }
 
-} 
+}

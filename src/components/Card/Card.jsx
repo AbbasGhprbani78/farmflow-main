@@ -26,7 +26,7 @@ export default function (props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Card style={{ width: '22rem', border: "none", boxShadow: "5px 5px 15px lightgray" }}>
+      <Card style={{ width: '22rem', border: "none", boxShadow: "5px 5px 15px lightgray", maxHeight: "488px" }}>
         <div style={{ height: "250px" }} className='img-wrapper'>
           <Card.Img variant="top" src={`${IP}${props.image}`} style={{ height: "100%" }} />
         </div>
@@ -38,7 +38,7 @@ export default function (props) {
               <MdAttachMoney style={{ color: "#5DA25E" }} />
             </div>
           </Card.Title>
-          <Card.Text>
+          <Card.Text style={{ overflowY: "scroll", height: "110px" }}>
             {props.description}
           </Card.Text>
           <Button className='buy-btn mt-3' onClick={handleShow}>

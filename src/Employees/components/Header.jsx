@@ -10,6 +10,40 @@ import { AiFillStar } from 'react-icons/ai';
 export default function Header({ unreadMessage }) {
   const [userIamge, setUserImage] = useState()
   const [totalPoint, setTotalPoint] = useState()
+  const [numberMessage, setUumberMessage] = useState();
+
+  const getUnread = async () => {
+
+    const access = localStorage.getItem('access')
+    const headers = {
+      Authorization: `Bearer ${access}`
+    };
+
+    try {
+      const response = await axios.get(`${IP}/unread-message/`, {
+        headers,
+      })
+
+      if (response.status === 200) {
+
+        console.log(response)
+        setUumberMessage(response.data.unread_chats_count)
+      }
+
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+
+  }
+  useEffect(() => {
+    getUnread()
+  }, [])
 
   const getUserIamge = async () => {
     const access = localStorage.getItem("access")
@@ -80,6 +114,7 @@ export default function Header({ unreadMessage }) {
         onOpen={handleToggle}
         userIamge={userIamge}
         totalPoint={totalPoint}
+        numberMessage={numberMessage}
       />
       <hr className="text-secondary"></hr>
     </>
@@ -87,7 +122,7 @@ export default function Header({ unreadMessage }) {
 }
 const currentRoute = window.location.pathname;
 
-function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
+function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint, numberMessage }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
 
@@ -104,7 +139,6 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
     };
   }, []);
 
-  const unred = localStorage.getItem("unread")
 
   return (
     <>
@@ -127,7 +161,7 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
                 style={{ width: "max-content", color: "#000" }}
                 to={"/employeesChat"}>
                 <i style={{ cursor: "pointer" }} className="bi bi-bell fs-5"></i>
-                <span className="notif-number">{unred}</span>
+                <span className="notif-number">{numberMessage}</span>
               </Link>
             </div>
             <div className="d-flex align-items-center">
@@ -173,7 +207,7 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
                 style={{ width: "max-content", color: "#000" }}
                 to={"/employeesChat"}>
                 <i style={{ cursor: "pointer" }} className="bi bi-bell fs-5"></i>
-                <span className="notif-number">{unred}</span>
+                <span className="notif-number">{numberMessage}</span>
               </Link>
               <div
                 className="d-flex align-items-center"

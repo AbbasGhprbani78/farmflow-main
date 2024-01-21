@@ -12,9 +12,10 @@ function TextInput({
 }) {
   return (
     <div className={`d-flex flex-column  ${divClass}`}>
-      <label style={{marginBottom:"10px"}} className={`text-success ${lableClass}`}>{label}</label>
+      <label style={{ marginBottom: "10px" }} className={`text-success ${lableClass}`}>{label}</label>
       <input
-      style={{borderRadius:"8px"}}
+        autoComplete="false"
+        style={{ borderRadius: "8px" }}
         disabled={disabled}
         type={type}
         value={value}

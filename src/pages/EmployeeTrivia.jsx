@@ -22,7 +22,6 @@ export default function EmployeeTrivia() {
     const [show, setShow] = useState(false);
 
 
-
     const handleClose = () => {
         setShow(false);
         setTimeout(() => {
@@ -221,7 +220,7 @@ export default function EmployeeTrivia() {
                                             <p className='time-game'>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</p>
                                         </Col>
                                     </Row>
-                                    <Row >
+                                    <Row  className='mt-2'>
                                         <Col className="game-box d-flex justify-content-between" style={{ margin: "10px auto 0 auto", padding: "0" }} xs={10}>
                                             <div className="game-left col-12 col-md-9">
                                                 {questions.length ? (
@@ -239,7 +238,7 @@ export default function EmployeeTrivia() {
                                                         ) : (
                                                             <div>
                                                                 <div className="level-item d-flex justify-content-between">
-                                                                    <p style={{ fontSize: "20px", color: "#5DA25E" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                    <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     <p style={{ paddingRight: "15px" }}>{currentQuestion + 1}/{questions.length}</p>
                                                                 </div>
                                                                 <div className="questions-wrapper">

@@ -33,6 +33,8 @@ function Employees() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showTasks, setShowTasks] = useState(false)
   const [changeUser, setChangeUser] = useState()
+  const [loading, setIsLodaing] = useState(false)
+  const [AllEmployee, setAllEmployee] = useState(true)
   const [infoUser, setInfoUser] = useState({
 
     email: "",
@@ -47,7 +49,7 @@ function Employees() {
     uuid: '',
   });
 
-
+  const [manager, setManager] = useState([])
 
   const fetchEmployees = async (uuid) => {
     const access = localStorage.getItem("access");
@@ -63,8 +65,10 @@ function Employees() {
           setSelectedId({ id: "", type: "add" });
           setInfoUser("");
         } else {
+          setManager(response.data.manager[0])
           setEmployees(response.data.employees);
-          console.log(employees)
+          // setEmployees(prevState => [...prevState, response.data.manager[0]])
+
           setUserTaskUuid(response.data && response.data.employees.length > 0 && response.data.employees[0].uuid)
           if (uuid === "0") {
             setSelectedId({
@@ -127,6 +131,15 @@ function Employees() {
     setUserTaskUuid(uuid)
     setChangeUser(uuid)
     setShowTasks(true)
+    setAllEmployee(false)
+  }
+
+  function onManager(uuid) {
+    setInfoUser(manager)
+    setUserTaskUuid(uuid)
+    setChangeUser(uuid)
+    setShowTasks(true)
+    setAllEmployee(false)
   }
 
 
@@ -145,6 +158,21 @@ function Employees() {
     setInfoUser(employees.find((member) => member.uuid === uuid));
     setShowTasks(true)
   }
+  function handleMangerEdit(uuid) {
+    setSelectedId({ id: uuid, type: "edit" });
+    setInfoUser(manager);
+    setShowTasks(true)
+  }
+  function handleMangerRemove(uuid) {
+    setSelectedId({ id: uuid, type: "remove" });
+    setInfoUser(manager);
+    setShowTasks(true)
+  }
+  function handleMangerShow(uuid) {
+    setSelectedId({ id: uuid, type: "show" });
+    setInfoUser(manager);
+    setShowTasks(true)
+  }
   function handleChangeInfo(info) {
     setInfoUser(info);
   }
@@ -153,7 +181,6 @@ function Employees() {
   }
 
   async function addingUser(formData) {
-
     try {
       const access = localStorage.getItem("access");
       const headers = {
@@ -171,18 +198,32 @@ function Employees() {
         successMessage(response.data.message);
       }
 
-    } catch (e) {
+    } catch (error) {
 
-      errorMessage(e.message);
-      if (e.response.status === 401) {
+      if (error.response.status === 401) {
         localStorage.removeItem('access')
         localStorage.removeItem('uuid')
         localStorage.removeItem('refresh')
         window.location.href = "/login"
       }
+      toast.error(`${error.response.data.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
+
   }
+
   async function edittingUser(formData) {
+
+    setIsLodaing(true)
+
     try {
       const access = localStorage.getItem("access");
       const headers = {
@@ -209,22 +250,26 @@ function Employees() {
       if (response.status === 200) {
         console.log(response);
         successMessage("Edit user successful");
+        setIsLodaing(false)
         setTimeout(() => {
           window.location.reload();
         }, 3000);
       }
     } catch (error) {
-      if (e.response.status === 401) {
+      if (error.response.status === 401) {
         localStorage.removeItem('access')
         localStorage.removeItem('uuid')
         localStorage.removeItem('refresh')
         window.location.href = "/login"
       }
 
+    } finally {
+      setIsLodaing(false);
     }
   }
 
   async function removingUser(uuid) {
+    setIsLodaing(true)
     try {
       const access = localStorage.getItem("access");
       const headers = {
@@ -239,6 +284,7 @@ function Employees() {
       );
       if (response.status === 200) {
         fetchEmployees("0");
+        setIsLodaing(true)
         successMessage(response.data.message);
         setTimeout(() => {
           window.location.reload()
@@ -253,6 +299,8 @@ function Employees() {
         localStorage.removeItem('refresh')
         window.location.href = "/login"
       }
+    } finally {
+      setIsLodaing(false)
     }
 
   }
@@ -272,6 +320,11 @@ function Employees() {
   const backHandler = () => {
     setShowTasks(false)
   }
+
+  const handleAllEmpolyee = () => {
+    setAllEmployee(true)
+    setShowTasks(true)
+  }
   return (
     <>
       {
@@ -283,7 +336,7 @@ function Employees() {
               </div>
               <div className="w-100  ">
                 <Header></Header>
-                <Container className="w-100">
+                <div className="w-100 container-fluid">
                   <ToastContainer />
                   <Row>
                     {windowWidth < 768 ? (
@@ -292,7 +345,7 @@ function Employees() {
                           <>
                             <Col
                               onClick={backHandler}
-                              style={{ textAlign: "left", color: "#5da25e", cursor: "pointer", fontSize: "18px" }}
+                              style={{ textAlign: "left", color: "#5da25e", cursor: "pointer", fontSize: "18px", position: "relative" }}
                               xs={12}>
                               <FaArrowLeftLong />
                             </Col>
@@ -305,7 +358,9 @@ function Employees() {
                                   userInfo={infoUser}
                                   selectedId={selectedId}
                                   userTaskUuid={userTaskUuid}
-                                  changeUser={changeUser} />
+                                  changeUser={changeUser}
+                                  AllEmployee={AllEmployee}
+                                />
                               ) : (
                                 <AddMember
                                   user={infoUser}
@@ -317,6 +372,7 @@ function Employees() {
                                   onAdd={addingUser}
                                   onPass={changePassword}
                                   changePass={handleChangePassword}
+                                  loading={loading}
                                 />
                               )}
                             </Col>
@@ -330,6 +386,10 @@ function Employees() {
 
                               >
                                 <Members
+                                  handleMangerEdit={handleMangerEdit}
+                                  handleMangerRemove={handleMangerRemove}
+                                  handleMangerShow={handleMangerShow}
+                                  onManager={onManager}
                                   members={employees}
                                   onItem={onClickUser}
                                   selectedId={selectedId}
@@ -337,19 +397,27 @@ function Employees() {
                                   onEdit={handleEdit}
                                   onRemove={handleRemove}
                                   onShow={handleShow}
+                                  handleAllEmpolyee={handleAllEmpolyee}
+                                  manager={manager}
+                                  AllEmployee={AllEmployee}
                                 />
                               </Col>
                             </>)}
                       </>) : (
                       <>
                         <Col
-                          className="px-3 px-xl-4 "
+                          style={{ position: "relative" }}
+                          className="px-3 px-xl-4 mb-3"
                           xs={12}
                           lg={4}
                           xl={{ span: 4, offset: 0 }}
                         >
 
                           <Members
+                            handleMangerEdit={handleMangerEdit}
+                            handleMangerRemove={handleMangerRemove}
+                            handleMangerShow={handleMangerShow}
+                            onManager={onManager}
                             members={employees}
                             onItem={onClickUser}
                             selectedId={selectedId}
@@ -357,10 +425,14 @@ function Employees() {
                             onEdit={handleEdit}
                             onRemove={handleRemove}
                             onShow={handleShow}
+                            handleAllEmpolyee={handleAllEmpolyee}
+                            manager={manager}
+                            AllEmployee={AllEmployee}
                           />
                         </Col>
                         <Col
                           className="mt-3 mt-xl-0 mb-3 "
+                          style={{ height: "100%" }}
                           xs={12}
                           lg={8}
                           xl={{ span: 8, offset: 0 }}
@@ -369,7 +441,10 @@ function Employees() {
                             <ProfileTasks
                               userInfo={infoUser}
                               selectedId={selectedId}
-                              userTaskUuid={userTaskUuid} changeUser={changeUser} />
+                              userTaskUuid={userTaskUuid}
+                              changeUser={changeUser}
+                              AllEmployee={AllEmployee}
+                            />
                           ) : (
                             <AddMember
                               user={infoUser}
@@ -381,13 +456,13 @@ function Employees() {
                               onAdd={addingUser}
                               onPass={changePassword}
                               changePass={handleChangePassword}
+                              loading={loading}
                             />
                           )}
                         </Col>
                       </>)}
-
                   </Row>
-                </Container>
+                </div>
               </div>
             </div>
           </>) : (
@@ -400,10 +475,13 @@ function Employees() {
   );
 }
 
-function ProfileTasks({ userInfo, userTaskUuid, changeUser }) {
+function ProfileTasks({ userInfo, userTaskUuid, changeUser, AllEmployee }) {
+
+  console.log(userInfo)
   const [activeTab, setActiveTab] = useState(1);
   const [tasks, setTasks] = useState([]);
   const [selectedValue, setSelectedValue] = useState(null);
+  const [allTask, setAllTask] = useState([])
   const [selectedTaskId, setSelectedTaskId] = useState({
     uuid: "",
     type: "add",
@@ -528,20 +606,50 @@ function ProfileTasks({ userInfo, userTaskUuid, changeUser }) {
     }
   };
 
+  const fetchAllTasks = async () => {
+    const access = localStorage.getItem("access");
+    const headers = {
+      Authorization: `Bearer ${access}`,
+    };
+
+    try {
+      const response = await axios.get(
+        `${IP}/all-profile-tasks/`,
+        { headers }
+      );
+      if (response.status === 200) {
+        setAllTask(response.data)
+        console.log(response)
+      }
+
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  };
+  useEffect(() => {
+    fetchAllTasks()
+  }, [])
+
   const fetchTasks = async () => {
     const access = localStorage.getItem("access");
     const headers = {
       Authorization: `Bearer ${access}`,
     };
+
     try {
       const response = await axios.get(
         `${IP}/profile-tasks/${userInfo.uuid}`,
-        {
-          headers,
-        }
+
+        { headers }
       );
       if (response.status === 200) {
-        setTasks(response.data.tasks);
+        setTasks(response.data);
         console.log(response)
       }
 
@@ -1032,95 +1140,119 @@ function ProfileTasks({ userInfo, userTaskUuid, changeUser }) {
       </Modal>
       <div className=" shadow p-3 ">
         <Row>
-          <Col className="w-100 mt-3" xs={12}>
-            <div className="content_top border-primary2-top border-primary2-bottom top-task-name">
-              <div className="d-flex flex-row align-items-center justify-content-between py-3">
-                <div className="d-flex align-items-center">
-                  {userInfo.image === null ? (
-                    <img src={Avatar} alt="profile" className="imgprofile"></img>
+          {
+            AllEmployee ?
+              <>
+                <Tabbed activeTab={activeTab} setActiveTab={setActiveTab} divClass={'tab-style'} nopoint={"false"}>
+                  {activeTab === 1 ? (
+                    <TabShowTasks
+                      tasks={allTask}
+                      onDeleteTask={removingTask}
+                      onEditTask={handleEditTask}
+                      fetchTasks={fetchTasks}
+                      main={"false"}
+                    />
+                  ) : activeTab === 4 ? (
+                    <TabShowProducts userInfo={userInfo} activeTab={4} />
+                  ) : activeTab === 2 ? (
+                    <TabShowMachines userInfo={userInfo.uuid} activeTab={8} />
                   ) : (
-                    <img
-                      src={`${IP}${userInfo.image}`}
-                      alt="profile"
-                      className="imgprofile"
-                    ></img>
+                    <></>
                   )}
-                  <div className="ms-0 ms-md-3">
+                </Tabbed>
+              </> :
+              <Col className="w-100 mt-3" xs={12}>
+
+                <div className="content_top border-primary2-top border-primary2-bottom top-task-name">
+                  <div className="d-flex flex-row align-items-center justify-content-between py-3">
                     <div className="d-flex align-items-center">
-                      <p className="color-primary2 mb-0 member-task-employee">
-                        {userInfo.first_name + " " + userInfo.last_name}
-                      </p>
+                      {userInfo.image === null ? (
+                        <img src={Avatar} alt="profile" className="imgprofile"></img>
+                      ) : (
+                        <img
+                          src={`${IP}${userInfo.image}`}
+                          alt="profile"
+                          className="imgprofile"
+                        ></img>
+                      )}
+                      <div className="ms-0 ms-md-3">
+                        <div className="d-flex align-items-center">
+                          <p className="color-primary2 mb-0 member-task-employee">
+                            {userInfo.first_name + " " + userInfo.last_name}
+                          </p>
+                        </div>
+                      </div>
                     </div>
+                    {activeTab !== 2 && activeTab !== 4 ? (
+                      <span className="addtwo" onClick={changeAdd}>
+                        {activeTab === 1
+                          ? "Add Task"
+                          : activeTab === 3
+                            ? "Add Point"
+                            : activeTab === 5
+                              ? "Back"
+                              : activeTab === 6
+                                ? "Back"
+                                : ""}
+                      </span>
+                    ) : (
+                      <></>
+                    )}
                   </div>
+
                 </div>
-                {activeTab !== 2 && activeTab !== 4 ? (
-                  <span className="addtwo" onClick={changeAdd}>
-                    {activeTab === 1
-                      ? "Add Task"
-                      : activeTab === 3
-                        ? "Add Point"
-                        : activeTab === 5
-                          ? "Back"
-                          : activeTab === 6
-                            ? "Back"
-                            : ""}
-                  </span>
-                ) : (
-                  <></>
-                )}
-              </div>
 
-            </div>
+                {activeTab === 5 ? (
+                  <AddNewTask
+                    selectedTaskId={selectedTaskId}
+                    taskInfo={taskInfo}
+                    onChange={handleChangeTaskInfo}
+                    onAdd={addingTask}
+                    onRemove={removingTask}
+                    onEdit={editingTask}
+                    lands={lands}
+                    products={products}
+                    onBack={handleCancelTask}
 
-            {activeTab === 5 ? (
-              <AddNewTask
-                selectedTaskId={selectedTaskId}
-                taskInfo={taskInfo}
-                onChange={handleChangeTaskInfo}
-                onAdd={addingTask}
-                onRemove={removingTask}
-                onEdit={editingTask}
-                lands={lands}
-                products={products}
-                onBack={handleCancelTask}
-
-              />
-            ) : activeTab === 6 ? (
-              <AddPoints
-                selectedPointId={selectedPointId}
-                pointInfo={pointInfo}
-                onChange={handleChangePointInfo}
-                onAdd={addingPoint}
-                onRemove={removingPoint}
-                onEdit={editingPoint}
-                onBack={handleCancelPoint}
-              />
-            ) : (
-              <Tabbed activeTab={activeTab} setActiveTab={setActiveTab} divClass={'tab-style'}>
-                {activeTab === 1 ? (
-                  <TabShowTasks
-                    tasks={tasks}
-                    onDeleteTask={removingTask}
-                    onEditTask={handleEditTask}
-                    fetchTasks={fetchTasks}
                   />
-                ) : activeTab === 4 ? (
-                  <TabShowProducts userInfo={userInfo} />
-                ) : activeTab === 3 ? (
-                  <ShowPoints
-                    points={points}
-                    userInfo={userInfo}
-                    onDeletePoint={handleDeletePoint}
-                    onEditPoint={handleEditPoint}
+                ) : activeTab === 6 ? (
+                  <AddPoints
+                    selectedPointId={selectedPointId}
+                    pointInfo={pointInfo}
+                    onChange={handleChangePointInfo}
+                    onAdd={addingPoint}
+                    onRemove={removingPoint}
+                    onEdit={editingPoint}
+                    onBack={handleCancelPoint}
                   />
-                ) : activeTab === 2 ? (
-                  <TabShowMachines userInfo={userInfo.uuid} />
                 ) : (
-                  <></>
+                  <Tabbed activeTab={activeTab} setActiveTab={setActiveTab} divClass={'tab-style'}>
+                    {activeTab === 1 ? (
+                      <TabShowTasks
+                        tasks={tasks}
+                        onDeleteTask={removingTask}
+                        onEditTask={handleEditTask}
+                        fetchTasks={fetchTasks}
+                      />
+                    ) : activeTab === 4 ? (
+                      <TabShowProducts userInfo={userInfo} />
+                    ) : activeTab === 3 ? (
+                      <ShowPoints
+                        points={points}
+                        userInfo={userInfo}
+                        onDeletePoint={handleDeletePoint}
+                        onEditPoint={handleEditPoint}
+                      />
+                    ) : activeTab === 2 ? (
+                      <TabShowMachines userInfo={userInfo.uuid} />
+                    ) : (
+                      <></>
+                    )}
+                  </Tabbed>
                 )}
-              </Tabbed>
-            )}
-          </Col>
+              </Col>
+          }
+
         </Row>
       </div>
     </>
@@ -1451,7 +1583,6 @@ function PointsDetails({ userInfo }) {
                   </div>
                 </>
               ) : (<>
-                <Loading />
               </>)
 
             }
@@ -1505,11 +1636,7 @@ const pointDetailData = [
   { first: "Challenge And Game Success", second: "Completed Challengies" },
 ];
 
-const data = [
-  { D: { sum_of_ratings: 7, count: 4 } },
-  { P: { sum_of_ratings: 10, count: 5 } },
-  { T: { sum_of_ratings: 12, count: 6 } },
-]
+
 
 
 

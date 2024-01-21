@@ -3,9 +3,37 @@ import axios from "axios";
 import { IP } from "../../App";
 
 
-export function TabShowMachines({ userInfo }) {
+export function TabShowMachines({ userInfo, activeTab }) {
   const [machines, setMachines] = useState([]);
 
+  const fetchAllMachines = async () => {
+    const access = localStorage.getItem("access");
+    const headers = {
+      Authorization: `Bearer ${access}`,
+    };
+    try {
+      const response = await axios.get(
+        `${IP}/all-profile-tools/`,
+        {
+          headers,
+        }
+      );
+      if (response.status === 200) {
+        setMachines(response.data);
+        console.log(response)
+
+      }
+
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  };
   const fetchMachines = async () => {
     const access = localStorage.getItem("access");
     const headers = {
@@ -34,8 +62,15 @@ export function TabShowMachines({ userInfo }) {
     }
   };
   useEffect(() => {
-    fetchMachines();
+    if (activeTab === 8) {
+      fetchAllMachines()
+    } else {
+      fetchMachines();
+    }
+
   }, []);
+
+  console.log(machines)
   return (
     <TableMachines machines={machines}>
       {machines &&
@@ -97,7 +132,7 @@ function TableMachines({ machines, children }) {
           </div>
         </div>
       ) : (
-        <div className="table-container w-100">
+        <div style={{ maxHeight: "500px", overflowY: "scroll" }} className="table-container w-100">
           <table className="table-machine-profile table ">
             <thead>
               <tr>

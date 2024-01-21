@@ -23,7 +23,6 @@ import EmployeeProduct from './pages/EmployeeProduct'
 import Employeess from './pages/Employeess';
 import EmployeeLeaderboard from './pages/EmployeeLeaderboard'
 import EmployeeConvertPoint from './pages/EmployeesConverpoint'
-// import Employeereport from './pages/Employeereport'
 import EmployeeNotifications from './pages/EmployeeNotifications'
 import EmployeeGame from "./pages/EmployeeGame";
 import EmployeeTrivia from "./pages/EmployeeTrivia";
@@ -46,7 +45,7 @@ let routes = [
     { path: "/leaderboard", element: <PrivateRoute><Leaderboard /></PrivateRoute> },
     { path: "/machines", element: <PrivateRoute><Machines /></PrivateRoute> },
     { path: "/notifications", element: <PrivateRoute><Notifications /></PrivateRoute> },
-    { path: "/product", element: <PrivateRoute><Product /></PrivateRoute> },
+    { path: "/farmdetails", element: <PrivateRoute><Product /></PrivateRoute> },
     { path: "/report", element: <PrivateRoute><Report /></PrivateRoute> },
     { path: "/game", element: <PrivateRoute><Game /></PrivateRoute> },
     { path: "/triviaHome", element: <PrivateRoute>< TriviaGame /></PrivateRoute> },
@@ -71,12 +70,11 @@ let routes = [
     { path: '/employeeweather', element: <EmployeeWeather /> },
     { path: '/employeesHome', element: <EmployeesHome /> },
     { path: '/employeesChat', element: < ChatEmployee /> },
-    { path: '/employeeProduct', element: <EmployeeProduct /> },
+    { path: '/employeefarmdetails', element: <EmployeeProduct /> },
     { path: '/employeess', element: <Employeess /> },
     { path: '/employeeLeaderboard', element: <EmployeeLeaderboard /> },
-    // { path: '/employeereport', element: <Employeereport /> },
     { path: '/employeeNotifications', element: <EmployeeNotifications /> },
-    { path: '/employeeeditProf', element:<EmployeeEditProf /> },
+    { path: '/employeeeditProf', element: <EmployeeEditProf /> },
     { path: "*", element: <PageNotFound /> },
 ]
 

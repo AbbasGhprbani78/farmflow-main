@@ -15,9 +15,9 @@ const navItems = [
   },
   {
     className: "nav-link text-light",
-    direction: "/product",
+    direction: "/farmdetails",
     iconClass: "bi bi-box-seam  fa-xl icon",
-    text: "PRODUCT",
+    text: "FARM DETAILS",
   },
   {
     className: "nav-link text-light",

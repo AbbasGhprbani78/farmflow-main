@@ -11,6 +11,9 @@ import Loading from "./Laoding/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import '../Style/EditProf.css'
 import "react-toastify/dist/ReactToastify.css"
+import Spinne from "./Spinner";
+
+
 export default function EmployeeEditProf() {
     const [editMode, setEditMode] = useState(false);
     const [all, setAll] = useState()
@@ -26,6 +29,7 @@ export default function EmployeeEditProf() {
     const [confirmPassword, setConfirmPassword] = useState()
     const [showPasswordInputs, setShowPasswordInputs] = useState(false);
     const [passwordChanged, setPasswordChanged] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     const getProfileInfo = async () => {
 
@@ -101,9 +105,6 @@ export default function EmployeeEditProf() {
 
     const navigate = useNavigate();
 
-    // const onHanddleCancel = () => {
-    //     navigate('/')
-    // }
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -112,6 +113,8 @@ export default function EmployeeEditProf() {
     };
 
     const onSubmit = async (e) => {
+        setIsLoading(true);
+
         const uuid = localStorage.getItem('uuid')
         e.preventDefault();
 
@@ -168,6 +171,7 @@ export default function EmployeeEditProf() {
             if (response.status === 200) {
                 toast.success("Edit successful!");
                 setEditMode(false);
+                setIsLoading(false);
                 console.log(response)
 
             }
@@ -179,6 +183,8 @@ export default function EmployeeEditProf() {
                 localStorage.removeItem('refresh')
                 window.location.href = "/login"
             }
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -202,6 +208,10 @@ export default function EmployeeEditProf() {
                                 <Header />
                                 <div >
                                     <Col md={8} style={{ margin: "0 auto" }}>
+                                        {
+                                            isLoading &&
+                                            <Spinne />
+                                        }
                                         <div className=" shadow p-3 ">
                                             <div className="header_profile">
                                                 <h4>Edditing the profile</h4>

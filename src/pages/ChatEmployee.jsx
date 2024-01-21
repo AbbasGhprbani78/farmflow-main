@@ -107,7 +107,7 @@ export default function ChatEmployee() {
       const body = {
         content: text,
         employees: uuid,
-       
+
       }
 
       try {
@@ -212,9 +212,11 @@ export default function ChatEmployee() {
   useEffect(() => {
     const interval = setInterval(() => {
       getUnreadMessages();
+      console.log("hello")
     }, 1000);
     return () => clearInterval(interval);
   }, [allMessage]);
+
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView();
@@ -281,7 +283,7 @@ export default function ChatEmployee() {
         <>
           <div className="w-100">
             <div className='d-flex justify-content-center'>
-              <Col className="chat-container shadow" xs={12} md={7} lg={8} xl={9}  style={{height:"100%",position:"fixed",bottom:"0"}}>
+              <Col className="chat-container shadow" xs={12} md={7} lg={8} xl={9} style={{ height: "100%", position: "fixed", bottom: "0" }}>
                 <div className="chat-profile d-flex justify-content-between">
                   <OffCanvas
                     className={"d-lg-none m-2"}
@@ -362,7 +364,7 @@ export default function ChatEmployee() {
             </div>
             <div className="w-100">
               <Header />
-              <div className='d-flex justify-content-center'>
+              <div className='d-flex justify-content-center' style={{ flexWrap: "wrap", height: "85%" }}>
                 <Col className="chat-container shadow" xs={12} md={7} lg={8} xl={9}>
                   <div className="chat-profile">
                     <Chatup />

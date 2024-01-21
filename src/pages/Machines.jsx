@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Machines() {
 
+  const [boxes, setBoxes] = useState([]);
   const [loading, setLoading] = useState(true)
   const [boxMachin, setBoxMachin] = useState([])
   const [selectedTab, setSelectedTab] = useState("M")
@@ -40,16 +41,16 @@ function Machines() {
 
       if (response.status === 200) {
 
-        console.log(response)
         setBoxMachin(response.data.map(item => ({
           ...item,
           land: [{ uuid: item.land.uuid, name: item.land.title }],
-          employee: [{ uuid: item.employee.uuid, username: item.employee.username }],
+          employee: item.employee ? [{ uuid: item.employee.uuid, username: item.employee.username }] : "",
           name: [{ id: item.name.id, name: item.name.name }],
           status: [item.status]
         })))
         setLoading(false)
 
+        console.log(response)
       }
 
     } catch (e) {
@@ -59,7 +60,6 @@ function Machines() {
 
   useEffect(() => {
     getAllBox()
-
   }, [selectedTab])
 
   const deleteBoxhandler = (uuid) => {
@@ -93,18 +93,22 @@ function Machines() {
         newSelectedTab = selectedKey;
     }
 
+    if (selectedTab !== newSelectedTab) {
+      setBoxMachin([])
+      setSelectedTab(newSelectedTab);
+      setSelectedTabName(selectedKey);
 
-    setSelectedTab(newSelectedTab);
-    console.log(selectedTab)
+    }
   };
 
-  const getFilds = async () => {
+  const getFilds = async (selectedTab) => {
 
     const uuid = localStorage.getItem('uuid')
     const access = localStorage.getItem('access')
     const headers = {
       Authorization: `Bearer ${access}`
     };
+
     const body = {
       type: selectedTab,
       manager: uuid
@@ -132,18 +136,18 @@ function Machines() {
     }
   }
 
+
   useEffect(() => {
-    getFilds()
-  }, [])
+    getFilds(selectedTab);
+  }, [selectedTab]);
+
 
   const AddBoxHandler = () => {
-
     const landArray = getData.lands
     const employeeArrey = getData.employee
     const nameArrey = getData.tools
 
     const newBox = {
-
       isNew: true,
       manual: defaultPdf,
       image: defaultImg,
@@ -152,7 +156,7 @@ function Machines() {
       land: landArray,
       employee: employeeArrey,
       name: nameArrey,
-      id: boxMachin.length + 1
+      uuid: boxMachin.length + 1
     }
 
     setBoxMachin(prevState => {
@@ -179,6 +183,7 @@ function Machines() {
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
 
 
   const isMobile = windowWidth <= 576;
@@ -209,11 +214,11 @@ function Machines() {
           onSelect={handleTabSelect}
           className="mb-3"
         >
-          <Tab eventKey="Machinery" title="Machinery" className={selectedTabName === "Machinery" ? "custom-active-tab" : ""}></Tab>
-          <Tab eventKey="vehicles" title="Vehicles" className={selectedTabName === "vehicles" ? "custom-active-tab" : ""}></Tab>
-          <Tab eventKey="Samrt Monitoring Device" title="Smart Monitoring Device" className={selectedTabName === "Samrt Monitoring Device" ? "custom-active-tab" : ""}></Tab>
-          <Tab eventKey="Tools And Implements" title="Tools And Implements" className={selectedTabName === "Tools And Implements" ? "custom-active-tab" : ""}></Tab>
-          <Tab eventKey="Report" title="Report" className={selectedTabName === "Report" ? "custom-active-tab" : ""}></Tab>
+          <Tab eventKey="Machinery" title="Machinery"></Tab>
+          <Tab eventKey="vehicles" title="Vehicles" ></Tab>
+          <Tab eventKey="Samrt Monitoring Device" title="Smart Monitoring Device"></Tab>
+          <Tab eventKey="Tools And Implements" title="Tools And Implements" ></Tab>
+          <Tab eventKey="Report" title="Report" ></Tab>
         </Tabs>
       );
     }
@@ -250,6 +255,7 @@ function Machines() {
                     isNew={Box.isNew}
                     index={i}
                     newBoxIndex={newBoxIndex}
+
                   />
                 ))}
               </>

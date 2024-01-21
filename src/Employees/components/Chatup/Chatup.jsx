@@ -3,6 +3,7 @@ import './Chatup.css'
 import { IP } from '../../../App'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import Avatar from "../../../Images/profileadd/avatar.png"
 
 export default function Chatup() {
 
@@ -42,10 +43,21 @@ export default function Chatup() {
   return (
     <div >
       <div className='d-flex align-items-center' >
-        <img src={managerInfo ? `${managerInfo.manager_image_url}` : `src/Images/chat/user.png`}
-          alt=""
-          className='m-3'
-          style={{ width: '50px,', height: "50px" }} />
+        {
+          managerInfo.manager_image_url ? (
+            <img src={managerInfo ? `${managerInfo.manager_image_url}` : `src/Images/chat/user.png`}
+              alt=""
+              className='m-3'
+              style={{ width: '50px,', height: "50px" }} />
+          ) : (
+            <img src={Avatar}
+              alt=""
+              className='m-3'
+              style={{ width: '50px,', height: "50px" }} />
+          )
+        }
+
+
         <div>
           <div className=' emloyeeName'>{managerInfo.manager_name}</div>
           <div className='text-muted  farm'>{managerInfo.manager_last_name}</div>

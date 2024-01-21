@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 import {
   CategoryScale,
   Legend,
@@ -35,6 +36,11 @@ function Report() {
     { id: "H", name: "group1", label: "High", type: "radio" },
     { id: "E", name: "group1", label: "Emergency", type: "radio" },
   ]
+  const [showSe, setShowse] = useState(false);
+
+  const handleClosese = () => setShowse(false);
+  // const handleShowse = () => setShowse(true);
+
 
   const [selectProduct, setSelectedProduct] = useState()
   const [selectedPlan, setSelectedPlan] = useState(null)
@@ -90,6 +96,60 @@ function Report() {
     },
   };
 
+  const firstApi = async () => {
+    const access = localStorage.getItem("access")
+    const headers = {
+      Authorization: `Bearer ${access}`
+    };
+    try {
+      const response = await axios.get(`${IP}/sensor-data/`, {
+        headers,
+      })
+
+      if (response.status === 200) {
+        console.log(response.data)
+
+      }
+
+
+    } catch (e) {
+      console.log(e)
+      if (e.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  }
+
+  const secondApi = async () => {
+    const access = localStorage.getItem("access")
+    const headers = {
+      Authorization: `Bearer ${access}`
+    };
+    try {
+      const response = await axios.post(`${IP}/get-data/`, {
+        headers,
+      })
+
+      if (response.status === 200) {
+        console.log(response.data)
+
+      }
+
+
+    } catch (e) {
+      console.log(e)
+      if (e.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  }
+
   const getWeather = async (uuid) => {
 
     const access = localStorage.getItem('access')
@@ -120,6 +180,7 @@ function Report() {
     }
 
   }
+
   const getLandsWeather = async () => {
     const access = localStorage.getItem('access')
     const headers = {
@@ -147,7 +208,6 @@ function Report() {
       }
     }
   }
-
 
 
   const getAll = async () => {
@@ -207,6 +267,7 @@ function Report() {
       }
     }
   }
+
 
   const getSensortask = async () => {
     const access = localStorage.getItem("access")
@@ -270,10 +331,11 @@ function Report() {
       }
     }
   }
-  
-  useEffect(()=>{
+
+
+  useEffect(() => {
     getSensorData()
-  },[selectProduct])
+  }, [selectProduct])
 
 
   const getAllEmployee = async () => {
@@ -491,12 +553,22 @@ function Report() {
 
 
   useEffect(() => {
-    setTypeSensor("wind_speed")
-    getSensortask()
-    getLandsWeather()
-    getAll()
-    getSensorData()
-    getAllEmployee()
+    const fetchData = async () => {
+      try {
+        await firstApi();
+        await secondApi();
+        setTypeSensor("wind_speed")
+        getSensortask()
+        getLandsWeather()
+        getAll()
+        getSensorData()
+        getAllEmployee()
+      } catch (error) {
+        console.error("Error fetching data:", error);
+
+      }
+    }
+    fetchData()
   }, []);
 
 
@@ -506,13 +578,30 @@ function Report() {
     return truncatedText;
   };
 
+  const addSensorHandler = () => {
+    setShowse(true)
+  }
+
   return (
     <>
+
+      <Modal show={showSe} onHide={handleClosese}>
+        <Modal.Header closeButton>
+          <Modal.Title className='notif-modal'>Sensor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>not available in this versen come sensor coming soon!</Modal.Body>
+        <Modal.Footer>
+
+          <Button style={{ width: "140px", backgroundColor: "#5DA25E", border: "none" }} onClick={handleClosese}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className='notif-modal'>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are You Sure to Delete This Task ?</Modal.Body>
+        <Modal.Body>Are You Sure ?</Modal.Body>
         <Modal.Footer>
           <Button style={{ width: "100px" }} variant="secondary" onClick={handleClose}>
             Close
@@ -650,54 +739,66 @@ function Report() {
               </div>
               <div className="w-100 ">
                 <Header></Header>
-                <div className="container">
+                <div className="container-fluid">
                   <Row className="top-report">
                     <Col className="drop-report d-flex" xs={12} md={3}>
-                      <select
-                        value={typeSensor}
-                        onChange={(e) => {
-                          setTypeSensor(e.target.value)
-                          getSensorData()
-                        }}
-                        className="drop-ch">
+                      <div style={{ width: "100%" }}>
+                        <p style={{ fontWeight: "bold" }}>Land :</p>
+                        <select
+                          style={{ width: "100%" }}
+                          value={selectedPlan}
+                          onChange={(e) => {
+                            const selectedValue = e.target.value;
+                            setSelectedPlan(selectedValue);
+                            getWeather(selectedValue);
+                            getProduct(selectedValue);
+                            getSensorData()
+                          }}
+                          className="drop-ch"
+                        >
+                          <option style={{ fontWeight: "bold" }} selected disabled value="Land">Land</option>
+                          {plans &&
+                            plans.map(plan => (
+                              <option key={plan.uuid} value={plan.uuid}>{plan.title}</option>
+                            ))
+                          }
+                        </select>
+                      </div>
+                      <div style={{ width: "100%" }}>
+                        <p style={{ fontWeight: "bold" }}>Product :</p>
+                        <select
+                          style={{ width: "100%" }}
+                          value={selectProduct}
+                          onChange={(e) => {
+                            setSelectedProduct(e.target.value)
+                            getSensorData()
+                          }}
+                          className="drop-ch">
+                          <option style={{ fontWeight: "bold" }} selected disabled value="Product">Product</option>
+                          {products && products.map((product, i) => (
+                            <option key={i} value={product.uuid}>{product.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <div className="d-flex justify-content-between align-items-center"> <p style={{ fontWeight: "bold" }}>Sensor :</p>
+                          <p onClick={addSensorHandler} style={{ cursor: "pointer", borderBottom: "1px solid #5da25e", color: "#5da25e", fontWeight: "bold" }} className="d-flex align-items-center">Add Sensor  +</p></div>
+                        <select
+                          style={{ width: "100%" }}
+                          onChange={(e) => {
+                            setTypeSensor(e.target.value)
+                            getSensorData()
 
-                        <option style={{ fontWeight: "bold" }} disabled selected value="Land">Type Of Sensor</option>
-                        <option style={{ fontWeight: "bold" }} value="wind_speed">wind speed</option>
-                        <option style={{ fontWeight: "bold" }} value="temperature">temperature</option>
-                        <option style={{ fontWeight: "bold" }} value="humidity">humidity</option>
-                        <option style={{ fontWeight: "bold" }} value="soil_moisture">soil moisture</option>
+                          }}
+                          className="drop-ch">
 
-                      </select>
-                      <select
-                        value={selectedPlan}
-                        onChange={(e) => {
-                          const selectedValue = e.target.value;
-                          setSelectedPlan(selectedValue);
-                          getWeather(selectedValue);
-                          getProduct(selectedValue);
-                          getSensorData()
-                        }}
-                        className="drop-ch"
-                      >
-                        <option style={{ fontWeight: "bold" }} selected disabled value="Land">Land</option>
-                        {plans &&
-                          plans.map(plan => (
-                            <option key={plan.uuid} value={plan.uuid}>{plan.title}</option>
-                          ))
-                        }
-                      </select>
-                      <select
-                        value={selectProduct}
-                        onChange={(e) => {
-                          setSelectedProduct(e.target.value)
-                          getSensorData()
-                        }}
-                        className="drop-ch">
-                        <option style={{ fontWeight: "bold" }} selected disabled value="Product">Product</option>
-                        {products && products.map((product, i) => (
-                          <option key={i} value={product.uuid}>{product.name}</option>
-                        ))}
-                      </select>
+                          <option style={{ fontWeight: "bold" }} disabled selected value="Land">Type Of Sensor</option>
+                          <option style={{ fontWeight: "bold" }} value="wind_speed">wind speed</option>
+                          <option style={{ fontWeight: "bold" }} value="temperature">temperature</option>
+                          <option style={{ fontWeight: "bold" }} value="humidity">humidity</option>
+                          <option style={{ fontWeight: "bold" }} value="soil_moisture">soil moisture</option>
+                        </select>
+                      </div>
                     </Col>
                     <Col className="chart-report" md={9}>
                       {
@@ -814,3 +915,4 @@ function successMessage(text) {
 
 
 
+//

@@ -14,7 +14,7 @@ import { TabShowProducts } from "../components/Profile add component/TabShowProd
 import EmployeeTabShowTasks from "../components/Profile add component/EmployeeTabShowTasks";
 import { Tabbed } from "../components/Tab component/Tabbed";
 import EmployeeTabShowPoints from "../components/Profile add component/EmployeeTabShowPoints";
-import { TabShowMachines } from "../components/Profile add component/TabShowMachines";
+import EmployeeTabShowMachine from "../components/Profile add component/EmployeeTabShowMachine";
 import Loading from "../components/Laoding/Loading";
 import Table from 'react-bootstrap/Table';
 
@@ -176,6 +176,7 @@ function ProfileTasks({ userInfo, selectedId }) {
       }
     }
   };
+
   const fetchTasks = async () => {
     const access = localStorage.getItem("access");
     const uuid = localStorage.getItem('uuid')
@@ -190,8 +191,8 @@ function ProfileTasks({ userInfo, selectedId }) {
         }
       );
       if (response.status === 200) {
-        console.log(response.data.tasks);
-        setTasks(response.data.tasks);
+        setTasks(response.data);
+        console.log(response)
 
       }
 
@@ -578,7 +579,7 @@ function ProfileTasks({ userInfo, selectedId }) {
                         onEditPoint={handleEditPoint}
                       />
                     ) : activeTab === 2 ? (
-                      <TabShowMachines userInfo={userUuid} />
+                      <EmployeeTabShowMachine userInfo={userUuid} />
                     ) : (
                       <></>
                     )}
@@ -589,7 +590,7 @@ function ProfileTasks({ userInfo, selectedId }) {
           </div>
         </>) :
         (<>
-          <Loading />
+
         </>)}
     </>
 
@@ -801,7 +802,7 @@ function PointsDetails({ userInfo }) {
                   </div>
                 </>
               ) : (<>
-                Loading ...
+                <Loading />
               </>)
 
             }
@@ -919,7 +920,6 @@ function PointsDetails({ userInfo }) {
                   </div>
                 </>
               ) : (<>
-                Loading ...
               </>)
 
             }

@@ -12,9 +12,11 @@ import PlansForm from "../components/PlansForm";
 import AllNotifs from "../components/AllNotifs";
 import Notif from "../components/Notif";
 import ShowModal from "../components/ShowModal";
-import { PlanInfo } from "../components/Product Component/PlanInfo";
 import axios from "axios";
 import { IP } from "../App";
+import { Link } from "react-router-dom";
+
+
 
 function HomePage() {
 
@@ -28,7 +30,6 @@ function HomePage() {
   const [landCount, setLandCount] = useState()
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [unNotif, setAllNotif] = useState()
-
 
   function handleClose() {
     setShow(false);
@@ -116,6 +117,15 @@ function HomePage() {
 
   localStorage.setItem("unread", unreadMessage)
 
+  const [landInfo, setLandInfo] = useState({
+    uuid: "",
+    title: "",
+    address: "",
+    x_coordinate: 45.4303447995166,
+    y_coordinate: -75.69932769298879,
+  });
+
+
   const getWeather = async (uuid) => {
 
     const access = localStorage.getItem('access')
@@ -134,6 +144,7 @@ function HomePage() {
         if (response.data) {
           setWeather(response.data)
           console.log(weather)
+
         }
 
 
@@ -292,171 +303,212 @@ function HomePage() {
     };
   }, []);
 
-
   return (
     <>
-      {windowWidth < 576 ? (
-        <>
-          <div className="d-flex">
-            <div className="d-none d-lg-block">
-              <NavBar />
-            </div>
-            <div className="w-100 mainbackground ">
-              <Header unreadMessage={unreadMessage}></Header>
-              <Container fluid>
-                <Row>
-                  <Col
-                    className=" mt-3 mb-3 mt-lg-0"
-                    xs={{ span: 12, offset: 0 }}
-                    lg={{ span: 3, offset: 0 }}
-                  >
-                    <PlansForm getWeather={getWeather} />
-                  </Col>
-                  <Col className="" xs={12} lg={9}>
-                    <Row>
-                      <PlanInfo
-                        pClassName=""
-                        className="s1"
-                        quality="good"
-                        amount={landCount}
-                        title="Lands"
-                      >
-                        <i className="bi bi-clipboard2 fs-3"></i>
-                      </PlanInfo>
-                      <PlanInfo
-                        pClassName="mt-3 mt-sm-0"
-                        className="s2"
-                        quality="high"
-                        amount={activeJob}
-                        title=" Active Tasks"
-                      >
-                        <i className="bi bi-fire fs-3"></i>
-                      </PlanInfo>
-                      <PlanInfo
-                        pClassName="mt-3 mt-xl-0"
-                        className="s3"
-                        quality="good"
-                        amount={jobDue}
-                        title="Completed Tasks"
-                      >
-                        <i className="bi bi-clock fs-3"></i>
-                      </PlanInfo>
-                    </Row>
-                    <ValidDate />
-                    <Weather weather={weather} />
-                  </Col>
-                  <Col
-                    className=" mt-3 mb-3 mt-lg-0"
-                    xs={{ span: 12, offset: 0 }}
-                    lg={{ span: 3, offset: 0 }}
-                  >
 
-                    <AllNotifs number={unNotif}>
-                      {notifData ? (
-                        <>
-                          {notifData && notifData.map((notif, i) => (
-                            <Notif
-                              text={notif.content}
-                              date={notif.date}
-                              time={notif.time}
-                              read={notif.read}
-                              onShow={() => handleShow(notif.id)}
-                              key={notif.id}
-                            />
-                          ))}
-                        </>) :
-                        (<>
-                          <span>there are no notification to dispaly</span>
-                        </>)}
-                    </AllNotifs>
-                  </Col>
-                </Row>
-              </Container>
+      <>
+        {windowWidth < 576 ? (
+          <>
+            <div className="d-flex">
+              <div className="d-none d-lg-block">
+                <NavBar />
+              </div>
+              <div className="w-100 mainbackground ">
+                <Header unreadMessage={unreadMessage}></Header>
+                <Container fluid>
+                  <Row>
+                    <Col
+                      className=" mt-3 mb-3 mt-lg-0"
+                      xs={{ span: 12, offset: 0 }}
+                      lg={{ span: 3, offset: 0 }}
+                    >
+                      <PlansForm getWeather={getWeather} />
+                    </Col>
+                    <Col className="" xs={12} lg={9}>
+                      <Row>
+                        <Col xs={12} sm={4} >
+                          <Link style={{ all: "unset" }} to={"/farmdetails"}>
+                            <div className={`w-100 mt s1 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-clipboard2 fs-3"></i>
+                                  <span className="fs-3 ">{landCount}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Lands</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+                        <Col xs={12} sm={4} className="my-2">
+                          <Link style={{ all: "unset" }} to={"/notifications"}>
+                            <div className={`w-100 mt s2 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-fire fs-3"></i>
+                                  <span className="fs-3 ">{activeJob}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Active Tasks</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+                        <Col xs={12} sm={4} >
+                          <Link style={{ all: "unset" }} to={"/employees"}>
+                            <div className={`w-100 mt s3 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-clock fs-3"></i>
+                                  <span className="fs-3 ">{jobDue}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Completed Tasks</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+                      </Row>
+                      <ValidDate />
+                      <Weather weather={weather} />
+                    </Col>
+                    <Col
+                      className=" mt-3 mb-3 mt-lg-0"
+                      xs={{ span: 12, offset: 0 }}
+                      lg={{ span: 3, offset: 0 }}
+                    >
+
+                      <AllNotifs number={unNotif}>
+                        {notifData ? (
+                          <>
+                            {notifData && notifData.map((notif, i) => (
+                              <Notif
+                                text={notif.content}
+                                date={notif.date}
+                                time={notif.time}
+                                read={notif.read}
+                                onShow={() => handleShow(notif.id)}
+                                key={notif.id}
+                              />
+                            ))}
+                          </>) :
+                          (<>
+                            <span>there are no notification to dispaly</span>
+                          </>)}
+                      </AllNotifs>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
             </div>
-          </div>
-          {notifData && notifData.map((elm) => {
-            if (activeId === elm.id)
-              return (
-                <ShowModal object={elm} show={show} handleClose={handleClose} />
-              );
-          })}
-        </>) : (
-        <>
-          <div className="d-flex">
-            <div className="d-none d-lg-block">
-              <NavBar />
+            {notifData && notifData.map((elm) => {
+              if (activeId === elm.id)
+                return (
+                  <ShowModal object={elm} show={show} handleClose={handleClose} />
+                );
+            })}
+          </>) : (
+          <>
+            <div className="d-flex">
+              <div className="d-none d-lg-block">
+                <NavBar />
+              </div>
+              <div className="w-100 mainbackground ">
+                <Header unreadMessage={unreadMessage}></Header>
+                <Container fluid>
+                  <Row>
+                    <Col className="" xs={12} xl={9}>
+                      <Row className="align-items-end">
+                        <Col xs={12} sm={4}>
+                          <Link to={"/farmdetails"} style={{ all: "unset" }}>
+                            <div className={`w-100 mt s1 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-clipboard2 fs-3"></i>
+                                  <span className="fs-3 ">{landCount}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Lands</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+
+                        <Col xs={12} sm={4} >
+                          <Link style={{ all: "unset" }} to={"/notifications"}>
+                            <div className={`w-100 mt s2 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-fire fs-3"></i>
+                                  <span className="fs-3 ">{activeJob}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Active Tasks</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+                        <Col xs={12} sm={4} >
+                          <Link style={{ all: "unset" }} to={"/employees"}>
+                            <div className={`w-100 mt s3 land`}>
+                              <Row className="flex-row">
+                                <Col xs={4} className="firstInfo">
+                                  <i className="bi bi-clock fs-3"></i>
+                                  <span className="fs-3 ">{jobDue}</span>
+                                </Col>
+                                <Col xs={8} className="secInfo">
+                                  <h5>Completed Tasks</h5>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Link>
+                        </Col >
+                      </Row>
+                      <ValidDate />
+                      <Weather weather={weather} />
+                    </Col>
+                    <Col xs={12} xl={3}
+                      className=" mt-3 mb-3 mt-lg-0"
+                    >
+                      <PlansForm getWeather={getWeather} />
+                      <AllNotifs number={unNotif}>
+                        {notifData ? (
+                          <>
+                            {notifData && notifData.map((notif, i) => (
+                              <Notif
+                                text={notif.content}
+                                date={notif.date}
+                                time={notif.time}
+                                read={notif.read}
+                                onShow={() => handleShow(notif.id)}
+                                key={notif.id}
+                              />
+                            ))}
+                          </>) :
+                          (<>
+                            <span>there are no notification to dispaly</span>
+                          </>)}
+                      </AllNotifs>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
             </div>
-            <div className="w-100 mainbackground ">
-              <Header unreadMessage={unreadMessage}></Header>
-              <Container fluid>
-                <Row>
-                  <Col className="" xs={12} xl={9}>
-                    <Row className="align-items-end">
-                      <PlanInfo
-                        pClassName=""
-                        className="s1"
-                        quality="good"
-                        amount={landCount}
-                        title="Lands"
-                      >
-                        <i className="bi bi-clipboard2 fs-3"></i>
-                      </PlanInfo>
-                      <PlanInfo
-                        pClassName="mt-3 mt-sm-0"
-                        className="s2"
-                        quality="high"
-                        amount={activeJob}
-                        title=" Active Tasks"
-                      >
-                        <i className="bi bi-fire fs-3"></i>
-                      </PlanInfo>
-                      <PlanInfo
-                        pClassName="mt-3 mt-xl-0"
-                        className="s3"
-                        quality="good"
-                        amount={jobDue}
-                        title="Completed Tasks"
-                      >
-                        <i className="bi bi-clock fs-3"></i>
-                      </PlanInfo>
-                    </Row>
-                    <ValidDate />
-                    <Weather weather={weather} />
-                  </Col>
-                  <Col xs={12} xl={3}
-                    className=" mt-3 mb-3 mt-lg-0"
-                  >
-                    <PlansForm getWeather={getWeather} />
-                    <AllNotifs number={unNotif}>
-                      {notifData ? (
-                        <>
-                          {notifData && notifData.map((notif, i) => (
-                            <Notif
-                              text={notif.content}
-                              date={notif.date}
-                              time={notif.time}
-                              read={notif.read}
-                              onShow={() => handleShow(notif.id)}
-                              key={notif.id}
-                            />
-                          ))}
-                        </>) :
-                        (<>
-                          <span>there are no notification to dispaly</span>
-                        </>)}
-                    </AllNotifs>
-                  </Col>
-                </Row>
-              </Container>
-            </div>
-          </div>
-          {notifData && notifData.map((elm) => {
-            if (activeId === elm.id)
-              return (
-                <ShowModal object={elm} show={show} handleClose={handleClose} />
-              );
-          })}
-        </>)}
+            {notifData && notifData.map((elm) => {
+              if (activeId === elm.id)
+                return (
+                  <ShowModal object={elm} show={show} handleClose={handleClose} />
+                );
+            })}
+          </>)}
+      </>
+
+
     </>
   );
 }
@@ -490,7 +542,9 @@ function ValidDate() {
     .reverse()
     .join("/");
   const remain = remaining;
-  const percentage = Math.floor((remain / validation) * 100);
+
+  const percentage = Math.floor((remain / 365) * 100)
+  const days = remain
 
   const remainingDay = async () => {
     const access = localStorage.getItem('access')
@@ -524,26 +578,27 @@ function ValidDate() {
   }, [])
   return (
     <Row className="justify-content-center">
-      <RemainDate percentage={percentage} />
+      <RemainDate percentage={percentage} days={days} />
       <PurchaseDate date={purchDate} />
     </Row>
   );
 }
-function RemainDate({ percentage }) {
+function RemainDate({ percentage, days }) {
   return (
     <Col xs={12} md={6} className="mt-2">
       <div className="remaining">
         <Row className="h-100">
           <Col xs={6}>
-            <h4>Days Remaining</h4>
+            <h4> Remaining Days</h4>
           </Col>
           <Col xs={6} className="vertical2">
             <div style={{ width: 100, height: 100 }}>
+
               <CircularProgressbar
                 minValue={0}
                 maxValue={100}
                 value={percentage}
-                text={`${percentage}%`}
+                text={days}
                 strokeWidth={5}
                 background={false}
                 styles={{

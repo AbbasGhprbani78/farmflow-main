@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { errorMessage, warningMessage } from "../../pages/Employees";
 import Avatar from "../../Images/profileadd/avatar.png"
 import { IP } from '../../App'
+import Spinne from "../Spinner";
 
 export function AddMember({
   user,
@@ -15,6 +16,7 @@ export function AddMember({
   onEdit,
   onPass,
   changePass,
+  loading
 }) {
 
   const [showPasswordInputs, setShowPasswordInputs] = useState(false);
@@ -22,7 +24,7 @@ export function AddMember({
   useEffect(() => {
     if (selectedId && selectedId.type === "add") {
       setShowPasswordInputs(true);
-      
+
     } else {
       setShowPasswordInputs(false);
     }
@@ -60,6 +62,7 @@ export function AddMember({
   const [isPrivate1, setIsPrivate1] = useState(true);
   const [isPrivate2, setIsPrivate2] = useState(true);
   const [upoloadImage, setuploadImage] = useState()
+
 
   const imageRef = useRef(null);
   function handleSubmit(e) {
@@ -174,7 +177,11 @@ export function AddMember({
           <h4>Add New Member</h4>
         )}
       </div>
-      <Row className="content_profile">
+      <Row className="content_profile" style={{ position: "relative" }}>
+        {
+          loading &&
+          <Spinne />
+        }
         <Col className=" w-100 rounded mt-3">
           <form className="content_down" onSubmit={handleSubmit}>
             <div className="content_top border-primary2-top border-primary2-bottom">
@@ -319,13 +326,13 @@ export function AddMember({
                   <Row className="d-flex w-100 ">
                     <Col
                       className="d-flex justify-content-start align-items-center my-3"
-                      xs={6}
+
                     >
                       <span className="primary-f fw-bold">Email Address:</span>
                     </Col>
                     <Col
                       className="d-flex justify-content-start align-items-center my-3"
-                      xs={6}
+
                     >
                       <span className="text-muted fs-6">{user.email}</span>
                     </Col>
@@ -551,7 +558,7 @@ export function AddMember({
               <div className="submit_button">
                 {selectedId && selectedId.type === "remove" ? (
                   <span className="text-danger">
-                    Are you sure to delete this employee?
+                    Are you sure ?
                   </span>
                 ) : selectedId.type === "edit" ? (
                   <span className="text-warning">

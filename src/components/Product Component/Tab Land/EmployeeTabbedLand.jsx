@@ -15,7 +15,7 @@ export default function EmployeeTabbedLand({
                 lands.length > 0 ? (
                     <div className="w-100  mt-3 ">
                         <div className="tabbs top_land">
-                            <select className="product-lands-drow bg-success text-light"
+                            <select className="product-lands-drow bg-success text-light mb-2"
                                 onChange={(e) => setActiveTab(e.target.value)}
                                 value={activeTab}
                                 style={{ width: "155px", padding: "7px" }}

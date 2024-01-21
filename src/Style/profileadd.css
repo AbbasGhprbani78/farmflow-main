@@ -33,14 +33,16 @@
   --color21: #6e8ecb;
   --color22: #e8e8e8;
 }
-.tdsta{
+
+.tdsta {
   border-right: none !important;
 }
 
-.prof-img{
+.prof-img {
   background-image: url('../../src/Images/homePage/user.png');
-  
+
 }
+
 @media (max-width: 576px) {
 
   .newtab.active,
@@ -65,7 +67,8 @@
     border-bottom: none;
   }
 }
-.bg-img{
+
+.bg-img {
   background-image: url(src/Images/chat/user.png);
   background-position: center;
   background-repeat: repeat;
@@ -179,7 +182,7 @@
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 2px solid var(--Primary2);
-  cursor: pointer;
+
 }
 
 .member-header h4 {
@@ -751,6 +754,21 @@ h6 {
   vertical-align: middle;
 }
 
+.All-members {
+  border-bottom: 1px solid #5da25e;
+  color: #5da25e;
+  cursor: pointer;
+
+}
+
+.al-m {
+  cursor: pointer;
+}
+
+.fa-angle {
+  cursor: pointer;
+}
+
 @media (max-width:768px) {
   .scrolll-y {
     height: 100% !important;
@@ -773,10 +791,11 @@ h6 {
 }
 
 @media (max-width:576px) {
-  .addtwo{
+  .addtwo {
     font-size: 13px;
   }
-  .point-box{
+
+  .point-box {
     text-align: center;
   }
 }

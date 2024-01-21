@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { IP } from '../App'
 import Logo from '../Images/homeMain/logo.png'
 import { Link } from "react-router-dom";
-;
+
 
 export default function SignUp() {
 
@@ -25,7 +25,6 @@ export default function SignUp() {
     const [image, setImage] = useState('')
     const [confirmPass, setConfirmPass] = useState();
     const [defaultImg, setDefaultImg] = useState()
-
 
 
     function handleToggle() {
@@ -134,7 +133,6 @@ export default function SignUp() {
 
         } catch (error) {
 
-            console.log(error.response.data.message);
             toast.error(`${error.response.data.message}`, {
                 position: "top-right",
                 autoClose: 5000,
@@ -145,7 +143,6 @@ export default function SignUp() {
                 progress: undefined,
                 theme: "colored",
             });
-
 
         }
     };
@@ -166,32 +163,16 @@ export default function SignUp() {
                 </Col>
                 <Col className="sginup-container" style={{ backgroundColor: "#fff" }} xs={12} md={9} xl={8}>
                     <div>
-                        <form className="input-container" onSubmit={submitHandler}>
+                        <form className="input-container" onSubmit={submitHandler} autoComplete="false">
                             <Row className="signUp">
                                 <h3 style={{ color: '#5DA25E', marginTop: "20px", textAlign: "left" }}>Sign Up</h3>
-                                {/* <Col xs={12}>
-                                    <div className="signup-img">
-                                        <img className="image-sg" src={defaultImg ? defaultImg : image} alt="" />
-                                        <label style={{ width: "100%", height: "100%" }} htmlFor="signUp-img"></label>
-                                        <input
-                                            type="file"
-                                            id="signUp-img"
-                                            className="input-image-signUp"
-                                            accept='image/jpeg, image/png, image/jpg'
-                                            onChange={(e) => {
-
-                                                setImage(e.target.files[0])
-                                                setDefaultImg(URL.createObjectURL(e.target.files[0]))
-                                            }}
-                                        />
-                                    </div>
-                                </Col> */}
                                 <div className="signInputwrapper">
                                     <Row className="justify-content-between">
                                         <Col xs={12} md={6} >
                                             <div className=" input-parent">
                                                 <span className="onBorder">FirstName:</span>
                                                 <input
+                                                    autoComplete="false"
                                                     value={firstName}
                                                     onChange={(e) => setFirstName(e.target.value)}
                                                     type="text"
@@ -203,6 +184,7 @@ export default function SignUp() {
                                             <div className="input-parent">
                                                 <span className="onBorder">LastName:</span>
                                                 <input
+                                                    autoComplete="false"
                                                     value={lastName}
                                                     onChange={(e) => setLastName(e.target.value)}
                                                     type="text"
@@ -216,6 +198,7 @@ export default function SignUp() {
                                             <div className="input-parent">
                                                 <span className="onBorder">Email:</span>
                                                 <input
+                                                    autoComplete="false"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     type="text"
@@ -229,6 +212,7 @@ export default function SignUp() {
                                             <div className="input-parent">
                                                 <span className="onBorder">UserName:</span>
                                                 <input
+                                                    autoComplete="false"
                                                     value={username}
                                                     onChange={(e) => setUsername(e.target.value)}
                                                     type="text"
@@ -240,6 +224,7 @@ export default function SignUp() {
                                             <div className="input-parent">
                                                 <span className="onBorder">Phone:</span>
                                                 <input
+                                                    autoComplete="false"
                                                     value={phone}
                                                     onChange={(e) => setPhone(e.target.value)}
                                                     type="text"
@@ -254,6 +239,7 @@ export default function SignUp() {
                                                 <span className="onBorder"> Password: </span>
                                                 <div className=" login-input">
                                                     <input
+                                                        autoComplete="false"
                                                         value={password}
                                                         className="w-100 input login-input"
                                                         type={`${isPrivate ? "password" : "text"}`}
@@ -282,6 +268,7 @@ export default function SignUp() {
                                                 <span className="onBorder"> confirmPass: </span>
                                                 <div className=" login-input">
                                                     <input
+                                                        autoComplete="false"
                                                         value={confirmPass}
                                                         className="w-100 input login-input"
                                                         type={`${isPrivate ? "password" : "text"}`}
@@ -289,7 +276,7 @@ export default function SignUp() {
                                                     ></input>
                                                     {isPrivate ? (
                                                         <FaEye
-                                                            className="setin"ب
+                                                            className="setin" ب
                                                             color="#6D6D6D"
                                                             size="1.3rem"
                                                             onClick={handleToggle}

@@ -122,6 +122,7 @@ function Chat() {
       }
     }
   }
+
   const getUnreadMessages = async (employeeId) => {
     const access = localStorage.getItem("access")
     const headers = {
@@ -312,7 +313,7 @@ function Chat() {
         <>
           {showChat ? (
             <>
-              <Col className="chat-container shadow" xs={12} md={7} lg={8} xl={9} style={{ height: "100%", overflowY: "hidden",position:"fixed" }}>
+              <Col className="chat-container shadow" xs={12} md={7} lg={8} xl={9} style={{ height: "100%", overflowY: "hidden", position: "fixed" }}>
                 <div className="chat-profile">
                   <Chatup onExit={onExitChatHandler} audiuanceInfo={audiuanceinfo} />
                 </div>
@@ -402,7 +403,7 @@ function Chat() {
             </div>
             <div className="w-100">
               <Header />
-              <div className="d-flex justify-content-around" style={{ flexWrap: "wrap" }}>
+              <div className="d-flex justify-content-around" style={{ flexWrap: "wrap", height: "85%" }}>
                 <Col xs={12} md={4} lg={3} xl={2} className="employesWrapper shadow" >
 
                   {

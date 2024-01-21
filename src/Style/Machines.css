@@ -36,11 +36,6 @@
 
 }
 
-.custom-active-tab {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
 @media (max-width:576px) {
   .dropMachine {
     margin-left: 15px;

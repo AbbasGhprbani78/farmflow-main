@@ -1,22 +1,29 @@
+import dayjs from 'dayjs'
+
 export function TabShowPoints({ points, onEditPoint, onDeletePoint }) {
+  const sortedPoint = [...points].sort((a, b) => {
+    const timeA = dayjs(a.date).format('YYYY-MM-DD HH:mm');
+    const timeB = dayjs(b.date).format('YYYY-MM-DD HH:mm');
+    return dayjs(timeB).unix() - dayjs(timeA).unix();
+  })
   return (
     <TablePoints points={points}>
-      {points.map((point, i) => (
+      {sortedPoint.map((point, i) => (
         <tr>
           <td className="text-center text-nowrap">
             {point.type == "D"
               ? "Daily Login"
               : point.type == "T"
-              ? "Task"
-              : point.type == "G"
-              ? "Games"
-              : point.type == "P"
-              ? "Productivity"
-              : point.type == "CK"
-              ? "Communication"
-              : point.type == "PS"
-              ? "Problem Solving"
-              : "Collabration"}
+                ? "Task"
+                : point.type == "G"
+                  ? "Games"
+                  : point.type == "P"
+                    ? "Productivity"
+                    : point.type == "CK"
+                      ? "Communication"
+                      : point.type == "PS"
+                        ? "Problem Solving"
+                        : "Collabration"}
           </td>
           <td className="text-center">{point.description}</td>
           <td className="text-center">
@@ -54,7 +61,7 @@ function TablePoints({ points, children }) {
           </div>
         </div>
       ) : (
-        <div className="table-container w-100">
+        <div style={{ maxHeight: "500px" }} className="table-container w-100">
           <table className="table-task-profile table ">
             <thead>
               <tr>

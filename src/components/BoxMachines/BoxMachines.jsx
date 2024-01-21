@@ -10,6 +10,8 @@ import DeleteModal from '../DeleteModal'
 import { IP } from '../../App'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinne from '../Spinner';
+import { CircularProgressbar } from "react-circular-progressbar";
 
 export default function BoxMachines(props) {
 
@@ -21,7 +23,7 @@ export default function BoxMachines(props) {
   const [imgSrc, setImgSrc] = useState()
   const [vehicle, setVehicle] = useState(props.model ? props.model : "")
   const [staut, setstaut] = useState(props.status.length > 0 && props.status[0] ? props.status[0] : "")
-  const [employeeName, setEmployeeName] = useState(props.employee.length > 0 && props.employee[0].uuid ? props.employee[0].uuid : "")
+  const [employeeName, setEmployeeName] = useState(props.employee && props.employee.length > 0 && props.employee[0].uuid ? props.employee[0].uuid : "none")
   const [plans, setPlans] = useState(props.land.length > 0 && props.land[0].uuid ? props.land[0].uuid : "")
   const [name, setName] = useState(props.name.length > 0 ? props.name[0].id : null)
   const [defaultStatus, setDefaultStatus] = useState(["IU", "A", "UM"])
@@ -30,7 +32,10 @@ export default function BoxMachines(props) {
   const [defaultImg, setDefaultImg] = useState()
   const [pdf, setPdf] = useState()
   const [newBox, setNewBox] = useState('src/Images/homePage/download.png')
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(false)
   const messageEndRef = useRef(null);
+  const [uploadPercentage, setUploadPercentage] = useState(0);
   const handleClose = () => setShow(false);
   const handleShowDelete = () => setShowDeleteModal(true)
   const handleCloseDelete = () => setShowDeleteModal(false)
@@ -54,7 +59,7 @@ export default function BoxMachines(props) {
   };
 
   const deleteBoxHandler = async (uuid) => {
-
+    setIsLoading(true);
     const access = localStorage.getItem('access')
 
     const headers = {
@@ -71,7 +76,7 @@ export default function BoxMachines(props) {
         props.onDelete(uuid)
         setShowDeleteModal(false)
         successMessage("the deletion was successful")
-
+        setIsLoading(false);
       }
 
     } catch (e) {
@@ -89,6 +94,8 @@ export default function BoxMachines(props) {
         successMessage("the deletion was successful")
       }
 
+    } finally {
+      setIsLoading(false);
     }
 
   }
@@ -105,6 +112,7 @@ export default function BoxMachines(props) {
   };
 
   const sendEditHandler = async (uuid) => {
+
     if (!vehicle) {
       toast.error(`model is required`, {
         position: "top-right",
@@ -118,6 +126,7 @@ export default function BoxMachines(props) {
       });
       return false;
     }
+    setProgress(true)
     const access = localStorage.getItem('access')
     const formData = new FormData()
     Object.entries(changedValues).forEach(([key, value]) => {
@@ -135,12 +144,17 @@ export default function BoxMachines(props) {
     try {
       const response = await axios.put(`${IP}/edit-tool/`, formData, {
         headers,
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadPercentage(progress);
+        },
       })
 
       if (response.status === 200) {
         setEditMode(false)
         props.getAllBox()
         successMessage("Editing was done successfully");
+        setProgress(false);
 
       }
 
@@ -153,6 +167,8 @@ export default function BoxMachines(props) {
         localStorage.removeItem('refresh')
         window.location.href = "/login"
       }
+    } finally {
+      setProgress(false);
     }
 
   }
@@ -193,7 +209,7 @@ export default function BoxMachines(props) {
     return true;
   };
 
-  
+
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 968 && window.innerWidth >= 653);
@@ -212,6 +228,7 @@ export default function BoxMachines(props) {
     if (!validateInputs()) {
       return;
     }
+    setProgress(true)
 
     const access = localStorage.getItem('access')
     const formData = new FormData()
@@ -222,7 +239,13 @@ export default function BoxMachines(props) {
     formData.append("manual", pdf)
     formData.append("image", imgSrc)
     formData.append("land", plans)
-    formData.append("employee", employeeName)
+    if (employeeName) {
+      formData.append("employee", employeeName);
+    } else {
+      // Handle the case when employee state is empty (e.g., set a default value)
+      formData.append("employee", "");
+    }
+
 
     const headers = {
       Authorization: `Bearer ${access}`
@@ -230,12 +253,18 @@ export default function BoxMachines(props) {
     try {
       const response = await axios.post(`${IP}/add-tool/`, formData, {
         headers,
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadPercentage(progress);
+        },
       })
 
       if (response.status === 201) {
         props.getAllBox()
         setEditMode(false)
         successMessage("Box was added successfully");
+        setProgress(false)
+        console.log(response)
       }
 
     } catch (e) {
@@ -246,6 +275,8 @@ export default function BoxMachines(props) {
         localStorage.removeItem('refresh')
         window.location.href = "/login"
       }
+    } finally {
+      setProgress(false);
     }
 
   }
@@ -255,6 +286,7 @@ export default function BoxMachines(props) {
   }, [])
 
   useEffect(() => {
+
     const isEmptyEmployee = !props.employee || props.employee.length === 0;
     const isEmptyLand = !props.land || props.land.length === 0;
 
@@ -290,7 +322,42 @@ export default function BoxMachines(props) {
       </Modal>
 
       <DeleteModal show={showDeleteModal} handleClose={handleCloseDelete} handleDeleteClose={() => deleteBoxHandler(props.uuid)} />
-      <div className="boxMachines-wrapper">
+      <div className="boxMachines-wrapper" style={{ position: "relative" }}>
+        {
+          progress &&
+          <div
+            style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", position: "absolute", zIndex: "999", backdropFilter: "blur(3px)" }}
+          >
+            <div style={{ width: "65px", height: "65px" }}>
+              <CircularProgressbar
+                minValue={0}
+                maxValue={100}
+                value={uploadPercentage}
+                text={`${uploadPercentage}%`}
+                strokeWidth={5}
+                background={false}
+                styles={{
+                  path: {
+                    stroke: `#5da25e`,
+                  },
+                  trail: {
+                    stroke: "#ffffff",
+                  },
+                  text: {
+                    fill: "#5da25e",
+                    fontSize: "20px",
+                  },
+                }}
+              />
+            </div>
+          </div>
+
+        }
+        {
+          isLoading &&
+          <Spinne />
+
+        }
         <div className='closeMachine d-flex justify-content-between' style={{ textAlign: "right", padding: "3px 20px" }}>
           <button style={{ color: "#fff" }}
             className='edit-btn-machine'
@@ -300,12 +367,13 @@ export default function BoxMachines(props) {
         {isSmallScreen ? (
           <>
             <div className="machine-content2">
+
               <div className="machines-img">
                 <img
                   src={defaultImg ? defaultImg : props.isNew ? newBox : (props.image ? `${IP}${props.image}` : "")}
                   alt=""
                   onError={(event) => { event.target.src = imgSrc }} />
-                <label htmlFor={`input-file-${props.id}`}></label>
+                <label htmlFor={`input-file-${props.uuid}`}></label>
                 <input className='upload-machines input-machine'
                   type="file"
                   onChange={(e) => {
@@ -314,7 +382,7 @@ export default function BoxMachines(props) {
                     handleInputChange('image', e.target.files[0]);
                   }}
                   accept='image/jpeg, image/png, image/jpg'
-                  id={`input-file-${props.id}`}
+                  id={`input-file-${props.uuid}`}
                   disabled={!(editMode || props.isNew)} />
               </div>
               <div className="input-machine-container">
@@ -356,7 +424,7 @@ export default function BoxMachines(props) {
                         setVehicle(e.target.value);
                         handleInputChange("model", e.target.value)
                       }}
-                      placeholder='Vehicle Modale'
+                      placeholder='Vehicle Model'
                       className='vehicle input-machine'
                       disabled={!(editMode || props.isNew)} />
                   </div>
@@ -371,6 +439,7 @@ export default function BoxMachines(props) {
                         handleInputChange("employee", e.target.value)
                       }}>
                       <option style={{ color: "#5DA25E" }} value="name" disabled="disabled" selected="selected">Employer Name</option>
+                      <option style={{ color: "#5DA25E" }} value="">no one</option>
                       {editInformation ? (
                         <>
                           {editInformation.employee.map((item, i) => (
@@ -484,7 +553,7 @@ export default function BoxMachines(props) {
                   src={defaultImg ? defaultImg : props.isNew ? newBox : (props.image ? `${IP}${props.image}` : "")}
                   alt=""
                   onError={(event) => { event.target.src = imgSrc }} />
-                <label htmlFor={`input-file-${props.id}`}></label>
+                <label htmlFor={`input-file-${props.uuid}`}></label>
                 <input
                   className='upload-machines input-machine'
                   type="file"
@@ -494,7 +563,7 @@ export default function BoxMachines(props) {
                     handleInputChange('image', e.target.files[0]);
                   }}
                   accept='image/jpeg, image/png, image/jpg'
-                  id={`input-file-${props.id}`}
+                  id={`input-file-${props.uuid}`}
                   disabled={!(editMode || props.isNew)} />
               </div>
 
@@ -535,7 +604,7 @@ export default function BoxMachines(props) {
                     setVehicle(e.target.value);
                     handleInputChange("model", e.target.value)
                   }}
-                  placeholder='Vehicle Modale'
+                  placeholder='Vehicle Model'
                   className='vehicle input-machine'
                   disabled={!(editMode || props.isNew)} />
               </div>
@@ -550,6 +619,7 @@ export default function BoxMachines(props) {
                     handleInputChange("employee", e.target.value)
                   }}>
                   <option style={{ color: "#5DA25E" }} value="name" disabled="disabled" selected="selected">Employer Name</option>
+                  <option style={{ color: "#5DA25E" }} value="">no one</option>
                   {editInformation ? (
                     <>
                       {editInformation.employee.map((item, i) => (
@@ -669,43 +739,3 @@ export default function BoxMachines(props) {
   )
 }
 
-
-{/* <>
-  <div className="machines-img">
-    <img
-      src={defaultImg ? defaultImg : props.isNew ? newBox : (props.image ? `${IP}${props.image}` : "")}
-      alt=""
-      onError={(event) => { event.target.src = imgSrc }} />
-    <label htmlFor={`input-file-${props.id}`}></label>
-    <input className='upload-machines input-machine'
-      type="file"
-      onChange={(e) => {
-        setImgSrc(e.target.files[0]);
-        setDefaultImg(URL.createObjectURL(e.target.files[0]))
-        handleInputChange('image', e.target.files[0]);
-      }}
-      accept='image/jpeg, image/png, image/jpg'
-      id={`input-file-${props.id}`}
-      disabled={!(editMode || props.isNew)} />
-  </div>
-
-
-  <div className="machines-img">
-    <img
-      src={defaultImg ? defaultImg : props.isNew ? newBox : (props.image ? `${IP}${props.image}` : "")}
-      alt=""
-      onError={(event) => { event.target.src = imgSrc }} />
-    <label htmlFor={`input-file-${props.id}`}></label>
-    <input
-      className='upload-machines input-machine'
-      type="file"
-      onChange={(e) => {
-        setImgSrc(e.target.files[0]);
-        setDefaultImg(URL.createObjectURL(e.target.files[0]))
-        handleInputChange('image', e.target.files[0]);
-      }}
-      accept='image/jpeg, image/png, image/jpg'
-      id={`input-file-${props.id}`}
-      disabled={!(editMode || props.isNew)} />
-  </div>
-</> */}

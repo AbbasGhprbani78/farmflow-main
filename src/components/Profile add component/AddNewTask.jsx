@@ -180,7 +180,6 @@ function AddNewTask({
               }
 
             />
-
             <TextInput
               value={taskInfo.title}
               onChange={(e) => setTitle(e.target.value)}
@@ -188,7 +187,7 @@ function AddNewTask({
               palce="Enter your new task"
               inputClass="mt-0"
               divClass="mb-3"
-              label="Edit Your Task"
+              label="Task Name"
               disabled={selectedTaskId && selectedTaskId.type == "remove"}
             />
           </Col>

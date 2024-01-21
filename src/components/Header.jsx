@@ -6,11 +6,44 @@ import OffCanvas from "./OffCanvas";
 import { IP } from "../App";
 import axios from "axios";
 import { AiFillStar } from 'react-icons/ai';
-export default function Header({ unreadMessage, score }) {
+export default function Header({ score }) {
 
   const [userIamge, setUserImage] = useState()
   const [totalPoint, setTotalPoint] = useState()
+  const [unreadMessage, setUnreadMessage] = useState();
 
+  const getUnread = async () => {
+
+    const access = localStorage.getItem('access')
+    const headers = {
+      Authorization: `Bearer ${access}`
+    };
+
+    try {
+      const response = await axios.get(`${IP}/unread-message/`, {
+        headers,
+      })
+
+      if (response.status === 200) {
+
+        console.log(response)
+        setUnreadMessage(response.data.unread_chats_count)
+      }
+
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+
+  }
+  useEffect(() => {
+    getUnread()
+  }, [])
 
   const getUserIamge = async () => {
     const access = localStorage.getItem("access")
@@ -114,7 +147,6 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
 
 
 
-  const unred = localStorage.getItem("unread")
   return (
     <>
       {windowWidth < 576 ? (
@@ -137,7 +169,7 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
                 style={{ width: "max-content", color: "#000" }}
                 to={"/chat"}>
                 <i style={{ cursor: "pointer" }} className="bi bi-bell fs-5"></i>
-                <span className="notif-number">{unred}</span>
+                <span className="notif-number">{unreadMessage}</span>
               </Link>
             </div>
             <div className="d-flex align-items-center">
@@ -183,7 +215,7 @@ function TopHeader({ onOpen, unreadMessage, userIamge, totalPoint }) {
                 style={{ width: "max-content", color: "#000" }}
                 to={"/chat"}>
                 <i style={{ cursor: "pointer" }} className="bi bi-bell fs-5"></i>
-                <span className="notif-number">{unred}</span>
+                <span className="notif-number">{unreadMessage}</span>
               </Link>
               <div
                 className="d-flex align-items-center"

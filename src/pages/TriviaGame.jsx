@@ -239,7 +239,7 @@ export default function TriviaGame() {
                                                         ) : (
                                                             <div>
                                                                 <div className="level-item d-flex justify-content-between">
-                                                                    <p style={{ fontSize: "20px", color: "#5DA25E" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                    <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     <p style={{ paddingRight: "15px" }}>{currentQuestion + 1}/{questions.length}</p>
                                                                 </div>
                                                                 <div className="questions-wrapper">

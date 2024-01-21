@@ -21,8 +21,34 @@ const landDataProducts = [
     ],
   },
 ];
-export function TabShowProducts({ userInfo }) {
+export function TabShowProducts({ userInfo, activeTab }) {
   const [data, setData] = useState(landDataProducts);
+
+  const fetchAllLands = async () => {
+    const access = localStorage.getItem("access");
+    const headers = {
+      Authorization: `Bearer ${access}`,
+    };
+    try {
+      const response = await axios.get(
+        `${IP}/all-profile-lands/`,
+        {
+          headers,
+        }
+      );
+      if (response.status === 200) {
+        setData(response.data.lands);
+      }
+
+    } catch (error) {
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  };
   const fetchLands = async () => {
     const access = localStorage.getItem("access");
     const headers = {
@@ -50,7 +76,12 @@ export function TabShowProducts({ userInfo }) {
     }
   };
   useEffect(() => {
-    fetchLands();
+    if (activeTab === 4) {
+      fetchAllLands()
+    } else {
+      fetchLands();
+    }
+
   }, []);
   return (
     <TableProducts products={data}>
@@ -82,7 +113,7 @@ function TableProducts({ products, children }) {
           </div>
         </div>
       ) : (
-        <div className="table-container w-100 ">
+        <div style={{ maxHeight: "500px", overflowY: "scroll" }} className="table-container w-100 ">
           <table className="table-product table  ">
             <thead>
               <tr>

@@ -4,6 +4,7 @@ import { FaRegCalendarTimes } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 
 function NotificationsCom({ notifData, tasks, setNotifData }) {
+
   const [activeTab, setActiveTab] = useState(0);
   const [activeIdNotif, setActiveIdNotif] = useState(0);
   const [activeIdTask, setActiveIdTask] = useState(0);

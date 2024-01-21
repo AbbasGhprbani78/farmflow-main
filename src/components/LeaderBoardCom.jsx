@@ -50,7 +50,7 @@ export default function LeaderBoardCom({ persons }) {
                 <thead>
                   <tr>
                     <th className="tabHeader text-center text-light">rank</th>
-                    <th  className="tabHeader text-start text-light ps-5">name</th>
+                    <th className="tabHeader text-start text-light ps-5">name</th>
                     <th className="tabHeader text-center text-light">score</th>
                   </tr>
                 </thead>
@@ -98,7 +98,15 @@ function TableRow({ rate, name, score, imgSrc }) {
           <tr>
             <td className="text-center cell-point">
               <div className="avatarimg">
-                <img src={`${IP}${imgSrc}`} alt={""} />
+                {
+                  imgSrc ?
+
+                    (<img src={imgSrc ? `${IP}${imgSrc}` : "src/Images/chat/user.png"} alt={""} />) :
+                    (
+                      <img src={"src/Images/chat/user.png"} alt={""} />
+                    )
+                }
+
                 <span>{name}</span>
               </div>
             </td>
@@ -119,7 +127,7 @@ function TableRow({ rate, name, score, imgSrc }) {
             </td>
             <td className="text-center">
               <div className="avatarimg">
-                <img src={imgSrc ? `${IP}${imgSrc}` :"src/Images/chat/user.png"} alt={""} />
+                <img src={imgSrc ? `${IP}${imgSrc}` : "src/Images/chat/user.png"} alt={""} />
                 <span>{name}</span>
               </div>
             </td>

@@ -17,8 +17,11 @@ import '../Style/ModalEdit.css'
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
+
+
 function Product() {
   const [activeTab, setActiveTab] = useState("");
+
 
   const [lands, setLands] = useState([]);
   const [landInfo, setLandInfo] = useState({
@@ -59,7 +62,7 @@ function Product() {
             setLandInfo(response.data.Lands[0]);
             setActiveTab(response.data.Lands[0].uuid);
             getWeather(response.data.Lands[0].uuid)
-            getActiveJob(response.data.Lands[0].uuid)
+
 
           } else {
             console.log(uuid);
@@ -73,7 +76,6 @@ function Product() {
         localStorage.removeItem('access')
         localStorage.removeItem('uuid')
         localStorage.removeItem('refresh')
-
         window.location.href = "/login"
       }
     }
@@ -117,6 +119,7 @@ function Product() {
       }
     }
   };
+  const navigate = useNavigate();
 
   const [imgProduct, setImageProduct] = useState()
   const [soliwind, setSoliwind] = useState()
@@ -180,6 +183,7 @@ function Product() {
         setTasks(response.data.all_tasks);
         setTimeLine(response.data.timelines_tasks);
         getSiloPerc(response.data.product_info.uuid)
+        getActiveJob(response.data.product_info.uuid)
       }
 
       else {
@@ -254,17 +258,18 @@ function Product() {
       Authorization: `Bearer ${access}`
     };
     const body = {
-      uuid: uuid
+      product: uuid
     }
     try {
-      const response = await axios.post(`${IP}/land-active-task/`, body, {
+      const response = await axios.post(`${IP}/count-pending-tasks-product/`, body, {
         headers,
       })
 
       if (response.status === 200) {
+
         console.log(response)
         setActiveJob(response.data.count)
-        console.log(activeJob)
+
       }
 
     } catch (error) {
@@ -285,12 +290,18 @@ function Product() {
       await setProducts("");
       setActiveTab(uuid);
       getWeather(uuid)
-      getActiveJob(uuid)
+      setActiveJob(0)
+
 
     } catch (error) {
       console.error("An error occurred:", error);
     }
   }
+
+  // useEffect(() => {
+
+  //   onClickToggleActive()
+  // }, [])
 
 
   function handleAddLand() {
@@ -328,6 +339,7 @@ function Product() {
         x_coordinate: 45.4303447995166,
         y_coordinate: -75.69932769298879,
       });
+
     } else {
       toast.warning("Please Add Land");
     }
@@ -422,7 +434,6 @@ function Product() {
         localStorage.removeItem('access')
         localStorage.removeItem('uuid')
         localStorage.removeItem('refresh')
-
         window.location.href = "/login"
       }
     }
@@ -724,6 +735,7 @@ function Product() {
   function handleClickProduct(uuid) {
     setSelectedProduct({ uuid: uuid, type: "show" });
     setProductInfo(products.find((product) => product.uuid === uuid));
+    getActiveJob(uuid)
   }
 
   const closeEditModal = () => {
@@ -839,7 +851,7 @@ function Product() {
                       value={productDec}
                       onChange={(e) => setProductDec(e.target.value)}
                       className="product-description"
-    
+
                     >
 
                     </textarea>
@@ -992,7 +1004,7 @@ function Predictions({ temp, activeJob, soliwind }) {
           className="s12"
           quality="high"
           amount={activeJob ? activeJob : "0"}
-          title="Jobs Active"
+          title="Active Tasks"
         >
           <i className="bi bi-fire fs-3"></i>
         </PlanInfo>
@@ -1124,10 +1136,6 @@ function SelectedProduct({ productInfo, tasks, imgProduct }) {
                     <span>{productInfo.product_info.name}</span>
                   </div>
                   <div className="product_info">
-                    <span>Percentage:</span>
-                    <span>{productInfo.percentage + "%"}</span>
-                  </div>
-                  <div className="product_info">
                     <span>Start Date:</span>
                     <span>{productInfo.product_info.sow_date}</span>
                   </div>
@@ -1194,14 +1202,14 @@ function TasksLI({ taskInfo }) {
   );
 }
 function TimeLine({ tasks }) {
-
+  const sortedTasks = tasks.slice().sort((a, b) => new Date(a.start_date) - new Date(b.start_date));
 
   return (
     <>
       {tasks.length > 0 &&
         <div className="time_line rounded-3 my-2">
           <div className="timeline_weeks w-100">
-            {tasks.map((task, i) => (
+            {sortedTasks.map((task, i) => (
               <TimeWeeksInfo key={i} task={task} />
             ))}
 
@@ -1229,8 +1237,6 @@ function TimeWeeksInfo({ task }) {
   useEffect(() => {
 
     const dateObject = new Date(task.start_date);
-    const options = { month: 'long', day: '2-digit' };
-
     setMonth(new Intl.DateTimeFormat('en', { month: 'long' }).format(dateObject));
     setDay(dateObject.getDate().toString());
   }, [task.start_date]);
@@ -1238,7 +1244,7 @@ function TimeWeeksInfo({ task }) {
   return (
     <div style={{ textAlign: "center" }} className="weeks_card">
       <div className="text_muted">{month}</div>
-      <div className={ task.status==="P" ?"pending":"approved" }>
+      <div className={task.status === "P" ? "pending" : "approved"}>
         <div className="px-2 py-3 cal text_muted">{day}</div>
       </div>
     </div>

@@ -3,12 +3,10 @@ import TextArea from "../TextArea";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
-import MapComponent from "../MapComponent";
 import "react-toastify/dist/ReactToastify.css";
 import { Container } from "react-bootstrap";
+import MapComLand from '../MapComLand'
 import { useState, useEffect } from "react";
-
-
 import "../../Style/addland.css";
 
 function AddLand({
@@ -39,7 +37,7 @@ function AddLand({
   function setY(y) {
     setMarkerPosition([landInfo.x_coordinate, y]);
     onChange((info) => ({ ...info, y_coordinate: y }));
-   
+
   }
 
   async function handleSubmit(e) {
@@ -83,7 +81,7 @@ function AddLand({
   }
   useEffect(() => {
     setMarkerPosition([landInfo.x_coordinate, landInfo.y_coordinate]);
-   
+
   }, [landInfo.x_coordinate, landInfo.y_coordinate]);
 
   return (
@@ -92,32 +90,33 @@ function AddLand({
         <Col xs={12} lg={8} className=" mapProduct">
           <div className="leaderShadow  w-100 p-4 mapProduct">
             <h6
-              className={`headerLeader ${
-                selectedLand.type == "add"
-                  ? `text-prim2`
-                  : selectedLand.type == "edit"
+              className={`headerLeader ${selectedLand.type == "add"
+                ? `text-prim2`
+                : selectedLand.type == "edit"
                   ? `text-warning`
                   : `text-danger`
-              }`}
+                }`}
             >
               {selectedLand && selectedLand.type === "edit"
                 ? "Editting The Land:"
                 : selectedLand.type === "add"
-                ? "Adding New Land:"
-                : "Removing The Land:"}
+                  ? "Adding New Land:"
+                  : "Removing The Land:"}
             </h6>
-            <Map
-              xCoor={landInfo.x_coordinate}
-              yCoor={landInfo.y_coordinate}
-              onXChange={setX}
-              onYChange={setY}
-              markerPosition={markerPosition}
-              onSetMarkPosition={handleMarkPosition}
-            />
+            <div style={{ height: "515px" }}>
+              <MapComLand
+                x={markerPosition[0]}
+                y={markerPosition[1]}
+                onXChange={setX}
+                onYChange={setY}
+                markerPosition={markerPosition}
+                onSetMarkPosition={handleMarkPosition}
+              />
+            </div>
           </div>
         </Col>
         <Col xs={12} lg={4} className="mt-3 mb-3 mt-sm-0 detailmap  form-map">
-          <div className="leaderShadow  w-100 p-4 "  style={{height:"100%"}}>
+          <div className="leaderShadow  w-100 p-4 " style={{ height: "100%" }}>
             <h6 className="headerLeader text-success">Details:</h6>
             <form
               className="d-flex w-100 flex-column justify-content-center"
@@ -169,7 +168,7 @@ function AddLand({
               <div className="submit_button">
                 {selectedLand && selectedLand.type === "remove" ? (
                   <span className="text-danger">
-                    Are you sure to delete this Land?
+                    Are you sure?
                   </span>
                 ) : selectedLand.type === "edit" ? (
                   <span className="text-warning">
@@ -181,29 +180,27 @@ function AddLand({
                 <div className="buttons">
                   <button
                     type="submit"
-                    className={`btn  ${
-                      selectedLand && selectedLand.type === "remove"
-                        ? `btn-outline-danger`
-                        : selectedLand.type === "edit"
+                    className={`btn  ${selectedLand && selectedLand.type === "remove"
+                      ? `btn-outline-danger`
+                      : selectedLand.type === "edit"
                         ? `btn-outline-warning`
                         : `btn-outline-success`
-                    }`}
+                      }`}
                   >
                     {selectedLand && selectedLand.type === "add"
                       ? "Add"
                       : selectedLand.type === "edit"
-                      ? "Edit"
-                      : "Remove"}
+                        ? "Edit"
+                        : "Remove"}
                   </button>
                   <button
                     type="button"
-                    className={`btn  cancel-button ${
-                      selectedLand && selectedLand.type === "remove"
-                        ? `btn-success`
-                        : selectedLand.type === "edit"
+                    className={`btn  cancel-button ${selectedLand && selectedLand.type === "remove"
+                      ? `btn-success`
+                      : selectedLand.type === "edit"
                         ? `btn-success`
                         : `btn-danger`
-                    }`}
+                      }`}
                     onClick={onBack}
                   >
                     Cancel
@@ -218,28 +215,7 @@ function AddLand({
   );
 }
 
-function Map({
-  xCoor,
-  yCoor,
-  onXChange,
-  onYChange,
-  markerPosition,
-  onSetMarkPosition,
-}) {
-  
-  return (
-    <div style={{height:"515px"}}>
-      <MapComponent
-        x={xCoor}
-        y={yCoor}
-        onXChange={onXChange}
-        onYChange={onYChange}
-        onSetMarkPosition={onSetMarkPosition}
-        markerPosition={markerPosition}
-      />
-    </div>
-  );
-}
+
 
 export default AddLand;
 function errorMessage(text) {

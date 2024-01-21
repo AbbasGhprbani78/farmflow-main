@@ -11,7 +11,7 @@ import axios from "axios";
 import { IP } from "../App";
 import { PlanInfo } from "../components/Product Component/PlanInfo";
 import plantImage from "../Images/product/plant.png";
-import Loading from "../components/Laoding/Loading";
+
 
 
 function Product() {
@@ -90,6 +90,7 @@ function Product() {
         console.log(response)
         if (response.data.products.length > 0) {
           setProducts(response.data.products);
+          console.log(response)
 
           setSelectedProduct({
             uuid: response.data.products[0].uuid,
@@ -571,7 +572,7 @@ function Product() {
     )
   );
 }
-function Predictions({ temp, activeJob,soliwind  }) {
+function Predictions({ temp, activeJob, soliwind }) {
   return (
     <Row className="overflow-y-scroll px-3 px-sm-2 px-lg-1 px-md-0 predictions-height mb-3">
       <Col xs={12} lg={6} className="px-0 px-lg-4">
@@ -591,7 +592,7 @@ function Predictions({ temp, activeJob,soliwind  }) {
           className="s12"
           quality="high"
           amount={activeJob ? activeJob : "0"}
-          title="Jobs Active"
+          title="Active Tasks"
         >
           <i className="bi bi-fire fs-3"></i>
         </PlanInfo>
@@ -604,7 +605,7 @@ function Predictions({ temp, activeJob,soliwind  }) {
           amount={soliwind && soliwind.wind_speed ? soliwind.wind_speed.value : ""}
           title="Soil Moisture"
         >
-          <i className="bi bi-wind fs-3"></i>
+          <i className="bi bi-cloud-drizzle fs-3"></i>
         </PlanInfo>
       </Col>
       <Col xs={12} lg={6} className="px-0 px-lg-4">
@@ -615,7 +616,7 @@ function Predictions({ temp, activeJob,soliwind  }) {
           amount={soliwind && soliwind.soil_moisture_data ? soliwind.soil_moisture_data.value : ""}
           title="Precipitation"
         >
-          <i className="bi bi-cloud-drizzle fs-3"></i>
+          <i className="bi  bi-wind fs-3"></i>
         </PlanInfo>
       </Col>
     </Row>
@@ -695,10 +696,6 @@ function SelectedProduct({ productInfo, tasks, imgProduct }) {
                   <div className="product_info">
                     <span>Crop:</span>
                     <span>{productInfo.product_info.name}</span>
-                  </div>
-                  <div className="product_info">
-                    <span>Percentage:</span>
-                    <span>{productInfo.percentage + "%"}</span>
                   </div>
                   <div className="product_info">
                     <span>Start Date:</span>
@@ -810,7 +807,7 @@ function TimeWeeksInfo({ task }) {
   return (
     <div style={{ textAlign: "center" }} className="weeks_card">
       <div className="text_muted">{month}</div>
-      <div className="weeks_circle">
+      <div className={task.status === "P" ? "pending" : "approved"}>
         <div className="px-2 py-3 cal text_muted">{day}</div>
       </div>
     </div>
@@ -844,9 +841,8 @@ function TimeLineInfo({
 export default Product;
 
 const time_info = [
-  { uuid: 1, color: "#5DA25E", text: "Plowing" },
-  { uuid: 2, color: "#FFDA84", text: "Shipment" },
-  { uuid: 3, color: "#99B760", text: "Shipment" },
+  { uuid: 1, color: "#5DA25E", text: "Aprrove" },
+  { uuid: 2, color: "#FFDA84", text: "Pending" },
 ];
 const time_weeks_info = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 function errorMessage(text) {
@@ -885,3 +881,4 @@ function successMessage(text) {
     theme: "colored",
   });
 }
+//bi bi-cloud-drizzle fs-3

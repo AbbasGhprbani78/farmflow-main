@@ -1,7 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import TextInput from "./TextInput";
 import { useRef, useState, useEffect } from "react";
-import { errorMessage, warningMessage } from "../pages/Employees";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import { IP } from '../App'
@@ -11,6 +10,7 @@ import Loading from "./Laoding/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import '../Style/EditProf.css'
 import "react-toastify/dist/ReactToastify.css"
+import Spinne from "./Spinner";
 
 export function EditProf() {
     const [editMode, setEditMode] = useState(false);
@@ -27,6 +27,7 @@ export function EditProf() {
     const [confirmPassword, setConfirmPassword] = useState()
     const [showPasswordInputs, setShowPasswordInputs] = useState(false);
     const [passwordChanged, setPasswordChanged] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     const getProfileInfo = async () => {
 
@@ -109,6 +110,8 @@ export function EditProf() {
     };
 
     const onSubmit = async (e) => {
+        setIsLoading(true);
+
         const uuid = localStorage.getItem('uuid')
         e.preventDefault();
 
@@ -172,6 +175,7 @@ export function EditProf() {
             if (response.status === 200) {
                 toast.success("Edit successful!");
                 setEditMode(false);
+                setIsLoading(false);
                 console.log(response)
 
             }
@@ -183,6 +187,8 @@ export function EditProf() {
                 localStorage.removeItem('refresh')
                 window.location.href = "/login"
             }
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -205,7 +211,11 @@ export function EditProf() {
                             <div className="w-100">
                                 <Header />
                                 <Row >
-                                    <Col md={8} style={{ margin: "0 auto" }}>
+                                    <Col md={8} style={{ margin: "0 auto", position: "relative" }}>
+                                        {
+                                            isLoading &&
+                                            <Spinne />
+                                        }
                                         <div className=" shadow p-3 ">
                                             <div className="header_profile">
                                                 <h4>Edditing the profile</h4>
@@ -223,6 +233,7 @@ export function EditProf() {
                                                                         className="imgprofile"
                                                                     ></img>
                                                                     <input
+                                                                        autoComplete="false"
                                                                         disabled={!editMode}
                                                                         id="aaaa"
                                                                         ref={imageRef}
@@ -256,7 +267,6 @@ export function EditProf() {
 
                                                         <Row className="mt-4 mt-md-0">
                                                             <Col xs={12} md={6}>
-
 
                                                                 <TextInput
                                                                     value={name}
@@ -482,8 +492,8 @@ export function EditProf() {
                                 </Row>
                             </div>
                             <ToastContainer />
-
                         </div>
+
                     </>) :
                     (<>
                         <Loading />

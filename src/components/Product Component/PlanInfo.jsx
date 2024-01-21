@@ -1,5 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 
+
 export function PlanInfo({
   quality = "",
   amount = "",
@@ -7,7 +8,9 @@ export function PlanInfo({
   children,
   className = "",
   pClassName = "",
+  link
 }) {
+
   return (
     <Col xs={12} sm={4} className={pClassName}>
       <div className={`w-100 mt ${className}`}>
@@ -21,6 +24,6 @@ export function PlanInfo({
           </Col>
         </Row>
       </div>
-    </Col>
+    </Col >
   );
 }

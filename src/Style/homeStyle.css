@@ -269,6 +269,10 @@
   }
 }
 
+.land {
+  cursor: pointer;
+}
+
 
 @media (min-width: 992px) {
   .game {
@@ -633,6 +637,7 @@
   height: 120px;
   background-color: #cbe0cb;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .s2 {

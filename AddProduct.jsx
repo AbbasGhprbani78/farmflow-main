@@ -29,9 +29,11 @@ function AddProduct({ productInfo, selectedProduct, onBack, onChange }) {
       });
       if (response.status === 200) {
         setEmployeeData(response.data.employees);
+        setEmployeeData(prevState => [...prevState, response.data.manager[0]])
         setLandData(response.data.lands);
         setProductData(response.data.products);
         console.log(response)
+        console.log(employeeData)
       }
 
     } catch (error) {

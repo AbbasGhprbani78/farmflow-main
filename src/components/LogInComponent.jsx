@@ -36,6 +36,7 @@ function LogIN({ children }) {
   const [isPrivate, setIsPerivate] = useState(true);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+
   function handleToggle() {
     setIsPerivate((e) => !e);
   }
@@ -106,6 +107,8 @@ function LogIN({ children }) {
       });
     }
   }
+
+
   const validate = () => {
     let result = true;
     if (username === "" || username === null) {
@@ -158,11 +161,12 @@ function LogIN({ children }) {
                   <img src="src/Images/header/logo.png" alt="" />
                 </div>
                 <div className="text-center align-items-center  margin-test mybg p-3">
-                  <Form style={{maxWidth:"500px",margin:"0 auto"}} onSubmit={onSubmit}>
+                  <Form style={{ maxWidth: "500px", margin: "0 auto" }} onSubmit={onSubmit} autoComplete="false">
                     <h3 className="title "> Sign In</h3>
                     <div className=" border-parent login-input">
                       <span className="onBorder">UserName:</span>
                       <input
+                        autoComplete="false"
                         value={username}
                         type="text"
                         className=" input login-input"
@@ -173,6 +177,7 @@ function LogIN({ children }) {
                       <span className="onBorder"> Password: </span>
                       <div className=" login-input">
                         <input
+                          autoComplete="false"
                           value={password}
                           className="w-100 input login-input"
                           type={`${isPrivate ? "password" : "text"}`}
@@ -206,7 +211,7 @@ function LogIN({ children }) {
                     </div>
                     <div className="text-sign mb-5" style={{ textAlign: "center" }}>
                       <span>Do you not already have an account ?</span>
-                      <Link style={{ width: "auto" ,fontSize:"1rem"}} to={"/signin"}>sign Up</Link>
+                      <Link style={{ width: "auto", fontSize: "1rem" }} to={"/signin"}>sign Up</Link>
                     </div>
                   </Form>
                 </div>

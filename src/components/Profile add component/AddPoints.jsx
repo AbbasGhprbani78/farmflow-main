@@ -110,7 +110,7 @@ function AddPoints({
         <div className="submit_button">
           {selectedPointId && selectedPointId.type === "remove" ? (
             <span className="text-danger">
-              Are you sure to delete this point?
+              Are you sure ?
             </span>
           ) : selectedPointId.type === "edit" ? (
             <span className="text-warning">

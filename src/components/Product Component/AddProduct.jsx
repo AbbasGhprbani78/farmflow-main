@@ -32,6 +32,7 @@ function AddProduct({ productInfo, selectedProduct, onBack, onChange }) {
         setEmployeeData(response.data.employees);
         setLandData(response.data.lands);
         setProductData(response.data.products);
+        setEmployeeData(prevState => [...prevState, response.data.manager[0]])
         setLoading(false)
         console.log(response)
       }
@@ -63,7 +64,7 @@ function AddProduct({ productInfo, selectedProduct, onBack, onChange }) {
       );
       if (response.status === 201) {
         successMessage(response.data.message);
-        window.location.href = "/product"
+        window.location.href = "/farmdetails"
       }
     } catch (e) {
       errorMessage(e.message);
@@ -177,7 +178,7 @@ function AddNewProduct({ productData, planesNameData, onSave, onBack }) {
 
 
   const backHandler = () => {
-    window.location.href = "/product"
+    window.location.href = "/farmdetails"
   }
   return (
     <>

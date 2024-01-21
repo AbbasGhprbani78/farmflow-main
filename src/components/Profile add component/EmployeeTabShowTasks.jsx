@@ -81,7 +81,7 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                 <Modal.Header closeButton>
                     <Modal.Title className='notif-modal'>Status</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are You Sure to Change Status This Task ?</Modal.Body>
+                <Modal.Body>Are You Sure ?</Modal.Body>
                 <Modal.Footer>
                     <Button style={{ width: "100px" }} variant="secondary" onClick={handleCloseStatusModal}>
                         Close
@@ -92,7 +92,7 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                 </Modal.Footer>
             </Modal>
             <TableTasks tasks={tasks}>
-                {tasks.map((task, i) => (
+                {tasks && tasks.map((task, i) => (
                     <tr>
 
                         <td className="text-center">{task.title}</td>
@@ -112,7 +112,7 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                             <span className="ms-2">Days</span>
 
                         </td>
-                        <td className="text-center">
+                        <td className="text-center" >
                             {task.status === "P" ? (
                                 <i className="bi bi-exclamation-circle text-warning"></i>
                             ) : task.status === "R" ? (
@@ -125,7 +125,7 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                         </td>
                         <td className="text-center">
                             {tasks[i].status === "P" ? (<Button
-                                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
+                                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px", margin: "auto" }}
                                 className='appro-btn d-flex align-items-center'
                                 onClick={() => {
 
@@ -133,8 +133,11 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                                 }}
                             >
                                 Approve<MdOutlineDoneOutline
-                                    style={{ fontSize: "18px", marginLeft: "5px" }} />
+                                    style={{ fontSize: "18px", marginLeft: "5px", }} />
                             </Button>) : null}
+                        </td>
+                        <td>
+                            {task.description}
                         </td>
 
                     </tr>
@@ -151,7 +154,7 @@ function TableTasks({ tasks, children }) {
 
     return (
         <>
-            {tasks.length === 0 ? (
+            {tasks && tasks.length === 0 ? (
                 <div className="table-parent w-100  border-prim1 mt-3">
                     <h4 className="header-task">All Task</h4>
                     <div className="d-flex justify-content-center">
@@ -169,7 +172,8 @@ function TableTasks({ tasks, children }) {
                                 <th className="text-center">Priority</th>
                                 <th className="text-center">Remaining Day</th>
                                 <th className="text-center">Status</th>
-                                <th></th>
+                                <th>Action</th>
+                                <th>description</th>
                             </tr>
                         </thead>
                         <tbody>{children}</tbody>

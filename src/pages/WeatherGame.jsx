@@ -239,7 +239,7 @@ export default function WeatherGame() {
                                         </Col>
                                         <Col sm={12} md={6} className="time-game">{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</Col>
                                     </Row>
-                                    <Row className='d-flex justify-content-center align-items-center mt-5'>
+                                    <Row className='d-flex justify-content-center align-items-center mt-3'>
                                         <Col md={8} >
                                             {questions.length === 0 ? (
                                                 <div className="scene" style={{ height: '100%', width: "100%" }}>
@@ -291,9 +291,9 @@ export default function WeatherGame() {
 
                                                             </Row>
                                                             <Row className='d-flex  boxGameWeather-question justify-content-center'>
-                                                                <Col className='mt-5'>
+                                                                <Col className='mt-3'>
                                                                     <div className="d-flex justify-content-between">
-                                                                        <p style={{ fontSize: "20px", color: "#5DA25E" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                        <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     </div>
                                                                     <div className="weathergame-question">
                                                                         <p className="weathergame-question-text" style={{ fontWeight: "bold" }}>{questions[currentQuestion].question}</p>
