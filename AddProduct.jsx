@@ -575,26 +575,3 @@ const isGreater = (firsrDate, secondDate) => {
   if (fr >= sc) return true;
   else return false;
 };
-
-
-
-
-
-
-{/* <div className="table-container table-task border-prim2  w-100 mb-3">
-          <table className="table table-responsiv-custome  table-borderless tabscr">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Task</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Priority</th>
-                <th>Employee</th>
-                <th>Description</th>
-                <th>Edit / Remove</th>
-              </tr>
-            </thead>
-            <tbody>{children}</tbody>
-          </table>
-        </div> */}

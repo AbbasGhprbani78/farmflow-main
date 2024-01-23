@@ -915,7 +915,7 @@ function Report() {
                                 }
 
                                 {
-                                  tableinfo && status === "All" && tableinfo.map((info, i) => (
+                                  statusL === "All" || status === "All" ? tableinfo.map((info, i) => (
                                     <tr key={i} className="noborder-shadow">
                                       <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
                                       <td className="td-report">{info.title}</td>
@@ -931,27 +931,9 @@ function Report() {
                                         </i>
                                       </td>
                                     </tr>
-                                  ))
+                                  )) : <></>
                                 }
-                                {
-                                  tableinfo && statusL === "All" && tableinfo.map((info, i) => (
-                                    <tr key={i} className="noborder-shadow">
-                                      <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
-                                      <td className="td-report">{info.title}</td>
-                                      <td className="td-report">{info.land.title}</td>
-                                      <td className="td-report">{info.product.name}</td>
-                                      <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
-                                        {truncateDescription(info.description)}
-                                      </td>
-                                      <td className="td-report  action-report justify-content-center">
-                                        <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
-                                        </i>
-                                        <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
-                                        </i>
-                                      </td>
-                                    </tr>
-                                  ))
-                                }
+
                               </tbody>
                             </Table>
                           }

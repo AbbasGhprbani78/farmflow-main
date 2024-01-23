@@ -39,8 +39,6 @@ export default function WeatherGame() {
             window.removeEventListener('resize', handleWindowResize);
         };
     }, []);
-
-
     useEffect(() => {
         const timerInterval = setInterval(() => {
             if (time > 0) {
@@ -93,8 +91,14 @@ export default function WeatherGame() {
         const headers = {
             Authorization: `Bearer ${access}`,
         };
-
+        // const numberQuestion = {
+        //     numberQuestion: questions.length
+        // }
+        // finalanswer.push(numberQuestion)
         const answer = finalanswer
+
+        console.log(answer)
+
 
         try {
             const response = await axios.post(`${IP}/get-question/`, answer, {
@@ -118,8 +122,8 @@ export default function WeatherGame() {
 
 
     const nextQusetion = () => {
+
         if (currentQuestion === questions.length - 1) {
-            console.log(finalanswer);
             sendAnswer(finalanswer);
             setShowScore(true);
             setTimeout(() => {
@@ -140,6 +144,7 @@ export default function WeatherGame() {
     }
 
     const selectAnswer = (answer, optionIndex) => {
+
         const updateSelectedOptions = [...selectedOption];
         updateSelectedOptions[currentQuestion] = answer;
         setSelectedOption(updateSelectedOptions);

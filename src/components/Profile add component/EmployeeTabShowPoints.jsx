@@ -44,7 +44,7 @@ function TablePoints({ points, children }) {
                     </div>
                 </div>
             ) : (
-                <div className="table-container w-100">
+                <div style={{ maxHeight: "500px" }} className="table-container w-100">
                     <table className="table-task-profile table ">
                         <thead>
                             <tr>

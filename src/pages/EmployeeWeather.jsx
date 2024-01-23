@@ -94,7 +94,10 @@ export default function WeatherGame() {
         const headers = {
             Authorization: `Bearer ${access}`,
         };
-
+        // const numberQuestion = {
+        //     numberQuestion: questions.length
+        // }
+        // finalanswer.push(numberQuestion)
         const answer = finalanswer
 
         try {

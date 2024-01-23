@@ -442,6 +442,7 @@ export default function BoxMachines(props) {
                       <option style={{ color: "#5DA25E" }} value="">no one</option>
                       {editInformation ? (
                         <>
+                          <option style={{ color: "#5DA25E" }} value={editInformation.manager[0].uuid}>{editInformation.manager[0].username}</option>
                           {editInformation.employee.map((item, i) => (
                             <option style={{ color: "#5DA25E" }} key={i} value={item.uuid}>{item.username}</option>
                           ))}
@@ -622,6 +623,7 @@ export default function BoxMachines(props) {
                   <option style={{ color: "#5DA25E" }} value="">no one</option>
                   {editInformation ? (
                     <>
+                      <option style={{ color: "#5DA25E" }} value={editInformation.manager[0].uuid}>{editInformation.manager[0].username}</option>
                       {editInformation.employee.map((item, i) => (
                         <option style={{ color: "#5DA25E" }} key={i} value={item.uuid}>{item.username}</option>
                       ))}

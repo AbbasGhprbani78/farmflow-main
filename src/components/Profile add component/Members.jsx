@@ -34,7 +34,7 @@ export function Members({
     <div style={{ borderRadius: "8px", height: "100%" }} className="shadow px-3  member-container-em">
       <div className="member-header " >
         <h4>Members</h4>
-        <p className={AllEmployee === true ? "All-members" : ""} onClick={handleAllEmpolyee}>All Members</p>
+        <p className={AllEmployee === true ? "All-members" : "All-member-normal"} onClick={handleAllEmpolyee}>All Members</p>
         <i style={{ cursor: "pointer" }} className="bi bi-person-add" onClick={onHeader}></i>
       </div>
       <div className="scroll-member">

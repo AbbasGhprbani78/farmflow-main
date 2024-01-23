@@ -286,7 +286,7 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
 
         ))}
 
-        {tasks && status === "All" && tasks.map((task, i) => (
+        {status === "All" || statusL === "All" ? tasks.map((task, i) => (
           <tr>
 
             {
@@ -358,80 +358,8 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
             <td>{task.description}</td>
           </tr>
 
-        ))}
-        {tasks && statusL === "All" && tasks.map((task, i) => (
-          <tr>
+        )) : <></>}
 
-            {
-              main !== "false" &&
-              <> <td className="text-center table-remove" onClick={() => handleShow(task.uuid)}>
-                <i
-                  className="bi bi-trash3 "
-
-                ></i>
-              </td>
-                <td className="text-center table-edit" >
-                  <i
-                    className="bi bi-pencil-square "
-                    onClick={() => onEditTask(task.uuid)}
-                  ></i>
-                </td></>
-            }
-
-            {
-              main === "false" &&
-              <td className="text-center">{task.employee.first_name} {task.employee.last_name}</td>
-            }
-
-            <td className="text-center">{task.title}</td>
-            <td className="text-center">{task.land.title}</td>
-            <td className="text-center">{task.product.name}</td>
-            <td className="text-center">
-              {task.priority === "L"
-                ? "Low"
-                : task.priority === "M"
-                  ? "Medium"
-                  : task.priority === "H"
-                    ? "High"
-                    : "Emergency"}
-            </td>
-
-            <td className="text-center tdsta" style={{ borderRight: "none !important" }}>
-              {task.remaining_days}
-              <span span className="ms-2" > Days</span>
-
-            </td>
-            <td style={{ textAlign: "center" }}>
-              {task.status === "P" ? (
-                <i className="bi bi-exclamation-circle text-warning"></i>
-              ) : task.status === "R" ? (
-                <i className="bi bi-x-circle text-danger"></i>
-              ) : task.status === "C" ? (
-                <i className="bi bi-check-circle text-primary"></i>
-              ) : (
-                <i className="bi bi-check-circle-fill text-success"></i>
-              )}
-
-            </td>
-
-            <td className="text-center">
-              {tasks[i].status === "C" ? (<Button
-                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
-                className='appro-btn d-flex align-items-center'
-                onClick={() => {
-
-                  sendStatusHandler(tasks[i].uuid);
-                }}
-              >
-                Confirm<MdOutlineDoneOutline
-                  style={{ fontSize: "18px", marginLeft: "5px" }} />
-              </Button>) : null}
-
-            </td>
-            <td>{task.description}</td>
-          </tr>
-
-        ))}
 
 
       </TableTasks >

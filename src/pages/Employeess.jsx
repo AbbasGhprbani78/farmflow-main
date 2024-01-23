@@ -15,7 +15,7 @@ import EmployeeTabShowTasks from "../components/Profile add component/EmployeeTa
 import { Tabbed } from "../components/Tab component/Tabbed";
 import EmployeeTabShowPoints from "../components/Profile add component/EmployeeTabShowPoints";
 import EmployeeTabShowMachine from "../components/Profile add component/EmployeeTabShowMachine";
-import Loading from "../components/Laoding/Loading";
+
 
 const empuuid = {
   uuid: localStorage.getItem('uuid')
@@ -773,7 +773,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[1] && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -810,7 +810,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{sum.count ? sum.count : 0}</span>
+                            <span>{sum && sum.count ? sum.count : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -819,7 +819,7 @@ function PointsDetails({ userInfo }) {
                   </div>
                 </>
               ) : (<>
-                <Loading />
+
               </>)
 
             }

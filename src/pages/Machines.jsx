@@ -27,6 +27,7 @@ function Machines() {
   const [getData, setGetData] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [selectedTabName, setSelectedTabName] = useState('Machinery');
+  const [manager, setManager] = useState()
 
   const getAllBox = async () => {
     const access = localStorage.getItem('access')
@@ -122,6 +123,7 @@ function Machines() {
       if (response.status === 200) {
         setExample(response.data)
         setGetData(response.data)
+        setManager(response.data.manager[0])
         console.log(response)
       }
 

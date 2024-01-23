@@ -61,6 +61,20 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
     };
 
 
+    const [status, setStatus] = useState("All")
+    const [statusL, setStatusL] = useState("All")
+
+
+    const handleFilterItem = (priority) => {
+        setStatus(priority)
+        setStatusL(null)
+    }
+    const handleFilterItemL = (land) => {
+        setStatusL(land)
+        setStatus(null)
+    }
+
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -91,8 +105,64 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <TableTasks tasks={tasks}>
-                {tasks && tasks.map((task, i) => (
+            <TableTasks tasks={tasks} handleFilterItem={handleFilterItem} handleFilterItemL={handleFilterItemL}>
+
+
+                {status === "All" || statusL === "All" ? tasks.map((task, i) => (
+                    <tr>
+
+                        <td className="text-center">{task.title}</td>
+                        <td className="text-center">{task.land.title}</td>
+                        <td className="text-center">{task.product.name}</td>
+                        <td className="text-center">
+                            {task.priority === "L"
+                                ? "Low"
+                                : task.priority === "M"
+                                    ? "Medium"
+                                    : task.priority === "H"
+                                        ? "High"
+                                        : "Emergency"}
+                        </td>
+                        <td className="text-center" >
+                            {task.remaining_days}
+                            <span className="ms-2">Days</span>
+
+                        </td>
+                        <td className="text-center" >
+                            {task.status === "P" ? (
+                                <i className="bi bi-exclamation-circle text-warning"></i>
+                            ) : task.status === "R" ? (
+                                <i className="bi bi-x-circle text-danger"></i>
+                            ) : task.status === "C" ? (
+                                <i className="bi bi-check-circle text-primary"></i>
+                            ) : task.status === "A" ? (
+                                <i className="bi bi-check-circle-fill text-success"></i>
+                            ) : ""}
+                        </td>
+                        <td className="text-center">
+                            {tasks[i].status === "P" ? (<Button
+                                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px", margin: "auto" }}
+                                className='appro-btn d-flex align-items-center'
+                                onClick={() => {
+
+                                    sendStatusHandler(tasks[i].uuid);
+                                }}
+                            >
+                                Approve<MdOutlineDoneOutline
+                                    style={{ fontSize: "18px", marginLeft: "5px", }} />
+                            </Button>) : null}
+                        </td>
+                        <td>
+                            {task.description}
+                        </td>
+
+                    </tr>
+
+                )) :
+                    <></>}
+
+
+                {tasks && tasks.filter(task => task.priority === status).map((task, i) => (
                     <tr>
 
                         <td className="text-center">{task.title}</td>
@@ -144,13 +214,99 @@ export default function EmployeeTabShowTasks({ tasks, fetchTasks }) {
 
                 ))}
 
+                {tasks && tasks.filter(task => task.land.title === statusL).map((task, i) => (
+                    <tr>
+
+                        <td className="text-center">{task.title}</td>
+                        <td className="text-center">{task.land.title}</td>
+                        <td className="text-center">{task.product.name}</td>
+                        <td className="text-center">
+                            {task.priority === "L"
+                                ? "Low"
+                                : task.priority === "M"
+                                    ? "Medium"
+                                    : task.priority === "H"
+                                        ? "High"
+                                        : "Emergency"}
+                        </td>
+                        <td className="text-center" >
+                            {task.remaining_days}
+                            <span className="ms-2">Days</span>
+
+                        </td>
+                        <td className="text-center" >
+                            {task.status === "P" ? (
+                                <i className="bi bi-exclamation-circle text-warning"></i>
+                            ) : task.status === "R" ? (
+                                <i className="bi bi-x-circle text-danger"></i>
+                            ) : task.status === "C" ? (
+                                <i className="bi bi-check-circle text-primary"></i>
+                            ) : task.status === "A" ? (
+                                <i className="bi bi-check-circle-fill text-success"></i>
+                            ) : ""}
+                        </td>
+                        <td className="text-center">
+                            {tasks[i].status === "P" ? (<Button
+                                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px", margin: "auto" }}
+                                className='appro-btn d-flex align-items-center'
+                                onClick={() => {
+
+                                    sendStatusHandler(tasks[i].uuid);
+                                }}
+                            >
+                                Approve<MdOutlineDoneOutline
+                                    style={{ fontSize: "18px", marginLeft: "5px", }} />
+                            </Button>) : null}
+                        </td>
+                        <td>
+                            {task.description}
+                        </td>
+
+                    </tr>
+
+                ))}
+
+
             </TableTasks>
         </>
 
     );
 }
-function TableTasks({ tasks, children }) {
+function TableTasks({ tasks, children, handleFilterItem, handleFilterItemL }) {
 
+    const [allLands, setAllLands] = useState(new Set());
+
+    const fetchAllTasks = async () => {
+        const access = localStorage.getItem("access");
+        const headers = {
+            Authorization: `Bearer ${access}`,
+        };
+
+        try {
+            const response = await axios.get(
+                `${IP}/lands/`,
+                { headers }
+            );
+            if (response.status === 200) {
+                const uniqueLandTitles = new Set(response.data.map(land => land.title));
+                setAllLands(uniqueLandTitles);
+                console.log(response)
+
+            }
+
+        } catch (error) {
+            console.log(error)
+            if (error.response.status === 401) {
+                localStorage.removeItem('access')
+                localStorage.removeItem('uuid')
+                localStorage.removeItem('refresh')
+                window.location.href = "/login"
+            }
+        }
+    };
+    useEffect(() => {
+        fetchAllTasks()
+    }, [])
 
     return (
         <>
@@ -167,9 +323,34 @@ function TableTasks({ tasks, children }) {
                         <thead>
                             <tr>
                                 <th className="text-center">Task</th>
-                                <th className="text-center">Land</th>
+                                <th className="text-center">
+                                    <select className='select-t'
+                                        onChange={(e) => handleFilterItemL(e.target.value)}>
+
+                                        <option value="All" selected>Lands</option>
+                                        <option value="All">All</option>
+                                        {
+
+                                            Array.from(allLands).map((land, i) => (
+                                                <><option key={i} value={land}>{land}</option>
+                                                    {console.log(land)}</>
+                                            ))
+                                        }
+                                    </select>
+                                </th>
                                 <th className="text-center">Product</th>
-                                <th className="text-center">Priority</th>
+                                <th className="text-center">
+                                    <select
+                                        onChange={(e) => handleFilterItem(e.target.value)}
+                                        className='select-t'>
+                                        <option value="All" selected>priority</option>
+                                        <option value="All">All</option>
+                                        <option value="L">Low</option>
+                                        <option value="M">Medium</option>
+                                        <option value="H">High</option>
+                                        <option value="E">Emergency</option>
+                                    </select>
+                                </th>
                                 <th className="text-center">Remaining Day</th>
                                 <th className="text-center">Status</th>
                                 <th>Action</th>
@@ -178,8 +359,9 @@ function TableTasks({ tasks, children }) {
                         </thead>
                         <tbody>{children}</tbody>
                     </table>
-                </div>
-            )}
+                </div >
+            )
+            }
         </>
     );
 }

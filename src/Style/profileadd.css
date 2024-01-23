@@ -761,6 +761,11 @@ h6 {
 
 }
 
+.All-member-normal {
+  cursor: pointer;
+  border-bottom: 1px solid black;
+}
+
 .al-m {
   cursor: pointer;
 }

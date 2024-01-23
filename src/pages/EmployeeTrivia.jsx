@@ -96,6 +96,10 @@ export default function EmployeeTrivia() {
         const headers = {
             Authorization: `Bearer ${access}`
         };
+        // const numberQuestion = {
+        //     numberQuestion: questions.length
+        // }
+        // allAnswer.push(numberQuestion)
         try {
             const response = await axios.post(`${IP}/challenge/`, allAnswer, {
                 headers,
