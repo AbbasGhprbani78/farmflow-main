@@ -5,12 +5,19 @@ import axios from "axios";
 import { IP } from "../App";
 import Loading from "../components/Laoding/Loading";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import '../components/CardGame/CardGame.css'
+import GameM from '../components//GameTab/GameM'
 
 function Game() {
 
   const [infoGame, setInfoGame] = useState([])
+  const [activeTab, SetActiveTab] = useState(0)
+  const [tab, setTab] = useState(1)
+
+  const changeTab = (tab, status) => {
+    SetActiveTab(tab)
+    setTab(status)
+  }
 
   const getGameInfo = async () => {
     const access = localStorage.getItem("access")
@@ -44,63 +51,78 @@ function Game() {
 
   return (
     <>
-      {infoGame.length > 0 ? (
-        <>
-          <div className="d-flex">
-            <div className="d-none d-lg-block">
-              <NavBar />
-            </div>
-            <div className="w-100 ">
-              <Header></Header>
+      {
 
-              <div className='Card-wrapper'>
-                <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
-                  <Row className='d-flex align-items-center cardgame-wrapper py-3'>
-                    <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
-                      src={"src/Images/game/Solution free vector icons designed by Freepik.png"} alt="" /></Col>
-                    <Col className='part middle' md={7} lg={8}>
-                      <h5>{infoGame[0].title}</h5>
-                      <p className='text-muted card-game-text mt-2'>{infoGame[0].descriptions}</p>
-                    </Col>
-                    <Col className='part' md={3} lg={2}>
-                      <Link to={"/memoryGame"}><button className="game-send-btn">play</button></Link>
-                    </Col>
-                  </Row>
-                </Col>
+        infoGame && infoGame.length > 0 ? (
+          <>
+            <div className="d-flex">
+              <div className="d-none d-lg-block">
+                <NavBar />
+              </div>
+              <div className="w-100 ">
+                <Header></Header>
 
-                <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
-                  <Row className='d-flex align-items-center cardgame-wrapper py-3'>
-                    <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
-                      src={"src/Images/game/Quiz free vector icons designed by Freepik.png"} alt="" /></Col>
-                    <Col className='part middle' md={7} lg={8}>
-                      <h5>{infoGame[1].title}</h5>
-                      <p className='text-muted card-game-text mt-2'>{infoGame[1].descriptions}</p>
+                {activeTab === 0 &&
+                  <div className='Card-wrapper'>
+                    <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
+                      <Row className='d-flex align-items-center cardgame-wrapper py-3'>
+                        <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
+                          src={"src/Images/game/memory.png"} alt="" /></Col>
+                        <Col className='part middle' md={7} lg={8}>
+                          <h5>{infoGame[0].title}</h5>
+                          <p className='text-muted card-game-text mt-2'>{infoGame[0].descriptions}</p>
+                        </Col>
+                        <Col className='part' md={3} lg={2}>
+                          <button onClick={() => changeTab(1, 1)} className="game-send-btn">play</button>
+                        </Col>
+                      </Row>
                     </Col>
-                    <Col className='part' md={3} lg={2}>
-                      <Link to={"/triviaHome"}><button className="game-send-btn">play</button></Link>
+
+                    <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
+                      <Row className='d-flex align-items-center cardgame-wrapper py-3'>
+                        <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
+                          src={"src/Images/game/Quiz.png"} alt="" /></Col>
+                        <Col className='part middle' md={7} lg={8}>
+                          <h5>{infoGame[1].title}</h5>
+                          <p className='text-muted card-game-text mt-2'>{infoGame[1].descriptions}</p>
+                        </Col>
+                        <Col className='part' md={3} lg={2}>
+                          <button onClick={() => changeTab(1, 2)} className="game-send-btn">play</button>
+                        </Col>
+                      </Row>
                     </Col>
-                  </Row>
-                </Col>
-                <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
-                  <Row className='d-flex align-items-center cardgame-wrapper py-3'>
-                    <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
-                      src={"src/Images/game/Questions free vector icons designed by Freepik.png"} alt="" /></Col>
-                    <Col className='part middle' md={7} lg={8}>
-                      <h5>{infoGame[2].title}</h5>
-                      <p className='text-muted card-game-text mt-2'>{infoGame[2].descriptions}</p>
+                    <Col xs={11} style={{ margin: "0 auto" }} className='mt-3 mb-3'>
+                      <Row className='d-flex align-items-center cardgame-wrapper py-3'>
+                        <Col className='part' md={2} lg={2}><img style={{ width: "90px" }}
+                          src={"src/Images/game/Questions.png"} alt="" /></Col>
+                        <Col className='part middle' md={7} lg={8}>
+                          <h5>{infoGame[2].title}</h5>
+                          <p className='text-muted card-game-text mt-2'>{infoGame[2].descriptions}</p>
+                        </Col>
+                        <Col className='part' md={3} lg={2}>
+                          <button onClick={() => changeTab(1, 3)} className="game-send-btn">play</button>
+                        </Col>
+                      </Row>
                     </Col>
-                    <Col className='part' md={3} lg={2}>
-                      <Link to={"/weatherGame"}><button className="game-send-btn">play</button></Link>
-                    </Col>
-                  </Row>
-                </Col>
+                  </div>
+                }
+                {
+                  activeTab === 1 &&
+                  <GameM
+                    text={"Back"}
+                    changeTab={changeTab}
+                    tab={tab}
+                  />
+                }
+
               </div>
             </div>
-          </div>
-        </>) : (
-        <>
-          <Loading />
-        </>)}
+          </>) : (
+          <>
+            <Loading />
+          </>)
+      }
+
     </>
   );
 }

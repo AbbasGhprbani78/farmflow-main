@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import '../../Style/Filter.css'
 
-export default function FilterP({ shoewfilter, handleFilterItem }) {
+export default function FilterP({ handleFilterItem }) {
 
 
     return (
-        <div className={shoewfilter ? "filter-container  active-filter" : "filter-container"}
-        >
-            <ul className='filter-list'>
-                <li className='filter-item' onClick={() => handleFilterItem("all")}>All</li>
-                <li className='filter-item' onClick={() => handleFilterItem("L")}>Low</li>
-                <li className='filter-item' onClick={() => handleFilterItem("M")}>Medium</li>
-                <li className='filter-item' onClick={() => handleFilterItem("H")}>High</li>
-                <li className='filter-item' onClick={() => handleFilterItem("E")}>Emergency</li>
-            </ul>
-        </div>
+        <select
+            onChange={(e) => handleFilterItem(e.target.value)}
+            className='select-t'>
+            <option value="All" selected>priority</option>
+            <option value="All">All</option>
+            <option value="L">Low</option>
+            <option value="M">Medium</option>
+            <option value="H">High</option>
+            <option value="E">Emergency</option>
+        </select>
+
     )
 }

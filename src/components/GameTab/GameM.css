@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.level {
+    width: 100px;
+    height: 100px;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.memorey {
+    background-image: url(../../../src/Images/game/memory.png);
+}
+
+.memorey,
+.weathers,
+.trivia {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bac {
+    filter: grayscale(100%);
+}
+
+.trivia {
+    background-image: url(../../../src/Images/game/Quiz.png);
+}
+
+.weathers {
+    background-image: url(../../../src/Images/game/Questions.png);
+}
+
+.col-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}

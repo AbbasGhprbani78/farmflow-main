@@ -507,9 +507,9 @@ h6 {
   border-bottom: 0 !important;
 }
 
-.table-task-profile tr td:last-child {
+/* .table-task-profile tr td:last-child {
   border-right: 0 !important;
-}
+} */
 
 .table-task-profile.table thead tr {
   border-bottom: 2px solid var(--Primary2);

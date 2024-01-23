@@ -153,7 +153,7 @@ export default function MemoryGame() {
 
       if (response.status === 200) {
         console.log(response.data)
-        setResult(response.data.point)
+        setResult(response.data.new_point ? response.data.new_point : response.data.message)
         setShowScore(true);
         setTimeout(() => {
           window.history.back();

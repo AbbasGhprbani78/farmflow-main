@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Style/TriviaGame.css'
 import { Row, Col } from 'react-bootstrap'
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { FaAngleRight } from 'react-icons/fa'
 import Modal from 'react-bootstrap/Modal';
 import NavBar from "../components/NavBar";
@@ -227,19 +227,19 @@ export default function TriviaGame() {
                                                 {questions.length ? (
                                                     <div>
                                                         {showScore ? (
-                                                           <>
-                                                            <div className="score-container-trivia">
-                                                                <div className="score-text">Score:</div>
-                                                                <div className="score-value">{score.Points}</div>
-                                                            </div>
-                                                            <div className="score-container-trivia mt-3">
-                                                                <div className="score-value">{score.Correct_answers}</div>
-                                                            </div>
-                                                           </>
+                                                            <>
+                                                                <div className="score-container-trivia">
+                                                                    <div className="score-text">Score:</div>
+                                                                    <div className="score-value">{score.Point ? score.Point : score.message}</div>
+                                                                </div>
+                                                                <div className="score-container-trivia mt-3">
+                                                                    <div className="score-value">{score.correct_answers}</div>
+                                                                </div>
+                                                            </>
                                                         ) : (
                                                             <div>
                                                                 <div className="level-item d-flex justify-content-between">
-                                                                    <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                    <p style={{ fontSize: "20px", color: "#5DA25E", display: "hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     <p style={{ paddingRight: "15px" }}>{currentQuestion + 1}/{questions.length}</p>
                                                                 </div>
                                                                 <div className="questions-wrapper">

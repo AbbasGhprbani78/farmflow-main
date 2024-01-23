@@ -3,11 +3,9 @@ import '../Style/Filter.css'
 import { IP } from '../App'
 import axios from 'axios'
 
-export default function FilterL({ shoewfilter, handleFilterItemL }) {
+export default function FilterL({ handleFilterItemL }) {
 
     const [allLands, setAllLands] = useState(new Set());
-
-
 
     const fetchAllTasks = async () => {
         const access = localStorage.getItem("access");
@@ -40,18 +38,15 @@ export default function FilterL({ shoewfilter, handleFilterItemL }) {
     }, [])
     return (
 
+        <select className='select-t' onChange={(e) => handleFilterItemL(e.target.value)}>
+            <option value="All" selected>Lands</option>
+            <option value="All">All</option>
+            {
+                Array.from(allLands).map((land, i) => (
+                    <option key={i} value={land}>{land}</option>
+                ))
+            }
+        </select>
 
-        <div className={shoewfilter ? "filter-container  active-filter" : "filter-container"}
-        >
-            <ul className='filter-list'>
-                <li className='filter-item' onClick={() => handleFilterItemL("all")}>All</li>
-                {
-                    Array.from(allLands).map((land, i) => (
-                        <li key={i} className='filter-item' onClick={() => handleFilterItemL(land)}>{land}</li>
-                    ))
-                }
-
-            </ul>
-        </div>
     )
 }

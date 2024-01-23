@@ -220,7 +220,7 @@ export default function EmployeeTrivia() {
                                             <p className='time-game'>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</p>
                                         </Col>
                                     </Row>
-                                    <Row  className='mt-2'>
+                                    <Row className='mt-2'>
                                         <Col className="game-box d-flex justify-content-between" style={{ margin: "10px auto 0 auto", padding: "0" }} xs={10}>
                                             <div className="game-left col-12 col-md-9">
                                                 {questions.length ? (
@@ -229,16 +229,16 @@ export default function EmployeeTrivia() {
                                                             <>
                                                                 <div className="score-container-trivia">
                                                                     <div className="score-text">Score:</div>
-                                                                    <div className="score-value">{score.Points}</div>
+                                                                    <div className="score-value">{score.Point ? score.Point : score.message}</div>
                                                                 </div>
                                                                 <div className="score-container-trivia mt-3">
-                                                                    <div className="score-value">{score.Correct_answers}</div>
+                                                                    <div className="score-value">{score.correct_answers}</div>
                                                                 </div>
                                                             </>
                                                         ) : (
                                                             <div>
                                                                 <div className="level-item d-flex justify-content-between">
-                                                                    <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                    <p style={{ fontSize: "20px", color: "#5DA25E", display: "hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     <p style={{ paddingRight: "15px" }}>{currentQuestion + 1}/{questions.length}</p>
                                                                 </div>
                                                                 <div className="questions-wrapper">

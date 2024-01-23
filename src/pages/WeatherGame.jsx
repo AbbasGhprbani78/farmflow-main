@@ -263,7 +263,7 @@ export default function WeatherGame() {
                                                         <>
                                                             <div className="score-container-weather">
                                                                 <div className="score-text">Score:</div>
-                                                                <div className="score-value">{score.point}</div>
+                                                                <div className="score-value">{score.point ? score.Point : score.message}</div>
                                                             </div>
                                                             <div className="score-container-weather mt-3">
                                                                 <div className="score-text">correct Answer:</div>
@@ -293,7 +293,7 @@ export default function WeatherGame() {
                                                             <Row className='d-flex  boxGameWeather-question justify-content-center'>
                                                                 <Col className='mt-3'>
                                                                     <div className="d-flex justify-content-between">
-                                                                        <p style={{ fontSize: "20px", color: "#5DA25E",display:"hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
+                                                                        <p style={{ fontSize: "20px", color: "#5DA25E", display: "hidden" }}>Level-{currentQuestion + 1} <FaAngleRight /></p>
                                                                     </div>
                                                                     <div className="weathergame-question">
                                                                         <p className="weathergame-question-text" style={{ fontWeight: "bold" }}>{questions[currentQuestion].question}</p>

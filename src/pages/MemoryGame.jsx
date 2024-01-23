@@ -4,9 +4,7 @@ import NavBar from '../components/NavBar';
 import '../Style/MemoryGame.css'
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
-import { GoTriangleLeft, GoTriangleRight } from 'react-icons/go';
-import { AiFillStar } from 'react-icons/ai';
+import { Row, Col } from 'react-bootstrap';;
 import Image from '../components/Image/Image'
 import axios from 'axios';
 import { IP } from '../App'
@@ -152,7 +150,7 @@ export default function MemoryGame() {
 
       if (response.status === 200) {
         console.log(response.data)
-        setResult(response.data.point)
+        setResult(response.data.new_point ? response.data.new_point : response.data.message)
         setShowScore(true);
         setTimeout(() => {
           window.history.back();

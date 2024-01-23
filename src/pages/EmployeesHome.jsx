@@ -343,7 +343,33 @@ export default function EmployeesHome() {
                                                 </Row>
                                             </div>
                                         </Link>
+                                        <ValidDate />
+                                        <Weather weather={weather} />
                                     </Col >
+                                    <Col
+                                        className=" mt-3 mb-3 mt-lg-0"
+                                        xs={{ span: 12, offset: 0 }}
+                                        lg={{ span: 3, offset: 0 }}
+                                    >
+                                        <AllNotifs number={unreadMessage}>
+                                            {notifData ? (
+                                                <>
+                                                    {notifData && notifData.map((notif, i) => (
+                                                        <Notif
+                                                            text={notif.content}
+                                                            date={notif.date}
+                                                            time={notif.time}
+                                                            read={notif.read}
+                                                            onShow={() => handleShow(notif.id)}
+                                                            key={notif.id}
+                                                        />
+                                                    ))}
+                                                </>) :
+                                                (<>
+                                                    <span>there are no notification to dispaly</span>
+                                                </>)}
+                                        </AllNotifs>
+                                    </Col>
                                 </Row>
                             </Container>
                         </div>
@@ -442,6 +468,7 @@ export default function EmployeesHome() {
                                                 </>)}
                                         </AllNotifs>
                                     </Col>
+
                                 </Row>
                             </Container>
                         </div>

@@ -3,7 +3,9 @@ import TextInput from "../TextInput";
 import TextArea from "../TextArea";
 import DropDown from "../DropDown";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
+import { useState } from "react";
 function AddPoints({
   pointInfo,
   selectedPointId,
@@ -12,7 +14,11 @@ function AddPoints({
   onRemove,
   onEdit,
   onBack,
+  userInfo
 }) {
+
+  const [pointArray, setPointArray] = useState([]);
+  console.log(pointArray)
   function handleSubmit(e) {
     e.preventDefault();
     if (selectedPointId && selectedPointId.type == "remove") {
@@ -28,11 +34,26 @@ function AddPoints({
         errorMessage("Please set a Rate!");
         return;
       }
-      if (selectedPointId && selectedPointId.type == "edit") {
+      pointInfo.date = pointInfo.date + "-1"
+
+      const newPoint = { ...pointInfo };
+
+      if (selectedPointId && selectedPointId.type === "edit") {
         onEdit(pointInfo);
       } else {
-        onAdd(pointInfo);
+        setPointArray((prevPointArray) => [...prevPointArray, newPoint]);
+        if (pointArray.length === 4) {
+          onAdd(pointArray)
+        }
       }
+
+      onChange({
+        type: "P",
+        date: "",
+        rating: "0",
+        description: "",
+        user: userInfo.uuid
+      });
     }
   }
   function setType(type) {
@@ -48,7 +69,18 @@ function AddPoints({
   function setDate(date) {
     onChange((info) => ({ ...info, date: date }));
   }
-  console.log(pointInfo);
+
+  useEffect(() => {
+    pointInfo.type = pointData[0].uuid
+  }, []);
+  useEffect(() => {
+    pointInfo.user = userInfo.uuid
+  }, [])
+
+
+  console.log(pointInfo)
+
+
   return (
     <div className="d-flex flex-column ">
       <div className="d-flex justify-content-center justify-content-md-start  py-3 mb-3 border-doubeled  ps-md-5 ps-lg-6">
@@ -56,8 +88,8 @@ function AddPoints({
           {selectedPointId && selectedPointId.type === "edit"
             ? "Editting The Point"
             : selectedPointId.type === "add"
-            ? "Adding New Point"
-            : "Removing The Point"}
+              ? "Adding New Point"
+              : "Removing The Point"}
         </h5>
       </div>
       <form onSubmit={handleSubmit} className="d-flex flex-column">
@@ -120,31 +152,38 @@ function AddPoints({
             <></>
           )}
           <div className="buttons">
+            {pointArray.length === 4 &&
+              <button
+                onClick={onAdd(pointArray)}
+                className={`btn`}
+              >
+                Send
+              </button>}
+
             <button
               type="submit"
-              className={`btn  ${
-                selectedPointId && selectedPointId.type === "remove"
-                  ? `btn-outline-danger`
-                  : selectedPointId.type === "edit"
+              className={`btn  ${selectedPointId && selectedPointId.type === "remove"
+                ? `btn-outline-danger`
+                : selectedPointId.type === "edit"
                   ? `btn-outline-warning`
                   : `btn-outline-success`
-              }`}
+                }`}
             >
-              {selectedPointId && selectedPointId.type === "add"
-                ? "Add"
-                : selectedPointId.type === "edit"
-                ? "Edit"
-                : "Remove"}
+              {pointArray.length === 3 ? "send" :
+                selectedPointId && selectedPointId.type === "add"
+                  ? "Add"
+                  : selectedPointId.type === "edit"
+                    ? "Edit"
+                    : "Remove"}
             </button>
             <button
               type="button"
-              className={`btn  cancel-button ${
-                selectedPointId && selectedPointId.type === "remove"
-                  ? `btn-success`
-                  : selectedPointId.type === "edit"
+              className={`btn  cancel-button ${selectedPointId && selectedPointId.type === "remove"
+                ? `btn-success`
+                : selectedPointId.type === "edit"
                   ? `btn-success`
                   : `btn-danger`
-              }`}
+                }`}
               onClick={onBack}
             >
               Cancel
@@ -187,3 +226,4 @@ function warningMessage(text) {
     theme: "colored",
   });
 }
+

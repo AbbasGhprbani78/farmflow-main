@@ -16,7 +16,6 @@ import { Tabbed } from "../components/Tab component/Tabbed";
 import EmployeeTabShowPoints from "../components/Profile add component/EmployeeTabShowPoints";
 import EmployeeTabShowMachine from "../components/Profile add component/EmployeeTabShowMachine";
 import Loading from "../components/Laoding/Loading";
-import Table from 'react-bootstrap/Table';
 
 const empuuid = {
   uuid: localStorage.getItem('uuid')
@@ -639,8 +638,43 @@ function ShowPoints({ points, userInfo, onDeletePoint, onEditPoint }) {
   );
 }
 function PointsDetails({ userInfo }) {
+  const [pointDetail, setPointDetail] = useState()
+  const [sum, setSum] = useState()
 
-  const [pointDetail, setPointDetail] = useState([])
+  const sums = async () => {
+
+    const access = localStorage.getItem("access");
+    const headers = {
+      Authorization: `Bearer ${access}`,
+    };
+
+    const body = {
+      uuid: userInfo.uuid
+    }
+
+    try {
+      const response = await axios.post(
+        `${IP}/sum/`, body,
+        {
+          headers,
+        }
+      );
+      if (response.status === 200) {
+        console.log(response.data)
+        setSum(response.data[0])
+      }
+
+    } catch (error) {
+      console.log(error)
+      if (error.response.status === 401) {
+        localStorage.removeItem('access')
+        localStorage.removeItem('uuid')
+        localStorage.removeItem('refresh')
+        window.location.href = "/login"
+      }
+    }
+  }
+
 
   const fecthSecondPoint = async () => {
 
@@ -662,7 +696,8 @@ function PointsDetails({ userInfo }) {
       );
       if (response.status === 200) {
         console.log(response.data)
-        setPointDetail(response.data)
+        setPointDetail(response.data);
+
       }
 
     } catch (error) {
@@ -678,6 +713,7 @@ function PointsDetails({ userInfo }) {
 
   useEffect(() => {
     fecthSecondPoint()
+    sums()
   }, [])
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -698,10 +734,11 @@ function PointsDetails({ userInfo }) {
 
     <>
       {
+
         windowWidth < 992 ? (
           <>
             {
-              pointDetail[0] ? (
+              pointDetail && pointDetail.length > 0 ? (
                 <>
                   <div className="mt-3">
                     <div className="container">
@@ -718,7 +755,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[0].T.sum_of_ratings ? pointDetail[0].T.sum_of_ratings : 0}</span>
+                            <span>{pointDetail && pointDetail[0].T && pointDetail[0].T.count ? pointDetail[0].T.count : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -736,7 +773,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[1] && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -754,49 +791,29 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[2].G.sum_of_ratings ? pointDetail[2].G.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[2] && pointDetail[2].G.sum_of_ratings ? pointDetail[2].G.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
                       </Row>
                       <Row className="my-2 d-flex">
-                        <Table bordered responsive style={{ textAlign: "center" }}>
-                          <thead>
-                            <tr>
-                              <th>Task</th>
-                              <th>point</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                {pointDetailData[0].second}
-                              </td>
-                              <td>
-                                {pointDetail[0].T.count}
-                                <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="cell-point">
-                                {pointDetailData[1].second}
-                              </td>
-                              <td className="cell-point">
-                                {pointDetail[1].D.count ? pointDetail[1].D.count : 0}
-                                <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td className="cell-point">
-                                {pointDetailData[2].second}
-                              </td>
-                              <td className="cell-point">
-                                {pointDetail[2].G.count ? pointDetail[2].G.count : 0}
-                                <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </Table>
+                        <Col
+                          className="point-box point-box-green"
+                          xs={6}
+                        >
+                          <span>performance evaluation</span>
+                        </Col>
+
+                        <Col
+                          className="point-box seprated"
+                          xs={6}
+                        >
+                          <span>Points</span>
+                          <div className="point-details">
+                            <span>{sum.count ? sum.count : 0}</span>
+                            <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
+                          </div>
+                        </Col>
                       </Row>
                     </div>
                   </div>
@@ -809,7 +826,7 @@ function PointsDetails({ userInfo }) {
           </>) : (
           <>
             {
-              pointDetail[0] ? (
+              pointDetail && pointDetail.length > 0 ? (
                 <>
                   <div className="mt-3">
                     <div className="container">
@@ -831,7 +848,7 @@ function PointsDetails({ userInfo }) {
                           lg={{ offset: 0, span: 4 }}
                         >
                           <span>{pointDetailData[0].second}</span>
-                          <span>{pointDetail[0].T.count ? pointDetail[0].T.count : 0}</span>
+                          <span>{pointDetail && pointDetail[0].T && pointDetail[0].T.count ? pointDetail[0].T.count : 0}</span>
                         </Col>
                         <Col
                           className="point-box seprated"
@@ -842,7 +859,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[0].T.sum_of_ratings ? pointDetail[0].T.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[0] && pointDetail[0].T && pointDetail[0].T.sum_of_ratings ? pointDetail[0].T.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -865,7 +882,7 @@ function PointsDetails({ userInfo }) {
                           lg={{ offset: 0, span: 4 }}
                         >
                           <span>{pointDetailData[1].second}</span>
-                          <span>{pointDetail[1].D.count ? pointDetail[1].D.count : 0}</span>
+                          <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.count ? pointDetail[1].D.count : 0}</span>
                         </Col>
                         <Col
                           className="point-box seprated"
@@ -876,7 +893,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -889,7 +906,7 @@ function PointsDetails({ userInfo }) {
                           md={{ offset: 3, span: 6 }}
                           lg={{ offset: 0, span: 4 }}
                         >
-                          <span>{pointDetailData[2].first}</span>
+                          <span>performance evaluation</span>
                         </Col>
                         <Col
                           className="point-box seprated my-3 my-lg-0 "
@@ -898,8 +915,8 @@ function PointsDetails({ userInfo }) {
                           md={{ offset: 3, span: 6 }}
                           lg={{ offset: 0, span: 4 }}
                         >
-                          <span>{pointDetailData[2].second}</span>
-                          <span>{pointDetail[2].G.count ? pointDetail[2].G.count : 0}</span>
+                          <span>points from the manager</span>
+                          <span>{sum && sum.performance_evaluation ? sum.performance_evaluation : 0}</span>
                         </Col>
                         <Col
                           className="point-box seprated"
@@ -910,7 +927,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[2].G.sum_of_ratings ? pointDetail[2].G.sum_of_ratings : 0}</span>
+                            <span>{sum && sum.count ? sum.count : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -929,7 +946,6 @@ function PointsDetails({ userInfo }) {
     </>
   );
 }
-
 export default Employees;
 export function errorMessage(text) {
   toast.error(text, {

@@ -63,6 +63,7 @@ export function TabShowProducts({ userInfo, activeTab }) {
       );
       if (response.status === 200) {
         console.log(response.data.lands);
+        console.log('hello')
         setData(response.data.lands);
       }
 

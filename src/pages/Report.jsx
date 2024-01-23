@@ -39,8 +39,6 @@ function Report() {
   const [showSe, setShowse] = useState(false);
 
   const handleClosese = () => setShowse(false);
-  // const handleShowse = () => setShowse(true);
-
 
   const [selectProduct, setSelectedProduct] = useState()
   const [selectedPlan, setSelectedPlan] = useState(null)
@@ -60,6 +58,22 @@ function Report() {
   const [priority, setPriority] = useState("L")
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
+  const [status, setStatuse] = useState("All")
+  const [statusL, setStatusL] = useState("All")
+
+  const [allLands, setAllLands] = useState(new Set());
+
+  const handleFilterItem = (priority) => {
+    setStatuse(priority)
+    setStatusL(null)
+  }
+
+  const handleFilterItemL = (land) => {
+    setStatusL(land)
+    setStatuse(null)
+  }
+
+  // cosnt 
 
   const isGreater = (firsrDate, secondDate) => {
     const fr = firsrDate.split("-").join("");
@@ -223,6 +237,8 @@ function Report() {
       if (response.status === 200) {
         console.log(response)
         setLands(response.data)
+        const uniqueLandTitles = new Set(response.data.map(land => land.title));
+        setAllLands(uniqueLandTitles);
       }
 
 
@@ -589,11 +605,11 @@ function Report() {
         <Modal.Header closeButton>
           <Modal.Title className='notif-modal'>Sensor</Modal.Title>
         </Modal.Header>
-        <Modal.Body>not available in this versen come sensor coming soon!</Modal.Body>
+        <Modal.Body>Not available in this version come sensor coming soon!</Modal.Body>
         <Modal.Footer>
 
           <Button style={{ width: "140px", backgroundColor: "#5DA25E", border: "none" }} onClick={handleClosese}>
-            Save Changes
+            Ok
           </Button>
         </Modal.Footer>
       </Modal>
@@ -780,9 +796,9 @@ function Report() {
                           ))}
                         </select>
                       </div>
-                      <div>
+                      <div style={{ width: "100%" }}>
                         <div style={{ width: "100%" }} className="d-flex justify-content-between align-items-center"> <p style={{ fontWeight: "bold" }}>Sensor :</p>
-                          <p onClick={addSensorHandler} style={{ width: "100%", cursor: "pointer", borderBottom: "1px solid #5da25e", color: "#5da25e", fontWeight: "bold" }} className="d-flex align-items-center">Add Sensor  +</p></div>
+                          <p onClick={addSensorHandler} style={{ cursor: "pointer", borderBottom: "1px solid #5da25e", color: "#5da25e", fontWeight: "bold" }} className="d-flex align-items-center">Add Sensor  +</p></div>
                         <select
                           style={{ width: "100%" }}
                           onChange={(e) => {
@@ -824,9 +840,34 @@ function Report() {
                             <Table className="table table-responsive-custome">
                               <thead style={{ textAlign: "center" }}>
                                 <tr className="noborder-shadow">
-                                  {/* <th className="thead-report">Priority</th> */}
+                                  <th className="thead-report">
+                                    <select
+                                      style={{ border: "none", fontWeight: " bold", color: '#5DA25E' }}
+                                      onChange={(e) => handleFilterItem(e.target.value)}
+                                    >
+                                      <option value="All" selected>priority</option>
+                                      <option value="All">All</option>
+                                      <option value="L">Low</option>
+                                      <option value="M">Meduim</option>
+                                      <option value="H">Hight</option>
+                                      <option value="E">Emergency</option>
+                                    </select>
+                                  </th>
                                   <th className="thead-report">Name</th>
-                                  <th className="thead-report">Land</th>
+                                  <th className="thead-report">
+                                    <select
+                                      style={{ border: "none", fontWeight: " bold", color: '#5DA25E' }}
+                                      onChange={(e) => handleFilterItemL(e.target.value)}
+                                    >
+                                      <option value="All" selected>Lands</option>
+                                      <option value="All">All</option>
+                                      {
+                                        Array.from(allLands).map((land, i) => (
+                                          <option key={i} value={land}>{land}</option>
+                                        ))
+                                      }
+                                    </select>
+                                  </th>
                                   <th className="thead-report">Product</th>
                                   <th className="thead-report">description</th>
                                   <th className="thead-report">Action</th>
@@ -834,29 +875,88 @@ function Report() {
                               </thead>
 
                               <tbody style={{ textAlign: "center" }}>
-                                {tableinfo && tableinfo.map((info, i) => (
-                                  <tr key={i} className="noborder-shadow">
-                                    {/* <td>{info.priority}</td> */}
-                                    <td className="td-report">{info.title}</td>
-                                    <td className="td-report">{info.land.title}</td>
-                                    <td className="td-report">{info.product.name}</td>
-                                    <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
-                                      {truncateDescription(info.description)}
-                                    </td>
-                                    <td className="td-report  action-report justify-content-center">
-                                      <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
-                                      </i>
-                                      <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
-                                      </i>
-                                    </td>
-                                  </tr>
-                                ))}
+                                {
+                                  tableinfo && tableinfo.filter(info => info.priority === status).map((info, i) => (
+                                    <tr key={i} className="noborder-shadow">
+                                      <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
+                                      <td className="td-report">{info.title}</td>
+                                      <td className="td-report">{info.land.title}</td>
+                                      <td className="td-report">{info.product.name}</td>
+                                      <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
+                                        {truncateDescription(info.description)}
+                                      </td>
+                                      <td className="td-report  action-report justify-content-center">
+                                        <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
+                                        </i>
+                                        <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
+                                        </i>
+                                      </td>
+                                    </tr>
+                                  ))
+                                }
+                                {
+                                  tableinfo && tableinfo.filter(info => info.land.title === statusL).map((info, i) => (
+                                    <tr key={i} className="noborder-shadow">
+                                      <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
+                                      <td className="td-report">{info.title}</td>
+                                      <td className="td-report">{info.land.title}</td>
+                                      <td className="td-report">{info.product.name}</td>
+                                      <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
+                                        {truncateDescription(info.description)}
+                                      </td>
+                                      <td className="td-report  action-report justify-content-center">
+                                        <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
+                                        </i>
+                                        <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
+                                        </i>
+                                      </td>
+                                    </tr>
+                                  ))
+                                }
+
+                                {
+                                  tableinfo && status === "All" && tableinfo.map((info, i) => (
+                                    <tr key={i} className="noborder-shadow">
+                                      <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
+                                      <td className="td-report">{info.title}</td>
+                                      <td className="td-report">{info.land.title}</td>
+                                      <td className="td-report">{info.product.name}</td>
+                                      <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
+                                        {truncateDescription(info.description)}
+                                      </td>
+                                      <td className="td-report  action-report justify-content-center">
+                                        <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
+                                        </i>
+                                        <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
+                                        </i>
+                                      </td>
+                                    </tr>
+                                  ))
+                                }
+                                {
+                                  tableinfo && statusL === "All" && tableinfo.map((info, i) => (
+                                    <tr key={i} className="noborder-shadow">
+                                      <td>{info.priority === "L" ? "Low" : info.priority === "H" ? "Hight" : info.priority === "M" ? "Meduim" : "Emergency"}</td>
+                                      <td className="td-report">{info.title}</td>
+                                      <td className="td-report">{info.land.title}</td>
+                                      <td className="td-report">{info.product.name}</td>
+                                      <td className="td-report dec-th" style={{ cursor: "pointer" }} onClick={() => openModalReport(info)}>
+                                        {truncateDescription(info.description)}
+                                      </td>
+                                      <td className="td-report  action-report justify-content-center">
+                                        <i style={{ cursor: "pointer" }} className="bi bi-check2 fs-5 text-success" onClick={() => openModalReport(info)}>
+                                        </i>
+                                        <i style={{ cursor: "pointer" }} className="bi bi-trash3 fs-5 text-danger" onClick={() => handleShow(info.uuid)} >
+                                        </i>
+                                      </td>
+                                    </tr>
+                                  ))
+                                }
                               </tbody>
                             </Table>
                           }
 
                         </div>
-
                       </Row>
                       <Row >
                       </Row>
@@ -917,4 +1017,3 @@ function successMessage(text) {
 
 
 
-//

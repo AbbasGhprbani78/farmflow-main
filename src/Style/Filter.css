@@ -40,3 +40,9 @@
     background-color: #023E4C;
     transition: all .3s;
 }
+
+.select-t {
+    border: none;
+    font-weight: bold;
+    color: #023E4C;
+}
