@@ -3,7 +3,6 @@ function LogIn() {
   return (
     <div>
       <LogInComponent />
-
     </div>
   );
 }
