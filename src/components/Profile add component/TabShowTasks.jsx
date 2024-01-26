@@ -136,6 +136,7 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
         handleFilterItem={handleFilterItem}
         handleFilterItemL={handleFilterItemL}>
 
+
         {tasks && tasks.filter(task => task.priority === status).map((task, i) => (
           <tr>
             {
@@ -190,20 +191,23 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
 
             </td>
 
-            <td className="text-center">
-              {tasks[i].status === "C" ? (<Button
-                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
-                className='appro-btn d-flex align-items-center'
-                onClick={() => {
+            {
+              main !== "false" &&
+              <td className="text-center">
+                {tasks[i].status === "C" ? (<Button
+                  style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
+                  className='appro-btn d-flex align-items-center'
+                  onClick={() => {
 
-                  sendStatusHandler(tasks[i].uuid);
-                }}
-              >
-                Confirm<MdOutlineDoneOutline
-                  style={{ fontSize: "18px", marginLeft: "5px" }} />
-              </Button>) : null}
+                    sendStatusHandler(tasks[i].uuid);
+                  }}
+                >
+                  Confirm<MdOutlineDoneOutline
+                    style={{ fontSize: "18px", marginLeft: "5px" }} />
+                </Button>) : null}
 
-            </td>
+              </td>
+            }
             <td>
               {task.description}
             </td>
@@ -265,20 +269,23 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
 
             </td>
 
-            <td className="text-center">
-              {tasks[i].status === "C" ? (<Button
-                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
-                className='appro-btn d-flex align-items-center'
-                onClick={() => {
+            {
+              main !== "false" &&
+              <td className="text-center">
+                {tasks[i].status === "C" ? (<Button
+                  style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
+                  className='appro-btn d-flex align-items-center'
+                  onClick={() => {
 
-                  sendStatusHandler(tasks[i].uuid);
-                }}
-              >
-                Confirm<MdOutlineDoneOutline
-                  style={{ fontSize: "18px", marginLeft: "5px" }} />
-              </Button>) : null}
+                    sendStatusHandler(tasks[i].uuid);
+                  }}
+                >
+                  Confirm<MdOutlineDoneOutline
+                    style={{ fontSize: "18px", marginLeft: "5px" }} />
+                </Button>) : null}
 
-            </td>
+              </td>
+            }
             <td>
               {task.description}
             </td>
@@ -340,21 +347,24 @@ export function TabShowTasks({ tasks, onEditTask, onDeleteTask, fetchTasks, main
               )}
 
             </td>
+            {
+              main !== "false" &&
+              <td className="text-center">
+                {tasks[i].status === "C" ? (<Button
+                  style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
+                  className='appro-btn d-flex align-items-center'
+                  onClick={() => {
 
-            <td className="text-center">
-              {tasks[i].status === "C" ? (<Button
-                style={{ background: "#5DA25E", border: "none", outline: "none", fontSize: "13px" }}
-                className='appro-btn d-flex align-items-center'
-                onClick={() => {
+                    sendStatusHandler(tasks[i].uuid);
+                  }}
+                >
+                  Confirm<MdOutlineDoneOutline
+                    style={{ fontSize: "18px", marginLeft: "5px" }} />
+                </Button>) : null}
 
-                  sendStatusHandler(tasks[i].uuid);
-                }}
-              >
-                Confirm<MdOutlineDoneOutline
-                  style={{ fontSize: "18px", marginLeft: "5px" }} />
-              </Button>) : null}
+              </td>
+            }
 
-            </td>
             <td>{task.description}</td>
           </tr>
 
@@ -408,9 +418,13 @@ function TableTasks({ tasks, children, main, handleFilterItem, handleFilterItemL
                 <th className="text-center">Remaining Day</th>
 
                 <th className="text-center">Status</th>
-                <th>
-                  Actions
-                </th>
+                {
+                  main !== "false" &&
+                  <th>
+                    Actions
+                  </th>
+                }
+
                 <th>description</th>
               </tr>
             </thead>

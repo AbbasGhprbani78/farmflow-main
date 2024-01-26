@@ -147,6 +147,8 @@ function Machines() {
   const AddBoxHandler = () => {
     const landArray = getData.lands
     const employeeArrey = getData.employee
+    employeeArrey.push(manager)
+    console.log(employeeArrey)
     const nameArrey = getData.tools
 
     const newBox = {

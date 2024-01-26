@@ -420,6 +420,7 @@ function HomePage() {
                 <Header unreadMessage={unreadMessage}></Header>
                 <Container fluid>
                   <Row>
+
                     <Col className="" xs={12} xl={9}>
                       <Row className="align-items-end">
                         <Col xs={12} sm={4}>

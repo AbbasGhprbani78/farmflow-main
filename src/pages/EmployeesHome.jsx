@@ -298,6 +298,13 @@ export default function EmployeesHome() {
                             <Header unreadMessage={unreadMessage}></Header>
                             <Container fluid>
                                 <Row>
+                                    <Col
+                                        className=" mt-3 mb-3 mt-lg-0"
+                                        xs={{ span: 12, offset: 0 }}
+                                        lg={{ span: 3, offset: 0 }}
+                                    >
+                                        <PlansForm getWeather={getWeather} />
+                                    </Col>
                                     <Col xs={12} sm={4} >
                                         <Link style={{ all: "unset" }} to={"/employeefarmdetails"}>
                                             <div className={`w-100 mt s1 land`}>

@@ -431,7 +431,7 @@ function Employees() {
                         </Col>
                         <Col
                           className="mt-3 mt-xl-0 mb-3 "
-                          style={{ height: "100%" }}
+                          style={{ height: "100%", maxWidth: "1000px" }}
                           xs={12}
                           lg={8}
                           xl={{ span: 8, offset: 0 }}
@@ -1416,7 +1416,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail && pointDetail[0].T && pointDetail[0].T.count ? pointDetail[0].T.count : 0}</span>
+                            <span>{pointDetail && pointDetail[2].T && pointDetail[2].T.sum_of_ratings ? pointDetail[2].T.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -1434,7 +1434,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[0] && pointDetail[0].D && pointDetail[0].D.sum_of_ratings ? pointDetail[0].D.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -1452,7 +1452,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[2] && pointDetail[2].G.sum_of_ratings ? pointDetail[2].G.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[1] && pointDetail[1].G && pointDetail[1].G.sum_of_ratings ? pointDetail[1].G.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -1508,7 +1508,7 @@ function PointsDetails({ userInfo }) {
                           lg={{ offset: 0, span: 4 }}
                         >
                           <span>{pointDetailData[0].second}</span>
-                          <span>{pointDetail && pointDetail[0].T && pointDetail[0].T.count ? pointDetail[0].T.count : 0}</span>
+                          <span>{pointDetail && pointDetail[2].T && pointDetail[2].T.count ? pointDetail[2].T.count : 0}</span>
                         </Col>
                         <Col
                           className="point-box seprated"
@@ -1519,7 +1519,7 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[0] && pointDetail[0].T && pointDetail[0].T.sum_of_ratings ? pointDetail[0].T.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[2] && pointDetail[2].T && pointDetail[2].T.sum_of_ratings ? pointDetail[2].T.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>
@@ -1542,7 +1542,7 @@ function PointsDetails({ userInfo }) {
                           lg={{ offset: 0, span: 4 }}
                         >
                           <span>{pointDetailData[1].second}</span>
-                          <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.count ? pointDetail[1].D.count : 0}</span>
+                          <span>{pointDetail[0] && pointDetail[0].D && pointDetail[0].D.count ? pointDetail[0].D.count : 0}</span>
                         </Col>
                         <Col
                           className="point-box seprated"
@@ -1553,7 +1553,41 @@ function PointsDetails({ userInfo }) {
                         >
                           <span>Points</span>
                           <div className="point-details">
-                            <span>{pointDetail[1] && pointDetail[1].D && pointDetail[1].D.sum_of_ratings ? pointDetail[1].D.sum_of_ratings : 0}</span>
+                            <span>{pointDetail[0] && pointDetail[0].D && pointDetail[0].D.sum_of_ratings ? pointDetail[0].D.sum_of_ratings : 0}</span>
+                            <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row className="my-2">
+                        <Col
+                          className="point-box point-box-green"
+                          xs={{ offset: 1, span: 10 }}
+                          sm={{ offset: 2, span: 8 }}
+                          md={{ offset: 3, span: 6 }}
+                          lg={{ offset: 0, span: 4 }}
+                        >
+                          <span>{pointDetailData[2].first}</span>
+                        </Col>
+                        <Col
+                          className="point-box seprated my-3 my-lg-0 "
+                          xs={{ offset: 1, span: 10 }}
+                          sm={{ offset: 2, span: 8 }}
+                          md={{ offset: 3, span: 6 }}
+                          lg={{ offset: 0, span: 4 }}
+                        >
+                          <span>{pointDetailData[2].second}</span>
+                          <span>{pointDetail[1] && pointDetail[1].G && pointDetail[1].G.count ? pointDetail[1].G.count : 0}</span>
+                        </Col>
+                        <Col
+                          className="point-box seprated"
+                          xs={{ offset: 1, span: 10 }}
+                          sm={{ offset: 2, span: 8 }}
+                          md={{ offset: 3, span: 6 }}
+                          lg={{ offset: 0, span: 4 }}
+                        >
+                          <span>Points</span>
+                          <div className="point-details">
+                            <span>{pointDetail[1] && pointDetail[1].G && pointDetail[1].G.sum_of_ratings ? pointDetail[1].G.sum_of_ratings : 0}</span>
                             <i className="bi bi-star-fill text-warning fs-5 ms-2"></i>
                           </div>
                         </Col>

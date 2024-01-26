@@ -47,7 +47,7 @@ export function TabShowMachines({ userInfo, activeTab }) {
         }
       );
       if (response.status === 200) {
-        setMachines(response.data.tools);
+        setMachines(response.data);
         console.log(response)
       }
 
